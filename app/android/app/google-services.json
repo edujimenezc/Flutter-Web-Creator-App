@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "678801736070",
+    "project_id": "miapp-e18c3",
+    "storage_bucket": "miapp-e18c3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:678801736070:android:518e30a0aa4e0fcfab6c07",
+        "android_client_info": {
+          "package_name": "com.example.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "678801736070-oq7rl0ds89ouvgs3m56ibh27o32jlimo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAiajFQ_ojoQoWfgyfsUJm5VW2SmBc6kqU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "678801736070-oq7rl0ds89ouvgs3m56ibh27o32jlimo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

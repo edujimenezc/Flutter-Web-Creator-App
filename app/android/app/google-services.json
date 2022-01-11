@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "678801736070",
-    "project_id": "miapp-e18c3",
-    "storage_bucket": "miapp-e18c3.appspot.com"
+    "project_number": "666354346390",
+    "project_id": "ejemploflutt",
+    "storage_bucket": "ejemploflutt.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:678801736070:android:518e30a0aa4e0fcfab6c07",
+        "mobilesdk_app_id": "1:666354346390:android:6f86829d316a1427e755b7",
         "android_client_info": {
-          "package_name": "com.example.app"
+          "package_name": "com.example.ejemplobbdd"
         }
       },
       "oauth_client": [
         {
-          "client_id": "678801736070-oq7rl0ds89ouvgs3m56ibh27o32jlimo.apps.googleusercontent.com",
+          "client_id": "666354346390-15shed61ksvv762feqjkr209itrknofo.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAiajFQ_ojoQoWfgyfsUJm5VW2SmBc6kqU"
+          "current_key": "AIzaSyAwsc4xjPgD9bbvbFVZSwX8GWqG87I6kRk"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "678801736070-oq7rl0ds89ouvgs3m56ibh27o32jlimo.apps.googleusercontent.com",
+              "client_id": "666354346390-15shed61ksvv762feqjkr209itrknofo.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

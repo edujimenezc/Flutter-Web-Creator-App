@@ -1,14 +1,29 @@
+
+
 import 'dart:async';
-import 'package:app/src/pages/registro.dart';
-import 'package:flutter/material.dart';
+
+import 'package:ejemplobbdd/src/pages/registro.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-void main() {
+import 'package:flutter/material.dart';
+
+import 'src/pages/homepage.dart';
+
+void main()  {
+
 runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  final Future<FirebaseApp> _inicialization = Firebase.initializeApp();
 @override
 Widget build(BuildContext context) {
+
+
+return FutureBuilder(
+future: _inicialization,
+builder: (context,snapshot){
+
 	return MaterialApp(
 	title: 'Splash Screen',
 	theme: ThemeData(
@@ -19,6 +34,17 @@ Widget build(BuildContext context) {
    
 
 	);
+},
+);
+
+
+
+
+
+
+
+
+
 }
 }
 
@@ -41,6 +67,7 @@ void initState() {
 }
 @override
 Widget build(BuildContext context) {
+  
 	return Container(
 	color: Colors.teal.shade100,
 	child:FlutterLogo(size:MediaQuery.of(context).size.height)
@@ -57,14 +84,22 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPage extends State<LoginPage>{
+  final Future<FirebaseApp> _inicialization =Firebase.initializeApp();
+
+ 
   String _email  = '';
     String _pass  = '';
-    FirebaseAuth auth = FirebaseAuth.instance;
+   
     
  @override
   Widget build(BuildContext context) {
 
-    return Scaffold(
+
+    
+    
+    
+    
+      return Scaffold(
 body: Center(
   child: Column(
 mainAxisSize: MainAxisSize.min,
@@ -82,6 +117,12 @@ _crearPassword(),
 
 
     );
+    
+    
+  
+
+
+   
   }
 
 Widget _crearEmail() {
@@ -124,14 +165,40 @@ Widget _crearEmail() {
   }
 
 
-
+Future<void> _loguearUsuario() async{
+}
 Widget _crearButtonAccess(){
 
 return FloatingActionButton(
    heroTag: "btn2",
         child: Text('Acceder'),
-        onPressed: (){
+        onPressed: () async {
 
+ 
+try {
+  UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+    email: _email,
+    password: _pass
+  );
+  
+  
+ final route = MaterialPageRoute(
+
+    builder: (context){
+return HomePage();
+
+    }
+  );
+
+Navigator.push(context, route);
+
+} on FirebaseAuthException catch (e) {
+  if (e.code == 'user-not-found') {
+    print('No user found for that email.');
+  } else if (e.code == 'wrong-password') {
+    print('Wrong password provided for that user.');
+  }
+}
 
 
 

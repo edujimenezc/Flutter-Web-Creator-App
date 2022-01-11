@@ -1,8 +1,12 @@
 
 
-import 'package:app/main.dart';
+
+import 'package:ejemplobbdd/main.dart';
+import 'package:ejemplobbdd/src/pages/homepage.dart';
 import 'package:flutter/material.dart';
 
+// ignore: import_of_legacy_library_into_null_safe
+import 'package:firebase_auth/firebase_auth.dart';
 
 
 class RegistroPage extends StatefulWidget {
@@ -13,7 +17,9 @@ class RegistroPage extends StatefulWidget {
 }
 
 class _RegistroPage extends State<RegistroPage>{
+  FirebaseAuth auth = FirebaseAuth.instance;
   String _email  = '';
+  String _pass = "";
  @override
   Widget build(BuildContext context) {
 
@@ -69,7 +75,7 @@ Widget _crearEmail() {
         icon: Icon( Icons.lock )
       ),
       onChanged: (valor) =>setState(() {
-        _email = valor;
+        _pass = valor;
       })
     );
 
@@ -81,8 +87,38 @@ Widget _crearButtonAccess(){
 return FloatingActionButton(
    heroTag: "btn2",
         child: Text('Acceder'),
-        onPressed: (){
-//ir2pantalla
+        onPressed: () async {
+
+
+try {
+  UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+    email: _email,
+    password: _pass
+  );
+  
+  
+ final route = MaterialPageRoute(
+
+    builder: (context){
+return HomePage();
+
+    }
+  );
+
+Navigator.push(context, route);
+
+
+} on FirebaseAuthException catch (e) {
+  if (e.code == 'weak-password') {
+    print('The password provided is too weak.');
+  } else if (e.code == 'email-already-in-use') {
+    print('The account already exists for that email.');
+  }
+} catch (e) {
+  print(e);
+}
+
+
 
         });
 

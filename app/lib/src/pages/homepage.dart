@@ -1,3 +1,4 @@
+import 'package:ejemplobbdd/src/pages/newPage.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,7 +18,31 @@ body: Center(
   child: Column(
 mainAxisSize: MainAxisSize.min,
 children: <Widget>[
-Text('Home'),
+SizedBox(height: 75),
+Text('¿Qué vas a hacer hoy?'),
+SizedBox(height: 50),
+Row(
+   mainAxisAlignment: MainAxisAlignment.center,
+children: <Widget>[
+_crearButtonCrearWeb(),
+SizedBox(width: 10),
+_crearButtonEditarWeb(),
+
+],
+),
+SizedBox(height: 30),
+Row(
+ mainAxisAlignment: MainAxisAlignment.center,
+  children: <Widget>[
+_crearButtonMiCuenta(),
+SizedBox(width: 90),
+_crearButtonAyuda(),
+
+
+
+  ],
+),
+
 ],
 
   ),
@@ -26,4 +51,150 @@ Text('Home'),
 
     );
   }
+
+
+
+Widget _crearButtonCrearWeb(){
+
+
+
+
+return Container(
+height: 450.0,
+        width: 185.0,
+
+child: FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn1",
+        child: Text('Crea un nuevo Proyecto'),
+        onPressed: (){
+
+
+
+ final route = MaterialPageRoute(
+
+    builder: (context){
+return NewPage();
+
+    }
+  );
+
+Navigator.push(context, route);
+
+        }),
+
+);
+
+}
+
+
+
+
+
+Widget _crearButtonEditarWeb(){
+
+
+
+
+return Container(
+ height: 450.0,
+        width: 185.0,
+
+child: FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn2",
+        child: Text('Edita un Proyecto Existente'),
+        onPressed: (){
+
+
+//TODO
+
+        }),
+
+);
+
+}
+
+Widget _crearButtonMiCuenta(){
+
+
+return Column(children: <Widget>[
+  
+  Container(
+ height: 75.0,
+        width: 75.0,
+
+child: FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn3",
+        child: Text('Mi cuenta img'),
+        onPressed: (){
+
+
+//TODO
+
+        }),
+
+),
+
+
+Text('Mi Cuenta'),
+
+
+
+
+]);
+
+
+
+}
+
+
+Widget _crearButtonAyuda(){
+
+
+return Column(children: <Widget>[
+  
+  Container(
+ height: 75.0,
+        width: 75.0,
+
+child: FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn4",
+        child: Text('Ayuda img'),
+        onPressed: (){
+
+
+//TODO
+
+        }),
+
+),
+
+Text('Ayuda'),
+
+
+
+
+
+]);
+
+
+
+}
+
+
+
+
+
+
 }

@@ -105,10 +105,19 @@ body: Center(
 mainAxisSize: MainAxisSize.min,
 children: <Widget>[
 Text('Iniciar Sesión'),
+SizedBox(height: 100),
  _crearEmail(),
+ SizedBox(height: 25),
 _crearPassword(),
- _crearButtonAccess(),
+ SizedBox(height: 50),
+
+   _crearButtonAccess(),
+ 
+   SizedBox(height: 25),
+  
  _crearButtonRegistro(),
+
+
 
 ],
 
@@ -169,7 +178,11 @@ Future<void> _loguearUsuario() async{
 }
 Widget _crearButtonAccess(){
 
-return FloatingActionButton(
+
+return Container(
+   height: 100.0,
+        width: 100.0,
+child: FloatingActionButton(
    heroTag: "btn2",
         child: Text('Acceder'),
         onPressed: () async {
@@ -215,13 +228,27 @@ Navigator.push(context, route);
 
 
 
-        });
+        })
+
+);
+
+
 
 }
 
 Widget _crearButtonRegistro(){
 
-return FloatingActionButton(
+
+
+
+return Container(
+ height: 100.0,
+        width: 100.0,
+
+child: FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
     heroTag: "btn1",
         child: Text('Registrarse'),
         onPressed: (){
@@ -243,7 +270,9 @@ Navigator.push(context, route);
 
 
 
-        });
+        }),
+
+);
 
 }
 

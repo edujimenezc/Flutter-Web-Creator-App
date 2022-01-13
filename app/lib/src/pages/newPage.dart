@@ -19,6 +19,11 @@ body: Center(
 mainAxisSize: MainAxisSize.min,
 children: <Widget>[
 SizedBox(height: 75),
+Row(children: <Widget>[
+  SizedBox(width: 10),
+_crearButtonVolver(),
+SizedBox(width: 40),
+],),
 Text('¿Cómo prefieres hacer tu Web?'),
 SizedBox(height: 50),
 
@@ -29,11 +34,7 @@ _crearButtonDesdeCero(),
 SizedBox(height: 50),
 _crearButtonConIA(),
 SizedBox(height: 50),
-Row(children: <Widget>[
-  SizedBox(width: 10),
-_crearButtonVolver(),
-SizedBox(width: 40),
-],)
+
 
 
 

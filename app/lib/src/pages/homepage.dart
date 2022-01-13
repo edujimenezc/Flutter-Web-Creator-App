@@ -1,4 +1,6 @@
 import 'package:ejemplobbdd/src/pages/newPage.dart';
+import 'package:ejemplobbdd/src/pages/perfilPage.dart';
+import 'package:ejemplobbdd/src/pages/userWebsPage.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -111,7 +113,16 @@ child: FloatingActionButton(
         onPressed: (){
 
 
-//TODO
+
+ final route = MaterialPageRoute(
+
+    builder: (context){
+return UserWebsPage();
+
+    }
+  );
+
+Navigator.push(context, route);
 
         }),
 
@@ -137,7 +148,15 @@ child: FloatingActionButton(
         onPressed: (){
 
 
-//TODO
+ final route = MaterialPageRoute(
+
+    builder: (context){
+return PerfilPage();
+
+    }
+  );
+
+Navigator.push(context, route);
 
         }),
 

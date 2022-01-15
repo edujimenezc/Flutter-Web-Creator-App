@@ -1,3 +1,4 @@
+import 'package:ejemplobbdd/src/pages/ayudaPage.dart';
 import 'package:ejemplobbdd/src/pages/newPage.dart';
 import 'package:ejemplobbdd/src/pages/perfilPage.dart';
 import 'package:ejemplobbdd/src/pages/userWebsPage.dart';
@@ -193,7 +194,16 @@ child: FloatingActionButton(
         onPressed: (){
 
 
-//TODO
+
+ final route = MaterialPageRoute(
+
+    builder: (context){
+return AyudaPage();
+
+    }
+  );
+
+Navigator.push(context, route);
 
         }),
 

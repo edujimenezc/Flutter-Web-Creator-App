@@ -70,8 +70,7 @@ SizedBox(height: 80),
 
  TextButton(
               onPressed: () {
-
-               //currentUser.updateEmail(newEmail)
+_crearAlertCambiarCorreo(context);
               },
               child: Text(
                 '¿Cambiar Email?', //title
@@ -80,7 +79,7 @@ SizedBox(height: 80),
             ),
 TextButton(
               onPressed: () {
-                //action
+                _crearAlertCambiarContrasenia(context);
               },
               child: Text(
                 '¿Cambiar Contraseña?', //title
@@ -89,24 +88,9 @@ TextButton(
             ),
 TextButton(
               onPressed: () async {
-                try {
-  await FirebaseAuth.instance.currentUser!.delete();
 
- final route = MaterialPageRoute(
+_crearAlertEliminarCuenta(context);
 
-    builder: (context){
-return LoginPage();
-
-    }
-  );
-
-Navigator.push(context, route);
-
-} on FirebaseAuthException catch (e) {
-  if (e.code == 'requires-recent-login') {
-    print('The user must reauthenticate before this operation can be executed.');
-  }
-}
               },
               child: Text(
                 'Eliminar mi cuenta', //title
@@ -158,13 +142,146 @@ TextButton(
 
 
 
+void _crearAlertEliminarCuenta(BuildContext context ){
+var passActual = null;
+
+showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+
+         return AlertDialog(
+          shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
+          title: Text('Eliminar Cuenta'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Text('Introduce tu Contraseña Actual'),
+
+
+
+TextField(
+            onChanged: (value) {
+passActual=value;
+            },
+             obscureText: true,
+            decoration: InputDecoration(hintText: "Contraseña"),
+          ),
 
 
 
 
 
 
-void _crearAlertEliminar(BuildContext context){
+
+
+
+
+              
+            ],
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Cancelar'),
+              onPressed: ()=> Navigator.of(context).pop(),
+            ),
+            TextButton(
+              child: Text('Ok'),
+              onPressed: (){
+                Navigator.of(context).pop();
+
+ final route = MaterialPageRoute(
+
+    builder: (context){
+return LoginPage();
+
+    }
+  );
+//TODO trycatch
+                AuthCredential credential = EmailAuthProvider.credential(email: currentUser!.email.toString(), password: passActual);
+
+currentUser!.reauthenticateWithCredential(credential).then((value) => FirebaseAuth.instance.currentUser!.delete().then((value) => Navigator.push(context, route)));
+
+
+
+
+
+
+
+
+
+
+              },
+            ),
+          ],
+        );
+
+      }
+
+    );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+                try {
+  await FirebaseAuth.instance.currentUser!.delete();
+
+ final route = MaterialPageRoute(
+
+    builder: (context){
+return LoginPage();
+
+    }
+  );
+
+
+
+
+
+
+
+
+
+
+
+
+
+//TODO
+
+
+
+Navigator.push(context, route);
+
+} on FirebaseAuthException catch (e) {
+  if (e.code == 'requires-recent-login') {
+    print('The user must reauthenticate before this operation can be executed.');
+  }
+}
+              */
+
+
+}
+
+
+
+
+
+void _crearAlertCambiarCorreo(BuildContext context){
 var correoNuevo=null;
  showDialog(
       context: context,
@@ -180,7 +297,7 @@ var correoNuevo=null;
 correoNuevo=value;
             },
             
-            decoration: InputDecoration(hintText: "Text Field in Dialog"),
+            decoration: InputDecoration(hintText: "Correo@example.com"),
           ),
           actions: <Widget>[
             TextButton(
@@ -192,9 +309,51 @@ correoNuevo=value;
               onPressed: (){
                
 if(correoNuevo!=null){
-  currentUser!.updateEmail(correoNuevo);
-   Navigator.of(context).pop();
-   //poner success y sino poner que no 
+//falta las excepciones
+  
+ final route = MaterialPageRoute(
+
+    builder: (context){
+return LoginPage();
+
+    }
+  );
+
+  currentUser!.updateEmail(correoNuevo).then((value) => 
+Navigator.push(context, route));
+  
+
+ // Navigator.of(context).pop();
+
+  
+
+}else{
+
+showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+
+         return AlertDialog(
+          shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
+          title: Text('Error'),
+          
+          content: Text("El correo introducido no es válido"),
+          actions: <Widget>[
+           
+            TextButton(
+              child: Text('Ok'),
+              onPressed: (){
+                Navigator.of(context).pop();
+        },
+            ),
+          ],
+        );
+
+      }
+
+    );
+
 }
 
 
@@ -213,6 +372,167 @@ if(correoNuevo!=null){
 
 */
 }
+
+
+void _crearAlertCambiarContrasenia(BuildContext context){
+var passAntigua=null;
+var passNueva=null;
+ showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+
+         return AlertDialog(
+          shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
+          title: Text('Cambiar Contraseña'),
+          
+          content: Column(
+          children: <Widget>[
+  
+
+TextField(
+            onChanged: (value) {
+passAntigua=value;
+            },
+             obscureText: true,
+            decoration: InputDecoration(hintText: "Contraseña Actual"),
+          ),
+
+              
+
+TextField(
+            onChanged: (value) {
+passNueva=value;
+            },
+             obscureText: true,
+            decoration: InputDecoration(hintText: "Nueva Contraseña"),
+          ),
+
+
+
+
+
+
+
+
+
+          ],
+
+
+
+          ),
+          
+          
+          actions: <Widget>[
+            TextButton(
+              child: Text('Cancelar'),
+              onPressed: ()=> Navigator.of(context).pop(),
+            ),
+            TextButton(
+              child: Text('Ok'),
+              onPressed: (){
+                final route = MaterialPageRoute(
+
+    builder: (context){
+return LoginPage();
+
+    }
+  );
+//TODO trycatch
+                AuthCredential credential = EmailAuthProvider.credential(email: currentUser!.email.toString(), password: passAntigua);
+
+currentUser!.reauthenticateWithCredential(credential).then((value) => currentUser!.updatePassword(passNueva).then((value) => Navigator.push(context, route)));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       /*        
+if(passNueva!=null){
+//falta las excepciones
+  
+ 
+  
+
+  
+
+ // Navigator.of(context).pop();
+
+  
+
+}else{
+
+showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+
+         return AlertDialog(
+          shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
+          title: Text('Error'),
+          
+          content: Text("El correo introducido no es válido"),
+          actions: <Widget>[
+           
+            TextButton(
+              child: Text('Ok'),
+              onPressed: (){
+                Navigator.of(context).pop();
+        },
+            ),
+          ],
+        );
+
+      }
+
+    );
+
+}
+*/
+
+
+              },
+            ),
+          ],
+        );
+
+      }
+
+    );
+
+
+/*
+
+*/
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,3 +1,4 @@
+import 'package:ejemplobbdd/src/pages/EditorEncabezadoPage.dart';
 import 'package:ejemplobbdd/src/pages/homepage.dart';
 import 'package:flutter/material.dart';
 
@@ -205,12 +206,13 @@ Text('Volver'),
 
 Widget  _cardCabecera() {
 
-
-
-return Card(
+return InkWell(
+    child: Card(
+  
   elevation:1.0 ,//sombra
   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),//borde redondeado
   child: Column(
+    
     children: <Widget>[
 ListTile(
   leading: Icon(Icons.photo_album),
@@ -229,7 +231,32 @@ ListTile(
 
     ],
   ),
+),
+    onTap: () { 
+        
+
+
+
+ final route = MaterialPageRoute(
+
+    builder: (context){
+return EditorEncabezadoPage();
+
+    }
+  );
+
+Navigator.push(context, route);
+
+
+
+
+
+
+
+    },
 );
+
+
 
 
 

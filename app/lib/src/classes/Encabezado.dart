@@ -1,32 +1,34 @@
+import 'dart:ffi';
+
 import 'package:ejemplobbdd/src/classes/Contenedor.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+ class Encabezado{
+  var currentUser = FirebaseAuth.instance.currentUser;
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  String autor="";
+  String nombre="";
+String h1="";
+String h2="";
+String h3="";
 
-class Encabezado{
-String h1;
-String h2;
-String h3;
-List<dynamic> Listadivs;
 List<Contenedor> contenedores=[];
 Map<dynamic,dynamic> mapaDivs={};
-Encabezado(
-  {
-required this.h1,
-required this.h2,
-required this.h3,
-required this.Listadivs,
+
+Encabezado.constructor1( String nombre,String h1, String h2, String h3, Map<dynamic,dynamic> mapadivs, String autor){
+
+this.nombre=nombre;
+
+this.h1=h1;
+this.h2=h2;
+this.h3=h3;
+this.mapaDivs=mapaDivs;
+this.autor=autor;
+
 }
 
-
-
-
-
-
-
-
-);
-
-
-
+Encabezado.constructor2();
 
 String get getH1{
 return this.h1;
@@ -55,7 +57,7 @@ this.h3=text;
 
 
 void aniadirAContenedores(){
-  this.Listadivs.forEach((element) {mapaDivs=element;});
+ 
   var i=0;
 
   for (var item in mapaDivs.values) {
@@ -91,15 +93,51 @@ i++;
 
 
 }
+//hacer funcion que te cambie el doc en bbdd
+Future<void> cargarABBDD()async {
+  
+  
+ autor=currentUser!.email.toString();
+
+DocumentReference webActual = FirebaseFirestore.instance.collection('webs').doc("prueba").collection("encabezado").doc("unique");
+
+ return webActual.set({
+
+"autor" : autor,
+"nombre_web" : nombre,
+"h1" : getH1,
+"h2" : getH2,
+"h3" : getH3,
+"divs" : mapaDivs
 
 
+ }
+   
+
+ )
+          
+          
+          .catchError((error) => print("Failed to add user: $error"));
+
+
+}
+
+
+
+
+
+
+
+
+/*
 static Encabezado fromJson(json)=> Encabezado(
+  nombre : "nombrePorDefecto",
   h1: json["h1"],
   h2: json["h2"],
   h3: json["h3"],
   Listadivs: json["divs"],
 
-);
+);*/
  @override
 String toString() {
   return this.h1.toString();//me he quedado en que me ha leido bn el json y tal crea los getter y setter y la clase en condiciones y luego es mostrarlo

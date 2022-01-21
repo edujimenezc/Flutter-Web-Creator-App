@@ -1,7 +1,9 @@
 import 'dart:collection';
 import 'dart:convert';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ejemplobbdd/src/classes/Encabezado.dart';
+import 'package:ejemplobbdd/src/classes/Encabezado.dart';
+import 'package:ejemplobbdd/src/classes/MyDatabase.dart';
 import 'package:ejemplobbdd/src/pages/creacionWebsPage.dart';
 import 'package:ejemplobbdd/src/pages/homepage.dart';
 import 'package:flutter/material.dart';
@@ -15,117 +17,69 @@ class EditorEncabezadoPage extends StatefulWidget {
 }
 
 class _EditorEncabezadoPage extends State<EditorEncabezadoPage>{
+  
+ // Encabezado encabezadoActual=cargarDeBBDD() as Encabezado;
 
  @override
   Widget build(BuildContext context) {
     
     
 
-    return Scaffold(
-body: Center(
-  child: Column(
-mainAxisSize: MainAxisSize.min,
-children: <Widget>[
+    return FutureBuilder (
+      
+      future: cargarDeBBDD(),
+      
+      builder: ( context,AsyncSnapshot<Encabezado> snapshot  ){
+  var h1="Titulo";
+var h2="Subtitulo";
+var h3="Más texto";
+if (!snapshot.hasData) {
+     return Container(
+       child: Center(
+         child: CircularProgressIndicator(),
+       ),
+     );
+}else{
 
-Row(children: <Widget>[
+
+  Encabezado encabezadoActual=snapshot.data!;
   
-  SizedBox(width: 10),
-_crearButtonVolver(),
-//SizedBox(width: 20),
+encabezadoActual.aniadirAContenedores();
 
-],),
 
-      Row(children: <Widget>[
-  
-  SizedBox(width: 10),
 
-//SizedBox(width: 20),
 
-],),
 
-        
+if(encabezadoActual.getH1.toString().isNotEmpty){
+h1=encabezadoActual.getH1;
+}
 
-_crearEditable(),
 
-    SizedBox(height: 400),
+if(encabezadoActual.getH2.toString().isNotEmpty){
+h2=encabezadoActual.getH2;
+}
+
+if(encabezadoActual.getH3.toString().isNotEmpty){
+h3=encabezadoActual.getH3;
+}
+
+
+
+
+
+
+
  
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-],
-
-  ),
-),
-
-
-    );
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- Widget _crearEditable() {
-readJson();
-    // menuProvider.cargarData()
-    return FutureBuilder(
-      future: readJson(),
-      initialData: [""],
-      builder: ( context, AsyncSnapshot<List<dynamic>> snapshot ){
-
-
-
-Encabezado EncabezadoActual=snapshot.data![0];
-EncabezadoActual.aniadirAContenedores();
-var h1="Titulo";
-var h2="Subtitulo";
-var h3="Más texto";
-
-
-if(EncabezadoActual.getH1.toString().isNotEmpty){
-h1=EncabezadoActual.getH1;
-}
-
-
-if(EncabezadoActual.getH2.toString().isNotEmpty){
-h2=EncabezadoActual.getH2;
-}
-
-if(EncabezadoActual.getH3.toString().isNotEmpty){
-h3=EncabezadoActual.getH3;
-}
-  return Column(
+  return Scaffold(
+    body: Column(
 
 children: <Widget>[
-
+_crearButtonVolver(),
 TextField(
   
-      obscureText: true,
+      
       decoration: InputDecoration(
         
         hintText: h1.toString(),
@@ -134,14 +88,16 @@ TextField(
         
       ),
       onChanged: (valor) =>setState(() {
-       // _pass = valor;
+        encabezadoActual.setH1 = valor;
+        encabezadoActual.cargarABBDD();
+       
       })
     ),
 
 
 TextField(
   
-      obscureText: true,
+     
       decoration: InputDecoration(
         
         hintText: h2.toString(),
@@ -150,14 +106,16 @@ TextField(
         
       ),
       onChanged: (valor) =>setState(() {
-       // _pass = valor;
+
+      encabezadoActual.setH2 = valor;
+      encabezadoActual.cargarABBDD();
       })
     ),
 
 
 TextField(
   
-      obscureText: true,
+      
       decoration: InputDecoration(
         
         hintText: h3.toString(),
@@ -170,7 +128,8 @@ TextField(
         
       ),
       onChanged: (valor) =>setState(() {
-       // _pass = valor;
+       encabezadoActual.setH3 = valor;
+       encabezadoActual.cargarABBDD();
       })
     )
 
@@ -180,15 +139,11 @@ TextField(
 
 ],
 
-);
-
+),
+  );
+}
       },
     );
-
-  
-
-    
-
   }
 
 
@@ -206,17 +161,86 @@ TextField(
 
 
 
-  Future<List<dynamic>> readJson() async {
+
+ 
+
+
+
+Future<Encabezado> cargarDeBBDD() async {
+
+var nombre;
+var h1;
+var h2;
+var h3;
+var mapaDivs;
+
+Encabezado x=Encabezado.constructor2();
+DocumentReference webActual = FirebaseFirestore.instance.collection('webs').doc("prueba").collection("encabezado").doc("unique");
+var querySnapshot = await webActual.get();
+
+Map<String, dynamic>? data = querySnapshot.data() as Map<String, dynamic>?;
+if(data!=null){
+  
+nombre=data["nombre_web"].toString();
+ x.h1=data["h1"].toString();
+ x.h2=data["h2"].toString();
+ x.h3=data["h3"].toString();
+x.mapaDivs=data["divs"];
+
+
+
+return x;
+
+
+
+
+
+
+
+
+}else{
+  
+ 
+
+ 
+  return x;
+
+
+
+
+ 
+
+
+
+}
+ 
+
+
+  
+}
+
+
+
+
+
+
+
+
+
+
+/*
+
+  Future<Encabezado> readJson() async {
 
     final String response = await rootBundle.loadString('assets/jsonBase.json');
     final datos =json.decode(response);
     
 
 
-   return datos.map<Encabezado>(Encabezado.fromJson).toList();
+   return encabezadoActual.cargarDeBBDD();
     
   
-}
+}*/
   
 
 
@@ -243,6 +267,7 @@ TextField(
 
 
 Widget _crearButtonVolver(){
+
 
 
 return Column(

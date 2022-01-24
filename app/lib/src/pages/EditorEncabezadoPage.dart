@@ -1,9 +1,10 @@
 import 'dart:collection';
 import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ejemplobbdd/main.dart';
 import 'package:ejemplobbdd/src/classes/Encabezado.dart';
 import 'package:ejemplobbdd/src/classes/Encabezado.dart';
-import 'package:ejemplobbdd/src/classes/MyDatabase.dart';
+import 'dart:io';
 import 'package:ejemplobbdd/src/pages/creacionWebsPage.dart';
 import 'package:ejemplobbdd/src/pages/homepage.dart';
 import 'package:flutter/material.dart';
@@ -76,7 +77,7 @@ h3=encabezadoActual.getH3;
     body: Column(
 
 children: <Widget>[
-_crearButtonVolver(),
+_crearButtonVolver(encabezadoActual),
 TextField(
   
       
@@ -87,11 +88,13 @@ TextField(
         
         
       ),
+
       onChanged: (valor) =>setState(() {
         encabezadoActual.setH1 = valor;
         encabezadoActual.cargarABBDD();
        
-      })
+      }),
+   
     ),
 
 
@@ -131,8 +134,15 @@ TextField(
        encabezadoActual.setH3 = valor;
        encabezadoActual.cargarABBDD();
       })
-    )
+    ),
+    
+    Expanded(child: _crearListaDivs(encabezadoActual.contenedores,encabezadoActual)),
 
+
+Text("Aqui van los botones de edicion"),
+Text("Aqui van los botones de edicion"),
+Text("Aqui van los botones de edicion"),
+Text("Aqui van los botones de edicion"),
 
 
 
@@ -156,11 +166,100 @@ TextField(
 
 
 
+Widget _crearListaDivs(List<dynamic> lista,Encabezado x){
+Encabezado encabezadoActual=x;
+return ListView.builder(
+  padding: const EdgeInsets.all(8),
+  itemCount: lista.length,
+  itemBuilder: (BuildContext context, int index) {
+    
+
+return 
+ListView.builder(
+   shrinkWrap: true,
+  physics: ScrollPhysics(),
+  padding: const EdgeInsets.all(8),
+  itemCount: lista[index].texto.length,
+  itemBuilder: (BuildContext context, int index2) {
+
+return TextField(
+  
+      
+      decoration: InputDecoration(
+        
+
+        hintText: lista[index].texto[index2].toString(),
+
+
+
+
+      
+        
+        
+      ),
+      onChanged: (valor) =>setState(() {
+      encabezadoActual.contenedores[index].texto[index2] = valor;
+      
+      //encabezadoActual.aniadirAlMapa();
+      //encabezadoActual.cargarABBDD();
+      
+      }),
+      
+       onSubmitted: (value){
+         encabezadoActual.contenedores[index].texto[index2]=value;
+encabezadoActual.aniadirAlMapa();
+encabezadoActual.cargarABBDD();
+       },
+    );
+
+
+
+  });
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+  }
+);
+
+
+
+
+
+
+
+}
+
+
+
+/*
+
+
+
+
+
+
+
+
+
+
+
+*/ 
 
  
 
@@ -266,8 +365,9 @@ return x;
 
 
 
-Widget _crearButtonVolver(){
-
+Widget _crearButtonVolver(Encabezado x){
+  
+  Encabezado xNow=x;
 
 
 return Column(
@@ -286,9 +386,9 @@ child: FloatingActionButton(
     heroTag: "btn3",
         child: Text('Volver img'),
         onPressed: (){
-
-
-
+/*sleep(Duration(seconds:1));
+xNow.aniadirAlMapa();
+xNow.cargarABBDD();*/
  final route = MaterialPageRoute(
 
     builder: (context){

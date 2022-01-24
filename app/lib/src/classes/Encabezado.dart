@@ -56,6 +56,35 @@ this.h3=text;
 
 
 
+
+void aniadirAlMapa(){
+  Map arrayTextos={};
+  mapaDivs={};
+int i=1;//used for the number of the div's name, example div1
+int j=0;//used for the array number of container becouse in programming it starts at 0
+int k=1;//used for the number of the text name, example text1
+for (var item in contenedores) {
+
+  for (var itemText in contenedores[j].texto) {
+   // mapaDivs["div${i.toString()}"]=[];
+    //print("texto del contenedor ");
+    arrayTextos["text${k.toString()}"]=itemText.toString();
+    k++;
+  }
+  mapaDivs["div${i.toString()}"]=arrayTextos;
+  arrayTextos={};
+  i++;
+  j++;
+  print(mapaDivs.toString());
+}
+
+
+
+
+}
+
+
+
 void aniadirAContenedores(){
  
   var i=0;

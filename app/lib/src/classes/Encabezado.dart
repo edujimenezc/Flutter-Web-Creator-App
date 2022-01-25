@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:ffi';
 
 import 'package:ejemplobbdd/src/classes/Contenedor.dart';
@@ -14,7 +15,7 @@ String h2="";
 String h3="";
 
 List<Contenedor> contenedores=[];
-Map<dynamic,dynamic> mapaDivs={};
+Map<dynamic,dynamic> mapaDivs=SplayTreeMap<dynamic,dynamic>();
 
 Encabezado.constructor1( String nombre,String h1, String h2, String h3, Map<dynamic,dynamic> mapadivs, String autor){
 
@@ -75,7 +76,12 @@ for (var item in contenedores) {
   arrayTextos={};
   i++;
   j++;
-  print(mapaDivs.toString());
+  
+//se cambian los putos nombres d los divsy d los text
+
+
+
+  
 }
 
 

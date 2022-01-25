@@ -18,7 +18,7 @@ class EditorEncabezadoPage extends StatefulWidget {
 }
 
 class _EditorEncabezadoPage extends State<EditorEncabezadoPage>{
-  
+  Color colorTargeta=Colors.white;
  // Encabezado encabezadoActual=cargarDeBBDD() as Encabezado;
 
  @override
@@ -136,7 +136,7 @@ TextField(
       })
     ),
     
-    Expanded(child: _crearListaDivs(encabezadoActual.contenedores,encabezadoActual)),
+    Expanded(child: _crearListaDivs(encabezadoActual.contenedores,encabezadoActual,colorTargeta)),
 
 
 Text("Aqui van los botones de edicion"),
@@ -166,7 +166,9 @@ Text("Aqui van los botones de edicion"),
 
 
 
-Widget _crearListaDivs(List<dynamic> lista,Encabezado x){
+Widget _crearListaDivs(List<dynamic> lista,Encabezado x,colorTargetaX){
+  Color colorTargeta=colorTargetaX;
+  
 Encabezado encabezadoActual=x;
 return ListView.builder(
   padding: const EdgeInsets.all(8),
@@ -174,7 +176,23 @@ return ListView.builder(
   itemBuilder: (BuildContext context, int index) {
     
 
-return 
+ return InkWell(
+  child: Card(
+  elevation:1.0 ,//sombra
+  color: colorTargeta,
+  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),//borde redondeado
+  child: Column(
+    children: <Widget>[
+      SizedBox(height: 30.0 ,),
+
+
+    
+SizedBox(height: 20.0 ,),
+Row(
+  children: <Widget>[
+
+Expanded(child:
+
 ListView.builder(
    shrinkWrap: true,
   physics: ScrollPhysics(),
@@ -182,7 +200,7 @@ ListView.builder(
   itemCount: lista[index].texto.length,
   itemBuilder: (BuildContext context, int index2) {
 
-return TextField(
+    return TextField(
   
       
       decoration: InputDecoration(
@@ -214,7 +232,118 @@ encabezadoActual.cargarABBDD();
 
 
 
-  });
+
+
+
+  })
+
+),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+  ],
+  
+),
+
+
+
+Row(
+
+  children: <Widget>[
+
+SizedBox(width: 20.0 ,),
+TextButton(onPressed: (){//el del texto
+
+ 
+encabezadoActual.contenedores[index].texto.add("Text");
+ encabezadoActual.aniadirAlMapa();
+
+ encabezadoActual.cargarABBDD();
+ setState(() {
+
+
+
+ });
+
+}, child: Text("+T")),
+TextButton(onPressed: (){//el de imgs
+
+
+}, child: Text("+Img")),
+TextButton(onPressed: (){//el de videos
+
+
+}, child: Text("+Video")),
+TextButton(onPressed: (){//el de musica
+
+
+
+}, child: Text("+Music")),
+
+  ],
+)
+
+
+
+
+    ],
+  ),
+),
+
+ onTap: () { 
+     /*
+setState(() {
+  this.colorTargeta=Colors.red.shade100;
+}
+);
+
+
+
+*/
+
+    }
+
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

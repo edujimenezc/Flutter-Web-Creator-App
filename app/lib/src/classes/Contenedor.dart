@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Contenedor{
-List<String> texto=[];
+List<String> texto=[];//ordenar por texto
 
 //cargar a bbdd los resultados
 

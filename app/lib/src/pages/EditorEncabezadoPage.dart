@@ -47,6 +47,7 @@ if (!snapshot.hasData) {
   
 encabezadoActual.aniadirAContenedores();
 
+encabezadoActual.contenedores.reversed;
 
 
 
@@ -168,6 +169,7 @@ Text("Aqui van los botones de edicion"),
 
 Widget _crearListaDivs(List<dynamic> lista,Encabezado x,colorTargetaX){
   Color colorTargeta=colorTargetaX;
+  lista.reversed;
   
 Encabezado encabezadoActual=x;
 return ListView.builder(
@@ -185,7 +187,7 @@ return ListView.builder(
     children: <Widget>[
       SizedBox(height: 30.0 ,),
 
-
+Text(lista[index].nombre),
     
 SizedBox(height: 20.0 ,),
 Row(
@@ -225,8 +227,37 @@ ListView.builder(
       
        onSubmitted: (value){
          encabezadoActual.contenedores[index].texto[index2]=value;
-encabezadoActual.aniadirAlMapa();
-encabezadoActual.cargarABBDD();
+        
+        
+
+Map mapaActual={};
+int i=1;
+for (var item in encabezadoActual.contenedores[index].texto) {
+  mapaActual["text${i}"]=item.toString();
+  i++;
+}
+print(mapaActual.toString());
+
+
+encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]=mapaActual;
+
+
+
+
+
+  encabezadoActual.cargarABBDD();
+ 
+
+
+
+
+
+
+
+
+
+
+
        },
     );
 
@@ -278,9 +309,23 @@ TextButton(onPressed: (){//el del texto
 
  
 encabezadoActual.contenedores[index].texto.add("Text");
- encabezadoActual.aniadirAlMapa();
 
- encabezadoActual.cargarABBDD();
+Map mapaActual={};
+int i=1;
+for (var item in encabezadoActual.contenedores[index].texto) {
+  mapaActual["text${i}"]=item.toString();
+  i++;
+}
+print(mapaActual.toString());
+
+
+encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]=mapaActual;
+
+
+
+
+
+  encabezadoActual.cargarABBDD();
  setState(() {
 
 

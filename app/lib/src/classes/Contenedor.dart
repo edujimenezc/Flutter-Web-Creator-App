@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
 
 class Contenedor{
-List<String> texto=[];//ordenar por texto
+  String nombre="";
+List<dynamic> texto=[];//ordenar por texto
 
 //cargar a bbdd los resultados
 
+Contenedor(String nombreX, List<dynamic> textoX){
+nombre=nombreX;
+texto=textoX;
+}
+String getNombre(){
+  return nombre;
+}
 
+List<dynamic> getTexto(){
 
+  return texto;
+}
 }

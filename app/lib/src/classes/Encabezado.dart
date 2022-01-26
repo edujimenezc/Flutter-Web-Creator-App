@@ -15,7 +15,7 @@ String h2="";
 String h3="";
 
 List<Contenedor> contenedores=[];
-Map<dynamic,dynamic> mapaDivs=SplayTreeMap<dynamic,dynamic>();
+Map<dynamic,dynamic> mapaDivs=Map<dynamic,dynamic>();
 
 Encabezado.constructor1( String nombre,String h1, String h2, String h3, Map<dynamic,dynamic> mapadivs, String autor){
 
@@ -58,44 +58,13 @@ this.h3=text;
 
 
 
-void aniadirAlMapa(){
-  Map arrayTextos={};
-  mapaDivs={};
-int i=1;//used for the number of the div's name, example div1
-int j=0;//used for the array number of container becouse in programming it starts at 0
-int k=1;//used for the number of the text name, example text1
-for (var item in contenedores) {
-
-  for (var itemText in contenedores[j].texto) {
-   // mapaDivs["div${i.toString()}"]=[];
-    //print("texto del contenedor ");
-    arrayTextos["text${k.toString()}"]=itemText.toString();
-    k++;
-  }
-  mapaDivs["div${i.toString()}"]=arrayTextos;
-  arrayTextos={};
-  i++;
-  j++;
-  
-//se cambian los putos nombres d los divsy d los text
-
-
-
-  
-}
-
-
-
-
-}
-
 
 
 void aniadirAContenedores(){
  
-  var i=0;
+  //var i=0;
 
-  for (var item in mapaDivs.values) {
+  /*for (var item in mapaDivs.values) {
     
     
     this.contenedores.add(Contenedor());
@@ -103,27 +72,26 @@ for (var x in item.keys) {
   if(x.toString().contains("text")){
     
 contenedores[i].texto.add(item[x]);
-  }
-  
+  }*/
+   mapaDivs.forEach((key, value) {
+
+
+contenedores.add(new Contenedor(key.toString(),value.values.toList()));
+//print(key.toString());
+
+
+    });
+contenedores=List.from(contenedores.reversed);
+print(contenedores[0].nombre);
+
+
+//contenedores.sort();
+//contenedores.forEach((element) {print(element.toString());});
+
+
  /*if(x.toString().contains("image")){
 print(item[x]);
   }*/
-
-}
-
-
-i++;
-   
-
-  }
-  
-
-
-
-
-
-
-
 
 
 

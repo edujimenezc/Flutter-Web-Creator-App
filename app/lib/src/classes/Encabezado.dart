@@ -76,13 +76,13 @@ contenedores[i].texto.add(item[x]);
    mapaDivs.forEach((key, value) {
 
 
-contenedores.add(new Contenedor(key.toString(),value.values.toList()));
+contenedores.add(new Contenedor(key.toString(),value));
 //print(key.toString());
 
 
     });
 contenedores=List.from(contenedores.reversed);
-print(contenedores[0].nombre);
+
 
 
 //contenedores.sort();

@@ -199,16 +199,22 @@ ListView.builder(
    shrinkWrap: true,
   physics: ScrollPhysics(),
   padding: const EdgeInsets.all(8),
-  itemCount: lista[index].texto.length,
+  itemCount: lista[index].elementos.keys.length,
   itemBuilder: (BuildContext context, int index2) {
 
-    return TextField(
+//index2=index2+1;
+
+if(lista[index].elementos.keys.toList()[index2].toString().contains("text")){
+int indiceCambiado=index2+1;
+
+
+return TextField(
   
       
       decoration: InputDecoration(
         
 
-        hintText: lista[index].texto[index2].toString(),
+        hintText: lista[index].elementos["${indiceCambiado.toString()}text"].toString(),
 
 
 
@@ -218,7 +224,7 @@ ListView.builder(
         
       ),
       onChanged: (valor) =>setState(() {
-      encabezadoActual.contenedores[index].texto[index2] = valor;
+      encabezadoActual.contenedores[index].elementos["${indiceCambiado.toString()}text"] = valor;
       
       //encabezadoActual.aniadirAlMapa();
       //encabezadoActual.cargarABBDD();
@@ -226,17 +232,31 @@ ListView.builder(
       }),
       
        onSubmitted: (value){
-         encabezadoActual.contenedores[index].texto[index2]=value;
+         encabezadoActual.contenedores[index].elementos["${indiceCambiado.toString()}text"]=value;
         
         
 
 Map mapaActual={};
 int i=1;
-for (var item in encabezadoActual.contenedores[index].texto) {
-  mapaActual["text${i}"]=item.toString();
+for (var item in encabezadoActual.contenedores[index].elementos.keys) {
+
+if(item.toString().contains("text")){
+mapaActual["${i}text"]=encabezadoActual.contenedores[index].elementos["${i}text"];
+
+}else if(item.toString().contains("img")){
+mapaActual["${i}img"]=encabezadoActual.contenedores[index].elementos["${i}img"];
+
+}else{
+
+mapaActual["${i}video"]=encabezadoActual.contenedores[index].elementos["${i}video"];
+
+
+}
+
+ 
   i++;
 }
-print(mapaActual.toString());
+
 
 
 encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]=mapaActual;
@@ -260,6 +280,53 @@ encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]=mapa
 
        },
     );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//si armario[indiceActual].contains(text) 
+//then
+//return textField
+//else if armario[indiceActual].contains(img) 
+// return ImageIcon
+//else if armario[indiceActual].contains(video)
+//return Video 
+
+
+}else if(lista[index].elementos.keys.toList()[index2].toString().contains("img")){
+
+return Text("Img");
+
+}else{
+
+return Text("Video");
+
+
+
+
+}
+
+
+
+
+
+
+
+
+    
 
 
 
@@ -303,21 +370,50 @@ encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]=mapa
 Row(
 
   children: <Widget>[
-
 SizedBox(width: 20.0 ,),
 TextButton(onPressed: (){//el del texto
 
- 
-encabezadoActual.contenedores[index].texto.add("Text");
+
+ int indiceUltimo=encabezadoActual.contenedores[index].elementos.keys.length-1;
+int numeroActual=int.parse(encabezadoActual.contenedores[index].elementos.keys.toList()[indiceUltimo].toString()[0]);
+//print(encabezadoActual.contenedores[index].elementos.keys.toString());
+
+
+ setState(() {
+
+
+//ahora m pone null
+
+
+
+  encabezadoActual.contenedores[index].elementos.putIfAbsent("${(numeroActual+1000000).toString()}text", () => 1);
+
+
+//encabezadoActual.contenedores[index].elementos["${(numeroActual+3).toString()}text"]="Text";
 
 Map mapaActual={};
 int i=1;
-for (var item in encabezadoActual.contenedores[index].texto) {
-  mapaActual["text${i}"]=item.toString();
+for (var item in encabezadoActual.contenedores[index].elementos.keys) {
+
+if(item.toString().contains("text")){
+mapaActual["${i}text"]=encabezadoActual.contenedores[index].elementos["${i}text"];
+
+}else if(item.toString().contains("img")){
+mapaActual["${i}img"]=encabezadoActual.contenedores[index].elementos["${i}img"];
+
+}else{
+
+mapaActual["${i}video"]=encabezadoActual.contenedores[index].elementos["${i}video"];
+
+
+}
+
+ 
   i++;
 }
-print(mapaActual.toString());
 
+mapaActual[mapaActual.keys.toList()[mapaActual.keys.toList().length-1]]="Text";
+print("aquio estoy"+mapaActual.toString());
 
 encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]=mapaActual;
 
@@ -325,8 +421,14 @@ encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]=mapa
 
 
 
+
   encabezadoActual.cargarABBDD();
- setState(() {
+
+
+
+
+
+
 
 
 

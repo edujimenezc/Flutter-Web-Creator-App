@@ -7,6 +7,7 @@ import 'package:ejemplobbdd/src/classes/Encabezado.dart';
 import 'dart:io';
 import 'package:ejemplobbdd/src/pages/creacionWebsPage.dart';
 import 'package:ejemplobbdd/src/pages/homepage.dart';
+import 'package:ejemplobbdd/src/pages/uploadImagePage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -431,11 +432,26 @@ encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]=mapa
 
 
 
-
  });
 
 }, child: Text("+T")),
 TextButton(onPressed: (){//el de imgs
+
+
+
+
+
+final route = MaterialPageRoute(
+
+    builder: (context){
+return UploadImagePage();
+
+    }
+  );
+
+Navigator.push(context, route);
+
+
 
 
 }, child: Text("+Img")),

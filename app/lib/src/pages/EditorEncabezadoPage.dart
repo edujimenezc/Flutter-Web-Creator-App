@@ -17,13 +17,22 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 
 class EditorEncabezadoPage extends StatefulWidget {
-  
+  String paginaActual="";
+  EditorEncabezadoPage(String nombreWeb){
+paginaActual=nombreWeb;
+
+  }
  @override
-  _EditorEncabezadoPage createState() => _EditorEncabezadoPage();
+  _EditorEncabezadoPage createState() => _EditorEncabezadoPage(paginaActual);
   
 }
 
 class _EditorEncabezadoPage extends State<EditorEncabezadoPage>{
+   String paginaActual="";
+  _EditorEncabezadoPage(String nombreWeb){
+paginaActual=nombreWeb;
+
+  }
   Color colorTargeta=Colors.white;
    PickedFile? imageFile=null;
     String nombreImagen="Default";
@@ -101,7 +110,7 @@ TextField(
 
       onChanged: (valor) =>setState(() {
         encabezadoActual.setH1 = valor;
-        encabezadoActual.cargarABBDD();
+        encabezadoActual.cargarABBDD(paginaActual);
        
       }),
    
@@ -121,7 +130,7 @@ TextField(
       onChanged: (valor) =>setState(() {
 
       encabezadoActual.setH2 = valor;
-      encabezadoActual.cargarABBDD();
+      encabezadoActual.cargarABBDD(paginaActual);
       })
     ),
 
@@ -132,7 +141,7 @@ TextField(
       decoration: InputDecoration(
         
         hintText: h3.toString(),
-suffixIcon: FloatingActionButton(
+/*suffixIcon: FloatingActionButton(
    shape: BeveledRectangleBorder(
           borderRadius: BorderRadius.zero
      ),
@@ -143,7 +152,7 @@ suffixIcon: FloatingActionButton(
 
 
 
-        })
+        })*/
 
 
 
@@ -154,7 +163,7 @@ suffixIcon: FloatingActionButton(
       ),
       onChanged: (valor) =>setState(() {
        encabezadoActual.setH3 = valor;
-       encabezadoActual.cargarABBDD();
+       encabezadoActual.cargarABBDD(paginaActual);
       })
     ),
     
@@ -171,7 +180,7 @@ if(encabezadoActual.mapaDivs.keys.isEmpty){
   encabezadoActual.mapaDivs.putIfAbsent("div1", () => {"0text":"Text"});
 
 
-encabezadoActual.cargarABBDD();
+encabezadoActual.cargarABBDD(paginaActual);
 
 setState(() {
   
@@ -196,7 +205,7 @@ numMayor=int.parse(item.toString()[item.toString().length-2]+item.toString()[ite
 elementoMayor=item.toString();
 
 
-encabezadoActual.cargarABBDD();
+encabezadoActual.cargarABBDD(paginaActual);
 
 setState(() {
   
@@ -218,7 +227,7 @@ elementoMayor=item.toString();
 
 encabezadoActual.mapaDivs.putIfAbsent("div${numMayor+1}", () => {"0text":"Text"});
 
-encabezadoActual.cargarABBDD();
+encabezadoActual.cargarABBDD(paginaActual);
 
 setState(() {
   
@@ -302,7 +311,7 @@ setState(() {
   
 encabezadoActual.mapaDivs.remove(elementoMayor);
 
-encabezadoActual.cargarABBDD();
+encabezadoActual.cargarABBDD(paginaActual);
 });
 
 
@@ -494,7 +503,7 @@ encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]=mapa
 */
 
 
-  encabezadoActual.cargarABBDD();
+  encabezadoActual.cargarABBDD(paginaActual);
  
 
 
@@ -697,7 +706,7 @@ elementoMayor=item.toString();
 
 
 
-  encabezadoActual.cargarABBDD();
+  encabezadoActual.cargarABBDD(paginaActual);
 
 
 
@@ -726,11 +735,12 @@ TextButton(onPressed: (){
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
+                Text("Nombre de la imagen"),
                 TextField(
 
 decoration: InputDecoration(
         
-        hintText: "",
+        hintText: "Nombre de la Imagen",
         //labelText: 'Password',
         
         
@@ -813,7 +823,7 @@ elementoMayor=item.toString();
 
 
 
-  encabezadoActual.cargarABBDD();
+  encabezadoActual.cargarABBDD(paginaActual);
 
  Navigator.of(context).pop();
 
@@ -957,7 +967,7 @@ elementoMayor=item.toString();
 
 
 
-  encabezadoActual.cargarABBDD();
+  encabezadoActual.cargarABBDD(paginaActual);
 
  Navigator.of(context).pop();
 
@@ -1187,7 +1197,7 @@ elementoMayor=item.toString();
 
 
 
-  encabezadoActual.cargarABBDD();
+  encabezadoActual.cargarABBDD(paginaActual);
 
  Navigator.of(context).pop();
 
@@ -1302,7 +1312,7 @@ elementoMayor=item.toString();
 
 
 encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()].remove(elementoMayor);
-encabezadoActual.cargarABBDD();
+encabezadoActual.cargarABBDD(paginaActual);
 
 setState(() {
   
@@ -1499,7 +1509,7 @@ var h3;
 var mapaDivs;
 
 Encabezado x=Encabezado.constructor2();
-DocumentReference webActual = FirebaseFirestore.instance.collection('webs').doc("prueba").collection("encabezado").doc("unique");
+DocumentReference webActual = FirebaseFirestore.instance.collection('webs').doc(currentUser!+"."+paginaActual).collection("encabezado").doc("unique");
 var querySnapshot = await webActual.get();
 
 Map<String, dynamic>? data = querySnapshot.data() as Map<String, dynamic>?;
@@ -1644,7 +1654,7 @@ xNow.cargarABBDD();*/
  final route = MaterialPageRoute(
 
     builder: (context){
-return CreacionWebsPage();
+return CreacionWebsPage(paginaActual);
 
     }
   );

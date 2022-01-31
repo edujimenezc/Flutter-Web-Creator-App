@@ -96,13 +96,13 @@ print(item[x]);
 
 
 }
-//hacer funcion que te cambie el doc en bbdd
-Future<void> cargarABBDD()async {
+
+Future<void> cargarABBDD(String nombreWeb)async {
   
   
  autor=currentUser!.email.toString();
 
-DocumentReference webActual = FirebaseFirestore.instance.collection('webs').doc("prueba").collection("encabezado").doc("unique");
+DocumentReference webActual = FirebaseFirestore.instance.collection('webs').doc(autor+"."+nombreWeb).collection("encabezado").doc("unique");
 
  return webActual.set({
 
@@ -141,8 +141,5 @@ static Encabezado fromJson(json)=> Encabezado(
   Listadivs: json["divs"],
 
 );*/
- @override
-String toString() {
-  return this.h1.toString();//me he quedado en que me ha leido bn el json y tal crea los getter y setter y la clase en condiciones y luego es mostrarlo
-}
+
 }

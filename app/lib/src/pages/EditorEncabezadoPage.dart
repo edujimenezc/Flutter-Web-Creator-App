@@ -132,6 +132,18 @@ TextField(
       decoration: InputDecoration(
         
         hintText: h3.toString(),
+suffixIcon: FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn10",
+        child: Text('B'),
+        onPressed: (){
+
+
+
+
+        })
 
 
 
@@ -148,11 +160,196 @@ TextField(
     
     Expanded(child: _crearListaDivs(encabezadoActual.contenedores,encabezadoActual,colorTargeta)),
 
+Row(children: [
+SizedBox(width: 100),
 
-Text("Aqui van los botones de edicion"),
-Text("Aqui van los botones de edicion"),
-Text("Aqui van los botones de edicion"),
-Text("Aqui van los botones de edicion"),
+TextButton(onPressed: (){
+
+
+
+if(encabezadoActual.mapaDivs.keys.isEmpty){
+  encabezadoActual.mapaDivs.putIfAbsent("div1", () => {"0text":"Text"});
+
+
+encabezadoActual.cargarABBDD();
+
+setState(() {
+  
+});
+
+
+
+
+
+}else{
+
+
+
+int numMayor=0;
+String elementoMayor="";
+for (var item in encabezadoActual.mapaDivs.keys) {
+
+if(item.toString().length>4){
+
+if(int.parse(item.toString()[item.toString().length-2]+item.toString()[item.toString().length-1])>numMayor){
+numMayor=int.parse(item.toString()[item.toString().length-2]+item.toString()[item.toString().length-1]);
+elementoMayor=item.toString();
+
+
+encabezadoActual.cargarABBDD();
+
+setState(() {
+  
+});
+
+
+}
+}else{
+
+
+
+
+if(int.parse(item.toString()[3])>numMayor){
+numMayor=int.parse(item.toString()[3]);
+elementoMayor=item.toString();
+}
+}
+}
+
+encabezadoActual.mapaDivs.putIfAbsent("div${numMayor+1}", () => {"0text":"Text"});
+
+encabezadoActual.cargarABBDD();
+
+setState(() {
+  
+});
+
+
+
+
+
+
+
+
+
+
+
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}, child: Text("+Contenedor")),
+
+
+TextButton(onPressed: (){
+
+
+
+
+
+int numMayor=0;
+String elementoMayor="";
+
+try{
+
+if(
+encabezadoActual.mapaDivs.keys==null
+
+){
+
+
+
+
+}else{
+
+
+
+for (var item in encabezadoActual.mapaDivs.keys) {
+
+if(item.toString().length>4){
+
+if(int.parse(item.toString()[item.toString().length-2]+item.toString()[item.toString().length-1])>numMayor){
+numMayor=int.parse(item.toString()[item.toString().length-2]+item.toString()[item.toString().length-1]);
+elementoMayor=item.toString();
+}
+}else{
+
+
+
+
+if(int.parse(item.toString()[3])>numMayor){
+numMayor=int.parse(item.toString()[3]);
+elementoMayor=item.toString();
+}
+}
+
+}
+
+setState(() {
+  
+encabezadoActual.mapaDivs.remove(elementoMayor);
+
+encabezadoActual.cargarABBDD();
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+  
+}catch(e){
+
+}
+
+
+
+
+
+
+
+
+
+}, child: Text("-Contenedor"))
+
+
+
+],)
 
 
 
@@ -329,13 +526,6 @@ encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]=mapa
 
 
 
-//si armario[indiceActual].contains(text) 
-//then
-//return textField
-//else if armario[indiceActual].contains(img) 
-// return ImageIcon
-//else if armario[indiceActual].contains(video)
-//return Video 
 
 
 }else if(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}img"]!=null){
@@ -383,24 +573,38 @@ return snapshot.data!;
 
 
 
- return Image.network("https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/YouTube_social_white_square_%282017%29.svg/800px-YouTube_social_white_square_%282017%29.svg.png");
-
-
-
-
-
-
-
-//ponerle el future
-//y arreglar el resto
 /*
-String  urlImagen=getYoutubeThumbnail(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}video"]);
-if(urlImagen.isNotEmpty){
-return Image.network(urlImagen);
+try{
+
+}catch(error r){
 
 
 
 
+}*/
+
+  
+
+  
+final String? id = getYoutubeThumbnail(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}video"]);
+if(id!=null){
+
+return Image.network('https://img.youtube.com/vi/${id}/0.jpg');
+ 
+}else{
+
+ return Image.network("https://i1.wp.com/www.radiosanjoaquin.cl/wp-content/uploads/2021/08/youtube-video-no-disponible.jpg?fit=1120%2C581&ssl=1");
+}
+
+
+
+
+
+
+
+
+
+/*
 
 
 
@@ -526,7 +730,7 @@ TextButton(onPressed: (){
 
 decoration: InputDecoration(
         
-        hintText: "textomamaguebo",
+        hintText: "",
         //labelText: 'Password',
         
         
@@ -926,7 +1130,13 @@ showDialog(
           shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
           title: Text('Añadir video de Youtube'),
           content: TextField(
-
+             decoration: InputDecoration(
+        
+        hintText: "Introduce la URL del video",
+        //labelText: 'Password',
+        
+        
+      ),
             onChanged: (valor) =>setState(() {
               url=valor;
        
@@ -941,6 +1151,15 @@ showDialog(
 
 
 if(url.isNotEmpty){
+
+
+
+
+
+ 
+
+
+
 
 
 
@@ -978,6 +1197,15 @@ elementoMayor=item.toString();
 
 
  });
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1154,6 +1382,30 @@ setState(() {
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+String? getYoutubeThumbnail(String videoUrl) {
+  final Uri? uri = Uri.tryParse(videoUrl);
+  if (uri == null) {
+    return null;
+  }
+
+  return uri.queryParameters['v'];
+  //'https://img.youtube.com/vi/${uri.queryParameters['v']}/0.jpg';
+}
+
 
 
 
@@ -1352,7 +1604,7 @@ return x;
 }
 */
 
-
+/*
 String getYoutubeThumbnail(String videoUrl) {
   final Uri? uri = Uri.tryParse(videoUrl);
   if (uri == null) {
@@ -1362,7 +1614,7 @@ String getYoutubeThumbnail(String videoUrl) {
   return 'https://img.youtube.com/vi/${uri.queryParameters['v']}/0.jpg';
 }
 
-
+*/
 
 
 Widget _crearButtonVolver(Encabezado x){

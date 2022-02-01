@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ejemplobbdd/src/classes/Encabezado.dart';
 import 'package:ejemplobbdd/src/pages/creacionWebsPage.dart';
 import 'package:ejemplobbdd/src/pages/homepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -139,7 +140,16 @@ result.docs.forEach((res) {print(res.id); });
    
  await FirebaseFirestore.instance.collection('webs').get().then((value) {
 
-value.docs.forEach((element) {userWebs.add(element.id);});
+value.docs.forEach((element) {
+  String correo=element.id.toString().split(".")[0]+"."+element.id.toString().split(".")[1];
+
+if(correo.toString() == currentUser){
+  
+   userWebs.add(element.id);
+};
+  
+  
+  });
 
  });
 
@@ -186,7 +196,10 @@ if(data!=null){
 
 
 Widget _crearLista(List listaWebs ){
-  
+  if(listaWebs.isEmpty){
+return Text("¡No tienes Webs Aún!");
+
+  }
 
 return ListView.builder(
   //shrinkWrap: true,
@@ -207,7 +220,7 @@ if(arrayActual.length>3){
   nombreActual=arrayActual[2];
 }
 
-
+ String nombreFinal="";
           return ListTile(
 
            
@@ -217,7 +230,12 @@ if(arrayActual.length>3){
               setState(() {
               String nombreWeb=listaWebs[index];
               var nombreSplit=nombreWeb.split(".");
-              String nombreFinal="";
+             
+
+
+
+
+
               if(nombreSplit.length>3){
                 for (var i = 2; i < arrayActual.length; i++) {
      nombreActual=nombreActual+" "+arrayActual[i];
@@ -238,6 +256,29 @@ if(arrayActual.length>3){
                                          }
                                               );
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                       Navigator.push(context, route);
             
               
@@ -247,7 +288,7 @@ if(arrayActual.length>3){
            },
              onLongPress: () => {
                
-              _crearAlertEliminar(context)
+              _crearAlertEliminar(context,nombreActual)
 
   },
             
@@ -258,7 +299,7 @@ if(arrayActual.length>3){
 }
 
 
-void _crearAlertEliminar(BuildContext context){
+void _crearAlertEliminar(BuildContext context,String nombreWeb){
 
  showDialog(
       context: context,
@@ -282,7 +323,20 @@ void _crearAlertEliminar(BuildContext context){
             ),
             TextButton(
               child: Text('Ok'),
-              onPressed: (){
+              onPressed: ()async{
+
+
+
+                  eliminarDeBBDD(nombreWeb).then((value) => setState(() {
+  
+}));
+
+
+
+
+
+
+
                 Navigator.of(context).pop();
 
 //TODO aki
@@ -305,6 +359,10 @@ void _crearAlertEliminar(BuildContext context){
 
 
 
+Future<void> eliminarDeBBDD(String paginaActual) async {
+
+var collection = FirebaseFirestore.instance.collection('webs');
+await collection.doc(currentUser!+"."+paginaActual).delete();
 
 Widget _crearButtonEditar(){
 
@@ -340,7 +398,7 @@ child: FloatingActionButton(
 
 
 
-}
+}}
 
 
 Widget _crearButtonVolver(){

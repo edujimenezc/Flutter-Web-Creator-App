@@ -102,6 +102,12 @@ Future<void> cargarABBDD(String nombreWeb)async {
   
  autor=currentUser!.email.toString();
 
+
+
+
+
+
+
 DocumentReference webActual = FirebaseFirestore.instance.collection('webs').doc(autor+"."+nombreWeb).collection("encabezado").doc("unique");
 
  return webActual.set({

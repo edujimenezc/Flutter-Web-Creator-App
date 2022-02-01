@@ -238,9 +238,22 @@ Future<void> cargarABBDD(String nombreWeb)async {
   
  String autor=currentUser.toString();
 
-DocumentReference webActual = FirebaseFirestore.instance.collection('webs').doc(nombreWeb).collection("encabezado").doc("unique");
+DocumentReference webActual = FirebaseFirestore.instance.collection('webs').doc(nombreWeb);//.collection("encabezado").doc("unique");
 
- return webActual.set({
+ webActual.set({
+
+"autor" : autor,
+
+
+
+ });
+   
+
+
+
+   DocumentReference webActual2 = FirebaseFirestore.instance.collection('webs').doc(nombreWeb).collection("encabezado").doc("unique");
+
+ return webActual2.set({
 
 "autor" : autor,
 "nombre_web" : nombreWeb,
@@ -251,7 +264,6 @@ DocumentReference webActual = FirebaseFirestore.instance.collection('webs').doc(
 
 
  }
-   
 
  )
           

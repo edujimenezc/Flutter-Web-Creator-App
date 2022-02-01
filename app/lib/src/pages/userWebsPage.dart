@@ -1,5 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ejemplobbdd/src/pages/creacionWebsPage.dart';
 import 'package:ejemplobbdd/src/pages/homepage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import 'EditorEncabezadoPage.dart';
 
 class UserWebsPage extends StatefulWidget {
   
@@ -9,11 +14,29 @@ class UserWebsPage extends StatefulWidget {
 }
 
 class _UserWebsPage extends State<UserWebsPage>{
- 
+ String? currentUser = FirebaseAuth.instance.currentUser!.email;
  @override
   Widget build(BuildContext context) {
 
-    return Scaffold(
+return FutureBuilder (
+      
+      future:  cargarWebs(),
+      
+      builder: ( context,AsyncSnapshot<dynamic> snapshot  ){
+  var h1="Titulo";
+var h2="Subtitulo";
+var h3="Más texto";
+if (!snapshot.hasData) {
+     return Container(
+       child: Center(
+         child: CircularProgressIndicator(),
+       ),
+     );
+}else{
+
+
+
+return Scaffold(
 body: Center(
   child: Column(
 mainAxisSize: MainAxisSize.min,
@@ -30,7 +53,7 @@ Text('Tus Webs'),
        
      alignment: Alignment.center,
        
-       child:  _crearLista(["1","3"]),
+       child:  _crearLista(snapshot.data),
        
        
        ),
@@ -69,29 +92,155 @@ Row(
 
 
     );
+
+
+
+
+
+
+
+
+}
+      });
+
+
+
+
+
+
+
+
+
+
+
+    
   }
 
 
 
 
 
+Future<List<String>> cargarWebs() async {
+
+List<String> userWebs=[];
+/*
+
+final db = FirebaseFirestore.instance;
+var result=await db.collection('webs').get();
+result.docs.forEach((res) {print(res.id); });
+
+
+*/
+
+
+
+
+
+   
+ await FirebaseFirestore.instance.collection('webs').get().then((value) {
+
+value.docs.forEach((element) {userWebs.add(element.id);});
+
+ });
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+/*
+var querySnapshot = await webActual.get();
+    
+
+Map<String, dynamic>? data = querySnapshot.data() as Map<String, dynamic>?;
+if(data!=null){
+  userWebs.add(data["nombre_web"].toString());
+
+
+
+
+
+}
+
+
+   
+  
+*/
+
+
+
+
+  return userWebs;
+}
+
+
+
+
 
 Widget _crearLista(List listaWebs ){
-  int selectedIndex;
-//var  listaWebs = ['1','2','3'];
+  
+
 return ListView.builder(
   //shrinkWrap: true,
   padding: const EdgeInsets.all(10.0),
  
         itemCount: listaWebs.length,
         itemBuilder: (BuildContext context,int index){
+
+String nombreActual="";
+List arrayActual=listaWebs[index].toString().split(".");
+if(arrayActual.length>3){
+ 
+  for (var i = 2; i < arrayActual.length; i++) {
+     nombreActual=nombreActual+" "+arrayActual[i];
+  }
+  
+}else{
+  nombreActual=arrayActual[2];
+}
+
+
           return ListTile(
-            title:Text(listaWebs[index]),
+
+           
+            title:Text(nombreActual),
              
            onTap: () {
               setState(() {
-              selectedIndex = index;
-              print(selectedIndex);
+              String nombreWeb=listaWebs[index];
+              var nombreSplit=nombreWeb.split(".");
+              String nombreFinal="";
+              if(nombreSplit.length>3){
+                for (var i = 2; i < arrayActual.length; i++) {
+     nombreActual=nombreActual+" "+arrayActual[i];
+  }
+                
+              }else{
+
+                nombreFinal=nombreSplit[2];
+              }
+
+              
+
+             final route = MaterialPageRoute(
+
+                     builder: (context){
+                  return CreacionWebsPage(nombreFinal);
+
+                                         }
+                                              );
+
+                      Navigator.push(context, route);
+            
+              
               
                
             });

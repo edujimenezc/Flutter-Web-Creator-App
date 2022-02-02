@@ -187,6 +187,50 @@ child: FloatingActionButton(
         child: Text('Acceder'),
         onPressed: () async {
 
+if(_email.isEmpty || _pass.isEmpty){
+
+
+
+
+showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+
+         return AlertDialog(
+          shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
+          title: Text('Error'),
+          
+          content: Expanded(child: Text("Los campos Email y Password deben estar rellenos")),
+          actions: <Widget>[
+           
+            TextButton(
+              child: Text('Ok'),
+              onPressed: (){
+                Navigator.of(context).pop();
+        },
+            ),
+          ],
+        );
+
+      }
+
+    );
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
  
 try {
   UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -207,9 +251,76 @@ Navigator.push(context, route);
 
 } on FirebaseAuthException catch (e) {
   if (e.code == 'user-not-found') {
-    print('No user found for that email.');
+   
+
+
+showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+
+         return AlertDialog(
+          shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
+          title: Text('Error'),
+          
+          content: Expanded(child: Text("Email incorrecto")),
+          actions: <Widget>[
+           
+            TextButton(
+              child: Text('Ok'),
+              onPressed: (){
+                Navigator.of(context).pop();
+        },
+            ),
+          ],
+        );
+
+      }
+
+    );
+
+
+
+
+
+
+
+
   } else if (e.code == 'wrong-password') {
-    print('Wrong password provided for that user.');
+   
+   
+showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+
+         return AlertDialog(
+          shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
+          title: Text('Error'),
+          
+          content: Expanded(child: Text("Contraseña Incorrecta")),
+          actions: <Widget>[
+           
+            TextButton(
+              child: Text('Ok'),
+              onPressed: (){
+                Navigator.of(context).pop();
+        },
+            ),
+          ],
+        );
+
+      }
+
+    );
+
+
+
+
+
+
+
+
   }
 }
 

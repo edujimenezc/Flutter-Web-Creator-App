@@ -26,19 +26,28 @@ SizedBox(width: 40),
 ],),
 Text('Preguntas Frecuentes'),
 SizedBox(height: 25),
+
+
+
+
      Expanded(child:Align(
        
      alignment: Alignment.center,
        
-       child: _crearListaPreguntas()
+       child:Column(children: [
+_crearListaPreguntas("¿Cómo creo una página web?","Pidiendomela y dandome 500 paveles"),
+_crearListaPreguntas("¿Cómo esto?","Pidiendomela y dandome 500 paveles"),
+_crearListaPreguntas("¿Cómo esto?","Pidiendomela y dandome 500 paveles")
+
+
+       ],)
        
        
        ),
        
        ),
       
-
-        
+     
 
 
 
@@ -70,80 +79,20 @@ SizedBox(height: 25),
 
 
 
-Widget _crearListaPreguntas( ){
- 
- return Column(children: <Widget>[
+Widget _crearListaPreguntas(String pregunta, String respuesta ) {
 
-DropdownButton<String>(
-  hint: Text("Please choose a location"),
-  items: <String>['A'].map((String value) {
-    return DropdownMenuItem<String>(
-      value: value,
-      child: Text(value),
-    );
-  }).toList(),
-  onChanged: (_) {},
-),
-SizedBox(height: 25),
+ return ExpansionTile(title: Text(pregunta),
+ children: [
+Text(respuesta)
 
-DropdownButton<String>(
-  hint: Text("Please choose a location"),
-  items: <String>[''].map((String value) {
-    return DropdownMenuItem<String>(
-      value: value,
-      child: Text('asas'+"\n"+"asas"),
-    );
-  }).toList(),
-  onChanged: (_) {},
-),
-SizedBox(height: 25),
-
-DropdownButton<String>(
-  hint: Text("Please choose a location"),
-  items: <String>['A'].map((String value) {
-    return DropdownMenuItem<String>(
-      value: value,
-      child: Text(value),
-    );
-  }).toList(),
-  onChanged: (_) {},
-),
-SizedBox(height: 25),
-
-DropdownButton<String>(
-  hint: Text("Please choose a location"),
-  items: <String>['A'].map((String value) {
-    return DropdownMenuItem<String>(
-      value: value,
-      child: Text(value),
-    );
-  }).toList(),
-  onChanged: (_) {},
-),
-SizedBox(height: 25),
-
-
-
- ]);
+ ],
  
  
  
  
  
+ );
  
- 
- 
-  /*
-return DropdownButton<String>(
-  hint: Text("Please choose a location"),
-  items: <String>['A'].map((String value) {
-    return DropdownMenuItem<String>(
-      value: value,
-      child: Text(value),
-    );
-  }).toList(),
-  onChanged: (_) {},
-);*/
 }
 
 

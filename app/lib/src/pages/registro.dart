@@ -90,6 +90,65 @@ return FloatingActionButton(
         onPressed: () async {
 
 
+
+
+if(_email.isEmpty || _pass.isEmpty){
+
+
+
+
+showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+
+         return AlertDialog(
+          shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
+          title: Text('Error'),
+          
+          content: Expanded(child: Text("Los campos Email y Password deben estar rellenos")),
+          actions: <Widget>[
+           
+            TextButton(
+              child: Text('Ok'),
+              onPressed: (){
+                Navigator.of(context).pop();
+        },
+            ),
+          ],
+        );
+
+      }
+
+    );
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 try {
   UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
     email: _email,
@@ -110,9 +169,131 @@ Navigator.push(context, route);
 
 } on FirebaseAuthException catch (e) {
   if (e.code == 'weak-password') {
-    print('The password provided is too weak.');
+   
+  
+showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+
+         return AlertDialog(
+          shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
+          title: Text('Error'),
+          
+          content: Expanded(child: Text("La contraseña es demasiado débil")),
+          actions: <Widget>[
+           
+            TextButton(
+              child: Text('Ok'),
+              onPressed: (){
+                Navigator.of(context).pop();
+        },
+            ),
+          ],
+        );
+
+      }
+
+    );
+
+
+
+
+
+
+
+
+
+
+
   } else if (e.code == 'email-already-in-use') {
-    print('The account already exists for that email.');
+   
+   
+
+showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+
+         return AlertDialog(
+          shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
+          title: Text('Error'),
+          
+          content: Expanded(child: Text("Ya hay una cuenta registrada con ese correo")),
+          actions: <Widget>[
+           
+            TextButton(
+              child: Text('Ok'),
+              onPressed: (){
+                Navigator.of(context).pop();
+        },
+            ),
+          ],
+        );
+
+      }
+
+    );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  }else if (e.code == 'invalid-email') {
+   
+   
+
+showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+
+         return AlertDialog(
+          shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
+          title: Text('Error'),
+          
+          content: Expanded(child: Text("Introduce un email válido")),
+          actions: <Widget>[
+           
+            TextButton(
+              child: Text('Ok'),
+              onPressed: (){
+                Navigator.of(context).pop();
+        },
+            ),
+          ],
+        );
+
+      }
+
+    );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   }
 } catch (e) {
   print(e);

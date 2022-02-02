@@ -1,4 +1,5 @@
 import 'package:ejemplobbdd/main.dart';
+import 'package:ejemplobbdd/src/pages/ayudaPage.dart';
 import 'package:ejemplobbdd/src/pages/homepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -106,7 +107,21 @@ Row(children: <Widget>[
 SizedBox(width: 40),
 TextButton(
               onPressed: () {
-                //action
+               
+               
+ final route = MaterialPageRoute(
+
+    builder: (context){
+return AyudaPage();
+
+    }
+  );
+
+
+Navigator.push(context, route);
+
+
+
               },
               child: Text(
                 'Preguntas Frecuentes', //title
@@ -116,7 +131,44 @@ TextButton(
 SizedBox(width: 40),
 TextButton(
               onPressed: () {
-                //action
+              
+              
+
+showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+
+         return AlertDialog(
+          shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
+          title: Text('Donaciones'),
+          
+          content: Expanded(child: Text("Puedes donar a mi Paypal \n miCorreo@example.com")),
+          actions: <Widget>[
+           
+            TextButton(
+              child: Text('Ok'),
+              onPressed: (){
+                Navigator.of(context).pop();
+        },
+            ),
+          ],
+        );
+
+      }
+
+    );
+
+
+
+
+
+
+
+
+
+
+
               },
               child: Text(
                 'Donaciones', //title

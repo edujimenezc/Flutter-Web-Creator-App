@@ -96,7 +96,45 @@ h3=encabezadoActual.getH3;
     body: Column(
 
 children: <Widget>[
-_crearButtonVolver(encabezadoActual),
+Column(
+
+  children: <Widget>[
+  
+  Container(
+    
+ height: 75.0,
+        width: 75.0,
+
+child: FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn3",
+        child: Text('Volver img'),
+        onPressed: (){
+
+ final route = MaterialPageRoute(
+
+    builder: (context){
+return CreacionWebsPage(paginaActual);
+
+    }
+  );
+encabezadoActual.cargarABBDD(paginaActual);
+Navigator.push(context, route);
+
+
+        }),
+
+),
+
+Text('Volver'),
+
+
+
+
+
+]),
 TextField(
   
       
@@ -177,7 +215,7 @@ TextButton(onPressed: (){
 
 
 if(encabezadoActual.mapaDivs.keys.isEmpty){
-  encabezadoActual.mapaDivs.putIfAbsent("div1", () => {"0text":"Text"});
+  encabezadoActual.mapaDivs.putIfAbsent("div1", () => {});
 
 
 encabezadoActual.cargarABBDD(paginaActual);
@@ -225,7 +263,7 @@ elementoMayor=item.toString();
 }
 }
 
-encabezadoActual.mapaDivs.putIfAbsent("div${numMayor+1}", () => {"0text":"Text"});
+encabezadoActual.mapaDivs.putIfAbsent("div${numMayor+1}", () => {});
 
 encabezadoActual.cargarABBDD(paginaActual);
 
@@ -462,7 +500,7 @@ return TextField(
       ),
       onChanged: (valor) =>setState(() {
       encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"] = valor;
-      
+      //print(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"]);
       //encabezadoActual.aniadirAlMapa();
       //encabezadoActual.cargarABBDD();
       
@@ -472,35 +510,6 @@ return TextField(
          encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"]=value;
         
         
-/*
-Map mapaActual={};
-int i=0;
-for (var item in encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()].keys) {
-
-if(item.toString().contains("t")){
-   mapaActual.putIfAbsent("${i}text", () => encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"]);
-
-print(item);
-}else if(item.toString().contains("img")){
-mapaActual["${i}img"]=encabezadoActual.contenedores[index].elementos["${i}img"];
-
-}else{
-
-mapaActual["${i}video"]=encabezadoActual.contenedores[index].elementos["${i}video"];
-
-
-}
-
- 
-  i++;
-}
-
-
-
-encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]=mapaActual;
-
-
-*/
 
 
   encabezadoActual.cargarABBDD(paginaActual);
@@ -686,6 +695,10 @@ int x=0;
 
 int numMayor=0;
 String elementoMayor="";
+
+if(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()].keys.toString()!="()"){
+print("nuebo"+encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()].keys.toString());
+
 for (var item in encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()].keys) {
 if(int.parse(item.toString()[x])>numMayor){
 numMayor=int.parse(item.toString()[x]);
@@ -693,7 +706,25 @@ elementoMayor=item.toString();
 }
 }
 
- encabezadoActual.contenedores[index].elementos.putIfAbsent("${(numMayor+1).toString()}text", () => "Text");
+
+encabezadoActual.contenedores[index].elementos.putIfAbsent("${(numMayor+1).toString()}text", () => "Text");
+
+
+
+}else{
+
+
+encabezadoActual.contenedores[index].elementos.putIfAbsent("${0}text", () => "Text");
+
+
+
+
+}
+
+
+
+
+ 
 
 
 
@@ -767,22 +798,76 @@ decoration: InputDecoration(
                 MaterialButton(
                   textColor: Colors.white,
                   color: Colors.pink,
-                  onPressed: (){
-                   
-                   
+                  onPressed: () async {
+                   bool nombreExiste=false;
+
+
+
+
+firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
+    .ref()
+    .child('images')
+    .child('defaultProfile.png');
+var listado=await FirebaseStorage.instance.ref().child('uploads').list().then((value){
+for (var item in value.items) {
+  if(item.fullPath.toString()=="uploads/"+currentUser.toString()+nombreImagen){
+
+nombreExiste=true;
+  }
+}
+
+if(nombreExiste){
+
+
+
+showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+
+         return AlertDialog(
+          shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
+          title: Text('¡Ya estas usando ese nombre!'),
+          
+          content: Expanded(child: Text("Ya estas usando ese nombre para una imagen, si usas el mismo nombre la imagen se sobreescribirá \n ¿Deseas sobreescribir la imagen?")),
+          actions: <Widget>[
+           
+            TextButton(
+              child: Text('No'),
+              onPressed: (){
+                Navigator.of(context).pop();
+        },
+            ),
+            TextButton(
+              child: Text('Si'),
+              onPressed: (){
+
+                Navigator.of(context).pop();
+
+
 
 
 
 showDialog(context: context,builder: (BuildContext context){
 
       return AlertDialog(
-        title: Text("Choose option",style: TextStyle(color: Colors.blue),),
+        title: Text("Elige una opción",style: TextStyle(color: Colors.blue),),
         content: SingleChildScrollView(
         child: ListBody(
           children: [
             Divider(height: 1,color: Colors.blue,),
             ListTile(
               onTap: (){
+
+
+
+
+
+
+
+
+
+
                 _openGallery(context).then((value){
 
 
@@ -803,6 +888,10 @@ int x=0;
 
 int numMayor=0;
 String elementoMayor="";
+
+
+if(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()].keys.toString()!="()"){
+
 for (var item in encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()].keys) {
 if(int.parse(item.toString()[x])>numMayor){
 numMayor=int.parse(item.toString()[x]);
@@ -811,6 +900,20 @@ elementoMayor=item.toString();
 }
 
  encabezadoActual.contenedores[index].elementos.putIfAbsent("${(numMayor+1).toString()}img", () => currentUser!+nombreImagen);
+
+
+
+}else{
+
+
+  encabezadoActual.contenedores[index].elementos.putIfAbsent("${0}img", () => currentUser!+nombreImagen);
+
+
+
+
+}
+
+
 
 
 
@@ -947,6 +1050,13 @@ int x=0;
 
 int numMayor=0;
 String elementoMayor="";
+
+
+
+
+
+if(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()].keys.toString()!="()"){
+
 for (var item in encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()].keys) {
 if(int.parse(item.toString()[x])>numMayor){
 numMayor=int.parse(item.toString()[x]);
@@ -957,6 +1067,32 @@ elementoMayor=item.toString();
  encabezadoActual.contenedores[index].elementos.putIfAbsent("${(numMayor+1).toString()}img", () => currentUser!+nombreImagen);
 
 
+
+}else{
+
+
+  encabezadoActual.contenedores[index].elementos.putIfAbsent("${0}img", () => currentUser!+nombreImagen);
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//old
 
 
  setState(() {
@@ -1061,6 +1197,467 @@ imageFile=null;
         ),
       ),);
     });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+               
+        },
+            )
+          ],
+        );
+
+      }
+
+    );
+
+
+
+
+
+}else{
+
+
+
+
+
+
+
+
+showDialog(context: context,builder: (BuildContext context){
+
+      return AlertDialog(
+        title: Text("Elige una opción",style: TextStyle(color: Colors.blue),),
+        content: SingleChildScrollView(
+        child: ListBody(
+          children: [
+            Divider(height: 1,color: Colors.blue,),
+            ListTile(
+              onTap: (){
+
+
+
+
+
+
+
+
+
+
+                _openGallery(context).then((value){
+
+
+
+
+
+
+if(imageFile!=null){
+
+
+      
+uploadImageToFirebase(context).then((value){
+
+//print(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()].keys.toString());
+
+
+int x=0;
+
+int numMayor=0;
+String elementoMayor="";
+
+
+if(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()].keys.toString()!="()"){
+
+for (var item in encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()].keys) {
+if(int.parse(item.toString()[x])>numMayor){
+numMayor=int.parse(item.toString()[x]);
+elementoMayor=item.toString();
+}
+}
+
+ encabezadoActual.contenedores[index].elementos.putIfAbsent("${(numMayor+1).toString()}img", () => currentUser!+nombreImagen);
+
+
+
+}else{
+
+
+  encabezadoActual.contenedores[index].elementos.putIfAbsent("${0}img", () => currentUser!+nombreImagen);
+
+
+
+
+}
+
+
+
+
+
+
+ setState(() {
+
+
+
+
+
+
+
+  encabezadoActual.cargarABBDD(paginaActual);
+
+ Navigator.of(context).pop();
+
+
+imageFile=null;
+
+
+
+ });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+});
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  
+                });
+
+
+
+
+
+
+
+
+
+
+              },
+            title: Text("Gallery"),
+              leading: Icon(Icons.account_box,color: Colors.blue,),
+        ),
+
+            Divider(height: 1,color: Colors.blue,),
+            ListTile(
+              onTap: (){
+                _openCamera(context).then((value){
+
+
+
+
+
+
+if(imageFile!=null){
+
+
+      
+uploadImageToFirebase(context).then((value){
+
+//print(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()].keys.toString());
+
+
+int x=0;
+
+int numMayor=0;
+String elementoMayor="";
+
+
+
+
+
+if(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()].keys.toString()!="()"){
+
+for (var item in encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()].keys) {
+if(int.parse(item.toString()[x])>numMayor){
+numMayor=int.parse(item.toString()[x]);
+elementoMayor=item.toString();
+}
+}
+
+ encabezadoActual.contenedores[index].elementos.putIfAbsent("${(numMayor+1).toString()}img", () => currentUser!+nombreImagen);
+
+
+
+}else{
+
+
+  encabezadoActual.contenedores[index].elementos.putIfAbsent("${0}img", () => currentUser!+nombreImagen);
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//old
+
+
+ setState(() {
+
+
+
+
+
+
+
+  encabezadoActual.cargarABBDD(paginaActual);
+
+ Navigator.of(context).pop();
+
+
+imageFile=null;
+
+
+
+ });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+});
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  
+                });
+              },
+              title: Text("Camera"),
+              leading: Icon(Icons.camera,color: Colors.blue,),
+            ),
+          ],
+        ),
+      ),);
+    });
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
+});
+
+       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+
+
+
+
+
+
+
+
+
+                  
+
+
+
+
+
 
 
 
@@ -1177,6 +1774,14 @@ int x=0;
 
 int numMayor=0;
 String elementoMayor="";
+
+
+
+
+
+if(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()].keys.toString()!="()"){
+print("nuebo"+encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()].keys.toString());
+
 for (var item in encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()].keys) {
 if(int.parse(item.toString()[x])>numMayor){
 numMayor=int.parse(item.toString()[x]);
@@ -1185,6 +1790,29 @@ elementoMayor=item.toString();
 }
 
  encabezadoActual.contenedores[index].elementos.putIfAbsent("${(numMayor+1).toString()}video", () =>url);
+
+
+
+}else{
+
+
+ encabezadoActual.contenedores[index].elementos.putIfAbsent("${0}video", () =>url);
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1304,6 +1932,10 @@ int x=0;
 int numMayor=0;
 String elementoMayor="";
 for (var item in encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()].keys) {
+if(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()].keys.length==1){
+ elementoMayor=item.toString();
+}
+
 if(int.parse(item.toString()[x])>numMayor){
 numMayor=int.parse(item.toString()[x]);
 elementoMayor=item.toString();
@@ -1629,7 +2261,7 @@ String getYoutubeThumbnail(String videoUrl) {
 
 Widget _crearButtonVolver(Encabezado x){
   
-  Encabezado xNow=x;
+ 
 
 
 return Column(

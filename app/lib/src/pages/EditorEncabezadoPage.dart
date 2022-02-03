@@ -100,33 +100,7 @@ Column(
 
   children: <Widget>[
   
-  Container(
-    
- height: 75.0,
-        width: 75.0,
-
-child: FloatingActionButton(
-   shape: BeveledRectangleBorder(
-          borderRadius: BorderRadius.zero
-     ),
-    heroTag: "btn3",
-        child: Text('Volver img'),
-        onPressed: (){
-
- final route = MaterialPageRoute(
-
-    builder: (context){
-return CreacionWebsPage(paginaActual);
-
-    }
-  );
-encabezadoActual.cargarABBDD(paginaActual);
-Navigator.push(context, route);
-
-
-        }),
-
-),
+ _crearButtonVolver(),
 
 Text('Volver'),
 
@@ -891,15 +865,61 @@ String elementoMayor="";
 
 
 if(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()].keys.toString()!="()"){
+if(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()].keys.length>10){
+
+
+
+
+showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+
+         return AlertDialog(
+          shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
+          title: Text('Limite alcanzado'),
+          
+          content: Expanded(child: Text("Sólo puedes añadir 11 elementos por contenedor!")),
+          actions: <Widget>[
+           
+            TextButton(
+              child: Text('Ok'),
+              onPressed: (){
+                Navigator.of(context).pop();
+        },
+            ),
+          ],
+        );
+
+      }
+
+    );
+
+
+
+}else{
 
 for (var item in encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()].keys) {
+  
+
+ 
+
+
+ 
 if(int.parse(item.toString()[x])>numMayor){
 numMayor=int.parse(item.toString()[x]);
 elementoMayor=item.toString();
 }
+
+
 }
 
  encabezadoActual.contenedores[index].elementos.putIfAbsent("${(numMayor+1).toString()}img", () => currentUser!+nombreImagen);
+
+
+
+}
+
 
 
 
@@ -1058,6 +1078,7 @@ String elementoMayor="";
 if(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()].keys.toString()!="()"){
 
 for (var item in encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()].keys) {
+  
 if(int.parse(item.toString()[x])>numMayor){
 numMayor=int.parse(item.toString()[x]);
 elementoMayor=item.toString();
@@ -1290,6 +1311,7 @@ String elementoMayor="";
 if(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()].keys.toString()!="()"){
 
 for (var item in encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()].keys) {
+  
 if(int.parse(item.toString()[x])>numMayor){
 numMayor=int.parse(item.toString()[x]);
 elementoMayor=item.toString();
@@ -1455,6 +1477,15 @@ String elementoMayor="";
 if(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()].keys.toString()!="()"){
 
 for (var item in encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()].keys) {
+
+if(item.toString().length>4){
+print("eeeeeeeehhhhhhhhhh"+item.toString());
+
+}else{
+  print("eeeeeeeehhhhhhhhhh"+item.toString());
+
+}
+
 if(int.parse(item.toString()[x])>numMayor){
 numMayor=int.parse(item.toString()[x]);
 elementoMayor=item.toString();
@@ -2259,8 +2290,8 @@ String getYoutubeThumbnail(String videoUrl) {
 */
 
 
-Widget _crearButtonVolver(Encabezado x){
-  
+Widget _crearButtonVolver(){
+ 
  
 
 

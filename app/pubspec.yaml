@@ -39,6 +39,12 @@ dependencies:
   cloud_firestore: ^3.1.6
   image_picker: ^0.8.4+5
   firebase_storage: ^10.2.6
+  path_provider: ^2.0.8
+  mailer: ^5.1.0
+  flutter_email_sender: ^5.0.2
+  flutter_html: ^2.2.1
+  flutter_archive: ^4.1.1
+  
 
 dev_dependencies:
   flutter_test:

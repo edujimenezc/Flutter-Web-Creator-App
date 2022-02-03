@@ -113,7 +113,7 @@ DocumentReference webActual = FirebaseFirestore.instance.collection('webs').doc(
  return webActual.set({
 
 "autor" : autor,
-"nombre_web" : nombre,
+"nombre_web" : autor+"."+nombreWeb,
 "h1" : getH1,
 "h2" : getH2,
 "h3" : getH3,

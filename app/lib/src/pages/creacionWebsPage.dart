@@ -263,12 +263,89 @@ textoArchivoHTML=textoArchivoHTML+'<h2>\n'+h2Encabezado+"\n</h2>\n";
 if(h3Encabezado!=""){
 textoArchivoHTML=textoArchivoHTML+'<h3>\n'+h3Encabezado+"\n</h3>\n";
 }
+ 
 
-//recorro todos los divs del encabezado
-for (var div in divsEncabezado.keys) {
+
+
+
+for (var div in divsEncabezado.keys.toList().reversed) {
+ 
+  
   //abro div
   textoArchivoHTML=textoArchivoHTML+'<div class="${div}">\n';
+for (var i = 0; i < divsEncabezado[div].keys.length; i++) {
+
+if(divsEncabezado[div].containsKey("${i}text")){
+textoArchivoHTML=textoArchivoHTML+'<p>${divsEncabezado[div]["${i}text"]}</p>'+"\n";
+}else if(divsEncabezado[div].containsKey("${i}img")){
+textoArchivoHTML=textoArchivoHTML+'<img src="${divsEncabezado[div]["${i}img"]}" alt="${divsEncabezado[div]["${i}img"]}">'+"\n";
+
+}else{
+String id=divsEncabezado[div]["${i}video"].split('=')[1];
+ textoArchivoHTML=textoArchivoHTML+'<iframe width="560" height="315" src="https://www.youtube.com/embed/${id}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
++"\n";
+
+}
+
+
+
+
+
+
+
+
+  /*
+//print(listaKeys[i].toString()+" "+"esto compara "+i.toString());
+  if(listaKeys[i].toString()=="${i}text"){
+    print("soy un txt");
+textoArchivoHTML=textoArchivoHTML+'<p>${divsEncabezado[div][listaKeys[i]]}</p>'+"\n";
+
+  }else if(listaKeys[i].toString()=="${i}img"){
+
+ textoArchivoHTML=textoArchivoHTML+'<img src="${divsEncabezado[div][listaKeys[i]]}" alt="${divsEncabezado[div][listaKeys[i]]}">'+"\n";
+
+
+
+
+
+  }else if(listaKeys[i].toString()=="${i}video"){
+    print("soy un video");
+    print("video"+divsEncabezado[div][listaKeys[i]].split('=').toString());
+/*
+String id=divsEncabezado[div][listaKeys[i]].split('=')[1];
+ textoArchivoHTML=textoArchivoHTML+'<iframe width="560" height="315" src="https://www.youtube.com/embed/${id}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
++"\n";
+
+
+*/
+*/
+
+  }
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+for (var div in divsEncabezado.keys.toList().reversed) {
   
+  //abro div
+  textoArchivoHTML=textoArchivoHTML+'<div class="${div}">\n';
+ 
 for (var contenido in divsEncabezado[div].keys) {
   
 
@@ -374,7 +451,7 @@ textoArchivoHTML=textoArchivoHTML+'</div>\n';
 }
 
 
-
+*/
 
 
 

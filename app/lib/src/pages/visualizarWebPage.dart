@@ -40,7 +40,8 @@ nombreWeb=web;
       
       
      
-      body: Column(
+      body: SingleChildScrollView(
+        child: Column(
 
         children: [
 
@@ -67,7 +68,17 @@ _crearButtonVolver(),
 
     ))
         ],
+      ),
       )
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
       
      );

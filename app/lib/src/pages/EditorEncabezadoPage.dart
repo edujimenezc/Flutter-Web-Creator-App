@@ -671,7 +671,47 @@ int numMayor=0;
 String elementoMayor="";
 
 if(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()].keys.toString()!="()"){
-print("nuebo"+encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()].keys.toString());
+
+
+
+if(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()].keys.length>10){
+
+
+
+
+showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+
+         return AlertDialog(
+          shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
+          title: Text('Limite alcanzado'),
+          
+          content: Expanded(child: Text("Sólo puedes añadir 11 elementos por contenedor!")),
+          actions: <Widget>[
+           
+            TextButton(
+              child: Text('Ok'),
+              onPressed: (){
+                Navigator.of(context).pop();
+        },
+            ),
+          ],
+        );
+
+      }
+
+    );
+
+
+
+}else{
+
+
+
+
+
 
 for (var item in encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()].keys) {
 if(int.parse(item.toString()[x])>numMayor){
@@ -683,7 +723,7 @@ elementoMayor=item.toString();
 
 encabezadoActual.contenedores[index].elementos.putIfAbsent("${(numMayor+1).toString()}text", () => "Text");
 
-
+}
 
 }else{
 
@@ -725,7 +765,39 @@ encabezadoActual.contenedores[index].elementos.putIfAbsent("${0}text", () => "Te
 }, child: Text("+T")),
 TextButton(onPressed: (){
   
+if(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()].keys.length>10){
 
+
+
+
+showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+
+         return AlertDialog(
+          shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
+          title: Text('Limite alcanzado'),
+          
+          content: Expanded(child: Text("Sólo puedes añadir 11 elementos por contenedor!")),
+          actions: <Widget>[
+           
+            TextButton(
+              child: Text('Ok'),
+              onPressed: (){
+                Navigator.of(context).pop();
+        },
+            ),
+          ],
+        );
+
+      }
+
+    );
+
+
+
+}else{
   
   
   showDialog(
@@ -773,6 +845,38 @@ decoration: InputDecoration(
                   textColor: Colors.white,
                   color: Colors.pink,
                   onPressed: () async {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                    bool nombreExiste=false;
 
 
@@ -1478,13 +1582,7 @@ if(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()].k
 
 for (var item in encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()].keys) {
 
-if(item.toString().length>4){
-print("eeeeeeeehhhhhhhhhh"+item.toString());
 
-}else{
-  print("eeeeeeeehhhhhhhhhh"+item.toString());
-
-}
 
 if(int.parse(item.toString()[x])>numMayor){
 numMayor=int.parse(item.toString()[x]);
@@ -1746,7 +1844,7 @@ imageFile=null;
   
   
   
-  
+}
   
   
   
@@ -1788,6 +1886,55 @@ showDialog(
               onPressed: (){
 
 
+
+
+
+if(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()].keys.length>10){
+
+
+
+
+showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+
+         return AlertDialog(
+          shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
+          title: Text('Limite alcanzado'),
+          
+          content: Expanded(child: Text("Sólo puedes añadir 11 elementos por contenedor!")),
+          actions: <Widget>[
+           
+            TextButton(
+              child: Text('Ok'),
+              onPressed: (){
+                Navigator.of(context).pop();
+        },
+            ),
+          ],
+        );
+
+      }
+
+    );
+
+
+
+}else{
+
+
+
+
+
+
+
+
+
+
+
+
+
 if(url.isNotEmpty){
 
 
@@ -1811,7 +1958,8 @@ String elementoMayor="";
 
 
 if(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()].keys.toString()!="()"){
-print("nuebo"+encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()].keys.toString());
+
+
 
 for (var item in encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()].keys) {
 if(int.parse(item.toString()[x])>numMayor){
@@ -1911,7 +2059,7 @@ elementoMayor=item.toString();
 
 
 
-
+              }
 
 
 
@@ -1958,6 +2106,10 @@ elementoMayor=item.toString();
 TextButton(onPressed: (){//el de borrar
 
 
+
+
+
+
 int x=0;
 
 int numMayor=0;
@@ -1967,10 +2119,33 @@ if(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()].k
  elementoMayor=item.toString();
 }
 
+if(
+item.toString().substring(0,2)=="10"
+){
+
+elementoMayor=item.toString();
+break;
+
+
+
+}else{
+
 if(int.parse(item.toString()[x])>numMayor){
 numMayor=int.parse(item.toString()[x]);
 elementoMayor=item.toString();
 }
+
+
+
+}
+
+
+
+
+
+
+
+
 }
 
 

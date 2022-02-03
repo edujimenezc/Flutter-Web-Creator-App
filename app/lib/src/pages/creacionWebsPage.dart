@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:ejemplobbdd/src/pages/visualizarWebPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ejemplobbdd/src/classes/Encabezado.dart';
@@ -278,7 +279,10 @@ for (var i = 0; i < divsEncabezado[div].keys.length; i++) {
 if(divsEncabezado[div].containsKey("${i}text")){
 textoArchivoHTML=textoArchivoHTML+'<p>${divsEncabezado[div]["${i}text"]}</p>'+"\n";
 }else if(divsEncabezado[div].containsKey("${i}img")){
-textoArchivoHTML=textoArchivoHTML+'<img src="${divsEncabezado[div]["${i}img"]}" alt="${divsEncabezado[div]["${i}img"]}">'+"\n";
+   
+final ref = FirebaseStorage.instance.ref().child('uploads').child("${divsEncabezado[div]["${i}img"]}");
+var url = await ref.getDownloadURL();
+textoArchivoHTML=textoArchivoHTML+'<img src="${url}" alt="${url}">'+"\n";
 
 }else{
 String id=divsEncabezado[div]["${i}video"].split('=')[1];

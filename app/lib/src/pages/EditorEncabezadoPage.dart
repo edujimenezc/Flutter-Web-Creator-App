@@ -1357,8 +1357,100 @@ newLista.sort();
   child: Column(
     children: <Widget>[
       SizedBox(height: 30.0 ,),
-
+Row(children: [
+SizedBox(width: 150.0 ),
 Text(lista[index].nombre),
+SizedBox(width: 80.0 ),
+
+FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn17",
+        child: Text('Editar contenedor'),
+        onPressed: (){
+
+showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+
+         return AlertDialog(
+          shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
+          title: Text('Edición del Contenedor'),
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
+          content: Column(
+            mainAxisSize:MainAxisSize.min,
+children: [
+
+
+
+
+Text("Color"),
+dropDown(["Negro","Rojo","Verde","Azul","Amarillo"].toList(),encabezadoActual,4,"estiloDivs",lista[index].nombre,""),
+
+
+
+
+
+
+
+],
+
+
+
+
+
+
+
+
+            
+          ),
+          actions: <Widget>[
+           
+            TextButton(
+              child: Text('Ok'),
+              onPressed: (){
+                Navigator.of(context).pop();
+        },
+            ),
+          ],
+        );
+
+      }
+
+    );
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }),
+
+],),
+
     
 SizedBox(height: 20.0 ,),
 Row(
@@ -1466,7 +1558,7 @@ encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${i
 
 }
  encabezadoActual.cargarABBDD(paginaActual);
- Navigator.of(context).pop();
+// Navigator.of(context).pop();
      setState(() {
        
      });
@@ -3499,6 +3591,13 @@ switch(posicionHTML) {
         
 x=encabezadoActual.mapaDivs[pt2][pt3][parteCSS];
 
+       }
+       break;
+       case "estiloDivs":{
+         if(encabezadoActual.divStyles.containsKey(pt2)){
+           x=encabezadoActual.divStyles[pt2];
+         }
+
        } 
       break; 
      
@@ -3543,7 +3642,11 @@ encabezadoActual.mapaDivs[pt2][pt3][parteCSS]=x;
  encabezadoActual.cargarABBDD(paginaActual);
        } 
       break; 
-     
+     case "estiloDivs":{
+         encabezadoActual.aniadirEstiloDiv(pt2,x);
+encabezadoActual.cargarABBDD(paginaActual);
+       } 
+      break; 
       default: { print("Invalid choice"); } 
       break; 
    } 
@@ -3711,7 +3814,7 @@ nombre=data["nombre_web"].toString();
  x.h2=data["h2"];
  x.h3=data["h3"];
 x.mapaDivs=data["divs"];
-
+x.divStyles=data["divsStyles"];
 
 
 return x;

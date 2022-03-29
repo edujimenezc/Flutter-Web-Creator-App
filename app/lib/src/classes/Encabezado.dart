@@ -13,6 +13,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 List h1=[];
 List h2=[];
 List h3=[];
+Map divStyles={};
 
 List<Contenedor> contenedores=[];
 Map<dynamic,dynamic> mapaDivs=Map<dynamic,dynamic>();
@@ -56,8 +57,24 @@ void set setH3(List text){
 this.h3=text;
 }
 
+void setStyles(Map mapa){
+this.divStyles=mapa;
 
+}
+Map getStyles(){
+return this.divStyles;
 
+}
+void aniadirEstiloDiv(String nombreDiv,String color){
+  if(divStyles.containsKey(nombreDiv)){
+    divStyles[nombreDiv]=color;
+  }else{
+ this.divStyles.putIfAbsent(nombreDiv, () => color);
+  }
+
+ 
+  
+}
 
 
 
@@ -118,13 +135,14 @@ DocumentReference webActual = FirebaseFirestore.instance.collection('webs').doc(
 "h1" : getH1,
 "h2" : getH2,
 "h3" : getH3,
-"divs" : mapaDivs
-
+"divs" : mapaDivs,
+"divsStyles" :divStyles
 
  }
    
 
  )
+ 
           
           
           .catchError((error) => print("Failed to add web: $error"));

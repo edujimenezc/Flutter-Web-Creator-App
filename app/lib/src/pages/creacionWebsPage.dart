@@ -133,9 +133,9 @@ Map<String, dynamic>? data = querySnapshot.data() as Map<String, dynamic>?;
 if(data!=null){
   
 nombre=data["nombre_web"].toString();
- x.h1=data["h1"].toString();
- x.h2=data["h2"].toString();
- x.h3=data["h3"].toString();
+ x.h1=data["h1"];
+ x.h2=data["h2"];
+ x.h3=data["h3"];
 x.mapaDivs=data["divs"];
 
 
@@ -222,9 +222,9 @@ Map<String, dynamic>? data = querySnapshot.data() as Map<String, dynamic>?;
 if(data!=null){
   
 nombreWeb=data["nombre_web"].toString();
- h1Encabezado=data["h1"].toString();
- h2Encabezado=data["h2"].toString();
- h3Encabezado=data["h3"].toString();
+ h1Encabezado=data["h1"][0].toString();
+ h2Encabezado=data["h2"][0].toString();
+ h3Encabezado=data["h3"][0].toString();
 divsEncabezado=data["divs"];
 
 
@@ -277,15 +277,15 @@ for (var div in divsEncabezado.keys.toList().reversed) {
 for (var i = 0; i < divsEncabezado[div].keys.length; i++) {
 
 if(divsEncabezado[div].containsKey("${i}text")){
-textoArchivoHTML=textoArchivoHTML+'<p>${divsEncabezado[div]["${i}text"]}</p>'+"\n";
+textoArchivoHTML=textoArchivoHTML+'<p>${divsEncabezado[div]["${i}text"][0]}</p>'+"\n";
 }else if(divsEncabezado[div].containsKey("${i}img")){
    
-final ref = FirebaseStorage.instance.ref().child('uploads').child("${divsEncabezado[div]["${i}img"]}");
+final ref = FirebaseStorage.instance.ref().child('uploads').child("${divsEncabezado[div]["${i}img"][0]}");
 var url = await ref.getDownloadURL();
 textoArchivoHTML=textoArchivoHTML+'<img src="${url}" alt="${url}">'+"\n";
 
 }else{
-String id=divsEncabezado[div]["${i}video"].split('=')[1];
+String id=divsEncabezado[div]["${i}video"][0].split('=')[1];
  textoArchivoHTML=textoArchivoHTML+'<iframe width="560" height="315" src="https://www.youtube.com/embed/${id}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
 +"\n";
 

@@ -10,14 +10,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   String autor="";
   String nombre="";
-String h1="";
-String h2="";
-String h3="";
+List h1=[];
+List h2=[];
+List h3=[];
 
 List<Contenedor> contenedores=[];
 Map<dynamic,dynamic> mapaDivs=Map<dynamic,dynamic>();
 
-Encabezado.constructor1( String nombre,String h1, String h2, String h3, Map<dynamic,dynamic> mapadivs, String autor){
+Encabezado.constructor1( String nombre,List h1, List h2, List h3, Map<dynamic,dynamic> mapadivs,Map<dynamic,dynamic> mapadivsCSS, String autor){
 
 this.nombre=nombre;
 
@@ -25,33 +25,34 @@ this.h1=h1;
 this.h2=h2;
 this.h3=h3;
 this.mapaDivs=mapaDivs;
+
 this.autor=autor;
 
 }
 
 Encabezado.constructor2();
 
-String get getH1{
+List get getH1{
 return this.h1;
 }
 
-String get getH2{
+List get getH2{
 return this.h2;
 }
 
-String get getH3{
+List get getH3{
 return this.h3;
 }
 
-void set setH1(String text){
+void set setH1(List text){
 this.h1=text;
 }
 
-void set setH2(String text){
+void set setH2(List text){
 this.h2=text;
 }
 
-void set setH3(String text){
+void set setH3(List text){
 this.h3=text;
 }
 
@@ -110,7 +111,7 @@ Future<void> cargarABBDD(String nombreWeb)async {
 
 DocumentReference webActual = FirebaseFirestore.instance.collection('webs').doc(autor+"."+nombreWeb).collection("encabezado").doc("unique");
 
- return webActual.set({
+  webActual.set({
 
 "autor" : autor,
 "nombre_web" : autor+"."+nombreWeb,
@@ -126,7 +127,13 @@ DocumentReference webActual = FirebaseFirestore.instance.collection('webs').doc(
  )
           
           
-          .catchError((error) => print("Failed to add user: $error"));
+          .catchError((error) => print("Failed to add web: $error"));
+
+
+
+
+
+
 
 
 }

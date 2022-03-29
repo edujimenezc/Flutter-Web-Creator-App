@@ -257,9 +257,9 @@ DocumentReference webActual = FirebaseFirestore.instance.collection('webs').doc(
 
 "autor" : autor,
 "nombre_web" : nombreWeb,
-"h1" : "Titulo",
-"h2" : "Subtitulo",
-"h3" :"Subtitulo2",
+"h1" : ["Titulo","","","","",""],
+"h2" : ["Subtitulo","","","","",""],
+"h3" :["Subsubtitulo","","","","",""],
 "divs" : {}
 
 

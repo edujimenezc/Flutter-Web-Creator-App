@@ -70,17 +70,17 @@ encabezadoActual.contenedores.reversed;
 
 
 
-if(encabezadoActual.getH1.toString().isNotEmpty){
-h1=encabezadoActual.getH1;
+if(encabezadoActual.h2[0].toString().isNotEmpty){
+h1=encabezadoActual.h1[0].toString();
 }
 
 
-if(encabezadoActual.getH2.toString().isNotEmpty){
-h2=encabezadoActual.getH2;
+if(encabezadoActual.h2[0].toString().isNotEmpty){
+h2=encabezadoActual.h2[0].toString();
 }
 
-if(encabezadoActual.getH3.toString().isNotEmpty){
-h3=encabezadoActual.getH3;
+if(encabezadoActual.h3[0].toString().isNotEmpty){
+h3=encabezadoActual.h3[0].toString();
 }
 
 
@@ -113,7 +113,320 @@ TextField(
   
       
       decoration: InputDecoration(
-        
+        suffixIcon: FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn10",
+        child: Text('B'),
+        onPressed: (){
+
+showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+
+         return AlertDialog(
+          shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
+          title: Text('Edición del texto'),
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
+          content: Column(
+            mainAxisSize:MainAxisSize.min,
+children: [
+
+
+
+Row(
+
+children: [
+SizedBox(width: 50),
+FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn20",
+        child: Text('Negrita'),
+        onPressed: (){
+
+
+
+  bool estaYa=false;
+ 
+ if(encabezadoActual.h1[1]=="bold"){
+   estaYa=true;
+ }
+
+
+
+
+
+
+     if(estaYa==false){
+ encabezadoActual.h1[1]="bold";
+      //print(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"]);
+      //encabezadoActual.aniadirAlMapa();
+       
+}else{
+
+encabezadoActual.h1[1]="";
+
+
+}
+ encabezadoActual.cargarABBDD(paginaActual);
+ Navigator.of(context).pop();
+     setState(() {
+       
+     });
+    
+
+
+        }),
+SizedBox(width: 50),
+FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn21",
+        child: Text('Cursiva'),
+        onPressed: (){
+
+
+
+  bool estaYa=false;
+ 
+ if(encabezadoActual.h1[2]=="italic"){
+   estaYa=true;
+ }
+
+
+
+
+
+
+     if(estaYa==false){
+ encabezadoActual.h1[2]="italic";
+      //print(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"]);
+      //encabezadoActual.aniadirAlMapa();
+       
+}else{
+
+encabezadoActual.h1[2]="";
+
+
+}
+ encabezadoActual.cargarABBDD(paginaActual);
+ Navigator.of(context).pop();
+     setState(() {
+       
+     });
+    
+
+
+
+        }),
+
+
+
+
+
+
+
+
+
+
+],
+
+
+          ),
+
+SizedBox(height: 30),
+Text("Alineación"),
+SizedBox(height: 15),
+Row(
+
+
+
+children: [
+SizedBox(width: 10),
+
+FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn21",
+        child: Text('Izquierda'),
+        onPressed: (){
+
+
+
+
+  bool estaYa=false;
+ 
+ if(encabezadoActual.h1[3]=="left"){
+   estaYa=true;
+ }
+
+
+
+
+
+
+     if(estaYa==false){
+ encabezadoActual.h1[3]="left";
+     
+       
+}
+ encabezadoActual.cargarABBDD(paginaActual);
+ Navigator.of(context).pop();
+     setState(() {
+       
+     });
+    
+
+
+        }),
+  SizedBox(width: 20), 
+FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn21",
+        child: Text('Centro'),
+        onPressed: (){
+
+
+
+
+  bool estaYa=false;
+ 
+ if(encabezadoActual.h1[3]=="center"){
+   estaYa=true;
+ }
+
+
+
+
+
+
+     if(estaYa==false){
+ encabezadoActual.h1[3]="center";
+      //print(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"]);
+      //encabezadoActual.aniadirAlMapa();
+       
+}
+ encabezadoActual.cargarABBDD(paginaActual);
+ Navigator.of(context).pop();
+     setState(() {
+       
+     });
+    
+
+
+        }),
+   SizedBox(width: 20), 
+FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn21",
+        child: Text('Derecha'),
+        onPressed: (){
+
+
+
+  bool estaYa=false;
+ 
+ if(encabezadoActual.h1[3]=="right"){
+   estaYa=true;
+ }
+
+
+
+
+
+
+     if(estaYa==false){
+ encabezadoActual.h1[3]="right";
+      //print(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"]);
+      //encabezadoActual.aniadirAlMapa();
+     }
+
+ encabezadoActual.cargarABBDD(paginaActual);
+ Navigator.of(context).pop();
+     setState(() {
+       
+     });
+    
+
+
+
+        })
+
+
+
+
+
+],
+
+
+
+
+),
+Text("Color"),
+dropDown(["Negro","Rojo","Verde","Azul","Amarillo"].toList(),encabezadoActual,4,"h1","",""),
+
+Text("Tamaño"),
+dropDown(["14","20","30","40","50","70"].toList(),encabezadoActual,5,"h1","","")
+
+
+
+
+
+
+
+
+],
+
+
+
+
+
+
+
+
+            
+          ),
+          actions: <Widget>[
+           
+            TextButton(
+              child: Text('Ok'),
+              onPressed: (){
+                Navigator.of(context).pop();
+        },
+            ),
+          ],
+        );
+
+      }
+
+    );
+
+
+        }),
         hintText: h1.toString(),
         //labelText: 'Password',
         
@@ -121,7 +434,7 @@ TextField(
       ),
 
       onChanged: (valor) =>setState(() {
-        encabezadoActual.setH1 = valor;
+        encabezadoActual.h1[0] = valor;
         encabezadoActual.cargarABBDD(paginaActual);
        
       }),
@@ -133,7 +446,320 @@ TextField(
   
      
       decoration: InputDecoration(
-        
+        suffixIcon: FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn15",
+        child: Text('B'),
+        onPressed: (){
+
+showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+
+         return AlertDialog(
+          shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
+          title: Text('Edición del texto'),
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
+          content: Column(
+            mainAxisSize:MainAxisSize.min,
+children: [
+
+
+
+Row(
+
+children: [
+SizedBox(width: 50),
+FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn20",
+        child: Text('Negrita'),
+        onPressed: (){
+
+
+
+  bool estaYa=false;
+ 
+ if(encabezadoActual.h2[1]=="bold"){
+   estaYa=true;
+ }
+
+
+
+
+
+
+     if(estaYa==false){
+ encabezadoActual.h2[1]="bold";
+      //print(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"]);
+      //encabezadoActual.aniadirAlMapa();
+       
+}else{
+
+encabezadoActual.h2[1]="";
+
+
+}
+ encabezadoActual.cargarABBDD(paginaActual);
+ Navigator.of(context).pop();
+     setState(() {
+       
+     });
+    
+
+
+        }),
+SizedBox(width: 50),
+FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn21",
+        child: Text('Cursiva'),
+        onPressed: (){
+
+
+
+  bool estaYa=false;
+ 
+ if(encabezadoActual.h2[2]=="italic"){
+   estaYa=true;
+ }
+
+
+
+
+
+
+     if(estaYa==false){
+ encabezadoActual.h2[2]="italic";
+      //print(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"]);
+      //encabezadoActual.aniadirAlMapa();
+       
+}else{
+
+encabezadoActual.h2[2]="";
+
+
+}
+ encabezadoActual.cargarABBDD(paginaActual);
+ Navigator.of(context).pop();
+     setState(() {
+       
+     });
+    
+
+
+
+        }),
+
+
+
+
+
+
+
+
+
+
+],
+
+
+          ),
+
+SizedBox(height: 30),
+Text("Alineación"),
+SizedBox(height: 15),
+Row(
+
+
+
+children: [
+SizedBox(width: 10),
+
+FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn21",
+        child: Text('Izquierda'),
+        onPressed: (){
+
+
+
+
+  bool estaYa=false;
+ 
+ if(encabezadoActual.h2[3]=="left"){
+   estaYa=true;
+ }
+
+
+
+
+
+
+     if(estaYa==false){
+ encabezadoActual.h2[3]="left";
+     
+       
+}
+ encabezadoActual.cargarABBDD(paginaActual);
+ Navigator.of(context).pop();
+     setState(() {
+       
+     });
+    
+
+
+        }),
+  SizedBox(width: 20), 
+FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn21",
+        child: Text('Centro'),
+        onPressed: (){
+
+
+
+
+  bool estaYa=false;
+ 
+ if(encabezadoActual.h2[3]=="center"){
+   estaYa=true;
+ }
+
+
+
+
+
+
+     if(estaYa==false){
+ encabezadoActual.h2[3]="center";
+      //print(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"]);
+      //encabezadoActual.aniadirAlMapa();
+       
+}
+ encabezadoActual.cargarABBDD(paginaActual);
+ Navigator.of(context).pop();
+     setState(() {
+       
+     });
+    
+
+
+        }),
+   SizedBox(width: 20), 
+FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn21",
+        child: Text('Derecha'),
+        onPressed: (){
+
+
+
+  bool estaYa=false;
+ 
+ if(encabezadoActual.h2[3]=="right"){
+   estaYa=true;
+ }
+
+
+
+
+
+
+     if(estaYa==false){
+ encabezadoActual.h2[3]="right";
+      //print(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"]);
+      //encabezadoActual.aniadirAlMapa();
+     }
+
+ encabezadoActual.cargarABBDD(paginaActual);
+ Navigator.of(context).pop();
+     setState(() {
+       
+     });
+    
+
+
+
+        })
+
+
+
+
+
+],
+
+
+
+
+),
+Text("Color"),
+dropDown(["Negro","Rojo","Verde","Azul","Amarillo"].toList(),encabezadoActual,4,"h2","",""),
+
+Text("Tamaño"),
+dropDown(["14","20","30","40","50","70"].toList(),encabezadoActual,5,"h2","","")
+
+
+
+
+
+
+
+
+],
+
+
+
+
+
+
+
+
+            
+          ),
+          actions: <Widget>[
+           
+            TextButton(
+              child: Text('Ok'),
+              onPressed: (){
+                Navigator.of(context).pop();
+        },
+            ),
+          ],
+        );
+
+      }
+
+    );
+
+
+        }),
         hintText: h2.toString(),
         //labelText: 'Password',
         
@@ -141,7 +767,7 @@ TextField(
       ),
       onChanged: (valor) =>setState(() {
 
-      encabezadoActual.setH2 = valor;
+      encabezadoActual.h2[0] = valor;
       encabezadoActual.cargarABBDD(paginaActual);
       })
     ),
@@ -153,18 +779,320 @@ TextField(
       decoration: InputDecoration(
         
         hintText: h3.toString(),
-/*suffixIcon: FloatingActionButton(
+suffixIcon: FloatingActionButton(
    shape: BeveledRectangleBorder(
           borderRadius: BorderRadius.zero
      ),
-    heroTag: "btn10",
+    heroTag: "btn16",
         child: Text('B'),
+        onPressed: (){
+
+showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+
+         return AlertDialog(
+          shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
+          title: Text('Edición del texto'),
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
+          content: Column(
+            mainAxisSize:MainAxisSize.min,
+children: [
+
+
+
+Row(
+
+children: [
+SizedBox(width: 50),
+FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn20",
+        child: Text('Negrita'),
+        onPressed: (){
+
+
+
+  bool estaYa=false;
+ 
+ if(encabezadoActual.h3[1]=="bold"){
+   estaYa=true;
+ }
+
+
+
+
+
+
+     if(estaYa==false){
+ encabezadoActual.h3[1]="bold";
+      //print(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"]);
+      //encabezadoActual.aniadirAlMapa();
+       
+}else{
+
+encabezadoActual.h3[1]="";
+
+
+}
+ encabezadoActual.cargarABBDD(paginaActual);
+ Navigator.of(context).pop();
+     setState(() {
+       
+     });
+    
+
+
+        }),
+SizedBox(width: 50),
+FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn21",
+        child: Text('Cursiva'),
+        onPressed: (){
+
+
+
+  bool estaYa=false;
+ 
+ if(encabezadoActual.h3[2]=="italic"){
+   estaYa=true;
+ }
+
+
+
+
+
+
+     if(estaYa==false){
+ encabezadoActual.h3[2]="italic";
+      //print(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"]);
+      //encabezadoActual.aniadirAlMapa();
+       
+}else{
+
+encabezadoActual.h3[2]="";
+
+
+}
+ encabezadoActual.cargarABBDD(paginaActual);
+ Navigator.of(context).pop();
+     setState(() {
+       
+     });
+    
+
+
+
+        }),
+
+
+
+
+
+
+
+
+
+
+],
+
+
+          ),
+
+SizedBox(height: 30),
+Text("Alineación"),
+SizedBox(height: 15),
+Row(
+
+
+
+children: [
+SizedBox(width: 10),
+
+FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn21",
+        child: Text('Izquierda'),
         onPressed: (){
 
 
 
 
-        })*/
+  bool estaYa=false;
+ 
+ if(encabezadoActual.h3[3]=="left"){
+   estaYa=true;
+ }
+
+
+
+
+
+
+     if(estaYa==false){
+ encabezadoActual.h3[3]="left";
+     
+       
+}
+ encabezadoActual.cargarABBDD(paginaActual);
+ Navigator.of(context).pop();
+     setState(() {
+       
+     });
+    
+
+
+        }),
+  SizedBox(width: 20), 
+FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn21",
+        child: Text('Centro'),
+        onPressed: (){
+
+
+
+
+  bool estaYa=false;
+ 
+ if(encabezadoActual.h3[3]=="center"){
+   estaYa=true;
+ }
+
+
+
+
+
+
+     if(estaYa==false){
+ encabezadoActual.h3[3]="center";
+      //print(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"]);
+      //encabezadoActual.aniadirAlMapa();
+       
+}
+ encabezadoActual.cargarABBDD(paginaActual);
+ Navigator.of(context).pop();
+     setState(() {
+       
+     });
+    
+
+
+        }),
+   SizedBox(width: 20), 
+FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn21",
+        child: Text('Derecha'),
+        onPressed: (){
+
+
+
+  bool estaYa=false;
+ 
+ if(encabezadoActual.h3[3]=="right"){
+   estaYa=true;
+ }
+
+
+
+
+
+
+     if(estaYa==false){
+ encabezadoActual.h3[3]="right";
+      //print(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"]);
+      //encabezadoActual.aniadirAlMapa();
+     }
+
+ encabezadoActual.cargarABBDD(paginaActual);
+ Navigator.of(context).pop();
+     setState(() {
+       
+     });
+    
+
+
+
+        })
+
+
+
+
+
+],
+
+
+
+
+),
+Text("Color"),
+dropDown(["Negro","Rojo","Verde","Azul","Amarillo"].toList(),encabezadoActual,4,"h3","",""),
+
+Text("Tamaño"),
+dropDown(["14","20","30","40","50","70"].toList(),encabezadoActual,5,"h3","","")
+
+
+
+
+
+
+
+
+],
+
+
+
+
+
+
+
+
+            
+          ),
+          actions: <Widget>[
+           
+            TextButton(
+              child: Text('Ok'),
+              onPressed: (){
+                Navigator.of(context).pop();
+        },
+            ),
+          ],
+        );
+
+      }
+
+    );
+
+
+        })
 
 
 
@@ -174,7 +1102,7 @@ TextField(
         
       ),
       onChanged: (valor) =>setState(() {
-       encabezadoActual.setH3 = valor;
+       encabezadoActual.h3[0] = valor;
        encabezadoActual.cargarABBDD(paginaActual);
       })
     ),
@@ -463,8 +1391,321 @@ return TextField(
       decoration: InputDecoration(
         
 
-        hintText: encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"],
+        hintText: encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"][0],
+suffixIcon: FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn17",
+        child: Text('B'),
+        onPressed: (){
 
+showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+
+         return AlertDialog(
+          shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
+          title: Text('Edición del texto'),
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
+          content: Column(
+            mainAxisSize:MainAxisSize.min,
+children: [
+
+
+
+Row(
+
+children: [
+SizedBox(width: 50),
+FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn20",
+        child: Text('Negrita'),
+        onPressed: (){
+
+
+
+  bool estaYa=false;
+ 
+ if(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"][1]=="bold"){
+   estaYa=true;
+ }
+
+
+
+
+
+
+     if(estaYa==false){
+ encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"][1]="bold";
+      //print(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"]);
+      //encabezadoActual.aniadirAlMapa();
+       
+}else{
+
+encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"][1]="";
+
+
+}
+ encabezadoActual.cargarABBDD(paginaActual);
+ Navigator.of(context).pop();
+     setState(() {
+       
+     });
+    
+
+
+        }),
+SizedBox(width: 50),
+FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn21",
+        child: Text('Cursiva'),
+        onPressed: (){
+
+
+
+  bool estaYa=false;
+ 
+ if(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"][2]=="italic"){
+   estaYa=true;
+ }
+
+
+
+
+
+
+     if(estaYa==false){
+ encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"][2]="italic";
+      //print(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"]);
+      //encabezadoActual.aniadirAlMapa();
+       
+}else{
+
+encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"][2]="";
+
+
+}
+ encabezadoActual.cargarABBDD(paginaActual);
+ Navigator.of(context).pop();
+     setState(() {
+       
+     });
+    
+
+
+
+        }),
+
+
+
+
+
+
+
+
+
+
+],
+
+
+          ),
+
+SizedBox(height: 30),
+Text("Alineación"),
+SizedBox(height: 15),
+Row(
+
+
+
+children: [
+SizedBox(width: 10),
+
+FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn21",
+        child: Text('Izquierda'),
+        onPressed: (){
+
+
+
+
+  bool estaYa=false;
+ 
+ if(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"][3]=="left"){
+   estaYa=true;
+ }
+
+
+
+
+
+
+     if(estaYa==false){
+ encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"][3]="left";
+     
+       
+}
+ encabezadoActual.cargarABBDD(paginaActual);
+ Navigator.of(context).pop();
+     setState(() {
+       
+     });
+    
+
+
+        }),
+  SizedBox(width: 20), 
+FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn21",
+        child: Text('Centro'),
+        onPressed: (){
+
+
+
+
+  bool estaYa=false;
+ 
+ if(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"][3]=="center"){
+   estaYa=true;
+ }
+
+
+
+
+
+
+     if(estaYa==false){
+ encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"][3]="center";
+      //print(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"]);
+      //encabezadoActual.aniadirAlMapa();
+       
+}
+ encabezadoActual.cargarABBDD(paginaActual);
+ Navigator.of(context).pop();
+     setState(() {
+       
+     });
+    
+
+
+        }),
+   SizedBox(width: 20), 
+FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn21",
+        child: Text('Derecha'),
+        onPressed: (){
+
+
+
+  bool estaYa=false;
+ 
+ if(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"][3]=="right"){
+   estaYa=true;
+ }
+
+
+
+
+
+
+     if(estaYa==false){
+ encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"][3]="right";
+      //print(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"]);
+      //encabezadoActual.aniadirAlMapa();
+     }
+
+ encabezadoActual.cargarABBDD(paginaActual);
+ Navigator.of(context).pop();
+     setState(() {
+       
+     });
+    
+
+
+
+        })
+
+
+
+
+
+],
+
+
+
+
+),
+Text("Color"),
+dropDown(["Negro","Rojo","Verde","Azul","Amarillo"].toList(),encabezadoActual,4,"divs",encabezadoActual.contenedores[index].getNombre(),"${index2}text"),
+
+Text("Tamaño"),
+dropDown(["14","20","30","40","50","70"].toList(),encabezadoActual,5,"divs",encabezadoActual.contenedores[index].getNombre(),"${index2}text")
+
+
+
+
+
+
+
+
+],
+
+
+
+
+
+
+
+
+            
+          ),
+          actions: <Widget>[
+           
+            TextButton(
+              child: Text('Ok'),
+              onPressed: (){
+                Navigator.of(context).pop();
+        },
+            ),
+          ],
+        );
+
+      }
+
+    );
+
+
+        })
 
 
 
@@ -473,15 +1714,13 @@ return TextField(
         
       ),
       onChanged: (valor) =>setState(() {
-      encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"] = valor;
-      //print(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"]);
-      //encabezadoActual.aniadirAlMapa();
-      //encabezadoActual.cargarABBDD();
+      encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"][0] = valor;
+      
       
       }),
       
        onSubmitted: (value){
-         encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"]=value;
+         encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"][0]=value;
         
         
 
@@ -526,7 +1765,7 @@ return TextField(
 
  return FutureBuilder (
       
-      future: getImageFromDatabase(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}img"]),
+      future: getImageFromDatabase(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}img"][0]),
       
       builder: ( context,AsyncSnapshot<Widget> snapshot  ){
   
@@ -578,7 +1817,7 @@ try{
   
 
   
-final String? id = getYoutubeThumbnail(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}video"]);
+final String? id = getYoutubeThumbnail(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}video"][0]);
 if(id!=null){
 
 return Image.network('https://img.youtube.com/vi/${id}/0.jpg');
@@ -721,14 +1960,14 @@ elementoMayor=item.toString();
 }
 
 
-encabezadoActual.contenedores[index].elementos.putIfAbsent("${(numMayor+1).toString()}text", () => "Text");
+encabezadoActual.contenedores[index].elementos.putIfAbsent("${(numMayor+1).toString()}text", () => ["Text","","","","",""]);
 
 }
 
 }else{
 
 
-encabezadoActual.contenedores[index].elementos.putIfAbsent("${0}text", () => "Text");
+encabezadoActual.contenedores[index].elementos.putIfAbsent("${0}text", () => ["Text","","","","",""]);
 
 
 
@@ -1018,7 +2257,7 @@ elementoMayor=item.toString();
 
 }
 
- encabezadoActual.contenedores[index].elementos.putIfAbsent("${(numMayor+1).toString()}img", () => currentUser!+nombreImagen);
+ encabezadoActual.contenedores[index].elementos.putIfAbsent("${(numMayor+1).toString()}img", () => [currentUser!+nombreImagen]);
 
 
 
@@ -1030,7 +2269,7 @@ elementoMayor=item.toString();
 }else{
 
 
-  encabezadoActual.contenedores[index].elementos.putIfAbsent("${0}img", () => currentUser!+nombreImagen);
+  encabezadoActual.contenedores[index].elementos.putIfAbsent("${0}img", () => [currentUser!+nombreImagen]);
 
 
 
@@ -1189,14 +2428,14 @@ elementoMayor=item.toString();
 }
 }
 
- encabezadoActual.contenedores[index].elementos.putIfAbsent("${(numMayor+1).toString()}img", () => currentUser!+nombreImagen);
+ encabezadoActual.contenedores[index].elementos.putIfAbsent("${(numMayor+1).toString()}img", () => [currentUser!+nombreImagen]);
 
 
 
 }else{
 
 
-  encabezadoActual.contenedores[index].elementos.putIfAbsent("${0}img", () => currentUser!+nombreImagen);
+  encabezadoActual.contenedores[index].elementos.putIfAbsent("${0}img", () => [currentUser!+nombreImagen]);
 
 
 
@@ -1422,14 +2661,14 @@ elementoMayor=item.toString();
 }
 }
 
- encabezadoActual.contenedores[index].elementos.putIfAbsent("${(numMayor+1).toString()}img", () => currentUser!+nombreImagen);
+ encabezadoActual.contenedores[index].elementos.putIfAbsent("${(numMayor+1).toString()}img", () => [currentUser!+nombreImagen]);
 
 
 
 }else{
 
 
-  encabezadoActual.contenedores[index].elementos.putIfAbsent("${0}img", () => currentUser!+nombreImagen);
+  encabezadoActual.contenedores[index].elementos.putIfAbsent("${0}img", () => [currentUser!+nombreImagen]);
 
 
 
@@ -1590,14 +2829,14 @@ elementoMayor=item.toString();
 }
 }
 
- encabezadoActual.contenedores[index].elementos.putIfAbsent("${(numMayor+1).toString()}img", () => currentUser!+nombreImagen);
+ encabezadoActual.contenedores[index].elementos.putIfAbsent("${(numMayor+1).toString()}img", () => [currentUser!+nombreImagen]);
 
 
 
 }else{
 
 
-  encabezadoActual.contenedores[index].elementos.putIfAbsent("${0}img", () => currentUser!+nombreImagen);
+  encabezadoActual.contenedores[index].elementos.putIfAbsent("${0}img", () => [currentUser!+nombreImagen]);
 
 
 
@@ -1968,14 +3207,14 @@ elementoMayor=item.toString();
 }
 }
 
- encabezadoActual.contenedores[index].elementos.putIfAbsent("${(numMayor+1).toString()}video", () =>url);
+ encabezadoActual.contenedores[index].elementos.putIfAbsent("${(numMayor+1).toString()}video", () =>[url]);
 
 
 
 }else{
 
 
- encabezadoActual.contenedores[index].elementos.putIfAbsent("${0}video", () =>url);
+ encabezadoActual.contenedores[index].elementos.putIfAbsent("${0}video", () =>[url]);
 
 
 
@@ -2237,7 +3476,121 @@ setState(() {
 
 
 
+Widget dropDown(List<String> elementos,Encabezado encabezadoActual,int parteCSS,String posicionHTML,String pt2,String pt3){
+  String x="";
+switch(posicionHTML) { 
+      case "h1": { 
+       x=  encabezadoActual.h1[parteCSS];
+       
+       } 
+      break; 
+     //TODO
+      case "h2": {  
+           x=  encabezadoActual.h2[parteCSS];
+       } 
+      break; 
+     
+      case "h3": {  
+        x=  encabezadoActual.h3[parteCSS];
+       } 
+      break; 
+     
+      case "divs": {  
+        
+x=encabezadoActual.mapaDivs[pt2][pt3][parteCSS];
 
+       } 
+      break; 
+     
+      default: { print("Invalid choice"); } 
+      break; 
+   } 
+if(x==""){
+ x=elementos[0];
+
+}
+
+return DropdownButtonFormField<String>(
+  onChanged: (valueX) {
+     setState(() {
+      x=valueX.toString();
+      //swith case
+      switch(posicionHTML) { 
+      case "h1": { 
+         encabezadoActual.h1[parteCSS]=x;
+        encabezadoActual.cargarABBDD(paginaActual);
+       } 
+      break; 
+     //TODO
+      case "h2": {  
+        
+
+  encabezadoActual.h2[parteCSS]=x;
+        encabezadoActual.cargarABBDD(paginaActual);
+
+       } 
+      break; 
+     
+      case "h3": { 
+          encabezadoActual.h3[parteCSS]=x;
+        encabezadoActual.cargarABBDD(paginaActual);
+       } 
+      break; 
+     
+      case "divs": {  
+        
+encabezadoActual.mapaDivs[pt2][pt3][parteCSS]=x;
+ encabezadoActual.cargarABBDD(paginaActual);
+       } 
+      break; 
+     
+      default: { print("Invalid choice"); } 
+      break; 
+   } 
+     
+      encabezadoActual.cargarABBDD(paginaActual);
+       
+
+
+
+
+
+
+   });
+  
+  },
+  
+ onSaved: (valueX) {
+   setState(() {
+      x=valueX.toString();
+      print(valueX.toString());
+   });
+  
+ },
+ value: x,
+  items: elementos.map((String value) {
+    
+    return DropdownMenuItem<String>(
+      
+      value: value,
+      child: new Text(value),
+      onTap: () {
+       
+       
+ setState(() {
+      x=value.toString();
+   });
+
+
+      },
+      
+    );
+  }).toList(),
+  
+);
+
+
+}
 
 
 
@@ -2354,9 +3707,9 @@ Map<String, dynamic>? data = querySnapshot.data() as Map<String, dynamic>?;
 if(data!=null){
   
 nombre=data["nombre_web"].toString();
- x.h1=data["h1"].toString();
- x.h2=data["h2"].toString();
- x.h3=data["h3"].toString();
+ x.h1=data["h1"];
+ x.h2=data["h2"];
+ x.h3=data["h3"];
 x.mapaDivs=data["divs"];
 
 
@@ -2431,38 +3784,7 @@ return x;
 
 
 
-/*
 
- String? convertUrlToId(String url, {bool trimWhitespaces = true}) {
-  if (!url.contains("http") && (url.length == 11)) return url;
-  if (trimWhitespaces) url = url.trim();
-
-  for (var exp in [
-    RegExp(
-        r"^https:\/\/(?:www\.|m\.)?youtube\.com\/watch\?v=([_\-a-zA-Z0-9]{11}).*$"),
-    RegExp(
-        r"^https:\/\/(?:www\.|m\.)?youtube(?:-nocookie)?\.com\/embed\/([_\-a-zA-Z0-9]{11}).*$"),
-    RegExp(r"^https:\/\/youtu\.be\/([_\-a-zA-Z0-9]{11}).*$")
-  ]) {
-    Match? match = exp.firstMatch(url);
-    if (match != null && match.groupCount >= 1) return match.group(1);
-  }
-
-  return null;
-}
-*/
-
-/*
-String getYoutubeThumbnail(String videoUrl) {
-  final Uri? uri = Uri.tryParse(videoUrl);
-  if (uri == null) {
-    return "";
-  }
-
-  return 'https://img.youtube.com/vi/${uri.queryParameters['v']}/0.jpg';
-}
-
-*/
 
 
 Widget _crearButtonVolver(){

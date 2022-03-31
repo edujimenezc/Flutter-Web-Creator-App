@@ -116,7 +116,7 @@ children: <Widget>[
 
 
 
-
+//creo q esta aqui no sirve
 Future<Encabezado> cargarDeBBDD() async {
 
 var nombre;
@@ -213,7 +213,8 @@ String h1Encabezado="";
 String h2Encabezado="";
 String h3Encabezado="";
 Map divsEncabezado={};
-
+Map estilosDivs={};
+String pageBackground="";
 
 
 
@@ -226,9 +227,9 @@ nombreWeb=data["nombre_web"].toString();
  h2Encabezado=data["h2"][0].toString();
  h3Encabezado=data["h3"][0].toString();
 divsEncabezado=data["divs"];
+estilosDivs=data['divsStyles'];
+pageBackground=data['pageBackground'];
 
-
-//demas
 }
 
 
@@ -236,8 +237,14 @@ divsEncabezado=data["divs"];
 String textoArchivoHTML="";
 
 //abro html
-textoArchivoHTML=textoArchivoHTML+"<html>\n";
-//tittle
+
+if(pageBackground.toString()!=""){
+textoArchivoHTML=textoArchivoHTML+'<html style="background-color:${pageBackground}">\n';
+  }else{
+textoArchivoHTML=textoArchivoHTML+'<html>\n';
+  }
+
+//title
 textoArchivoHTML=textoArchivoHTML+"<Title> ${nombreWeb} </Title>"+"\n";
 
 //abro body
@@ -252,32 +259,280 @@ textoArchivoHTML=textoArchivoHTML+'<div class="encabezado">\n';
 
 //h1 del encabezado
 if(h1Encabezado!=""){
-textoArchivoHTML=textoArchivoHTML+'<h1>\n'+h1Encabezado+"\n</h1>\n";
+  String estilos="";
+  for (var i = 1; i < 7; i++) {
+switch (i) {
+  case 1:
+  if(data!["h1"][i].toString()!=""){
+ estilos=estilos+ "font-weight: ${data["h1"][i].toString()}; ";
+  }
+   
+    
+    break;
+  case 2:
+  if(data!["h1"][i].toString()!=""){
+    estilos=estilos+ "font-style: ${data["h1"][i].toString()}; ";
+  }
+
+    
+  break;
+  case 3:
+  if(data!["h1"][i].toString()!=""){
+    estilos=estilos+ "text-align: ${data["h1"][i].toString()}; ";
+  }
+
+  break;
+  case 4:
+  if(data!["h1"][i].toString()!=""){
+    estilos=estilos+ "color: ${data["h1"][i].toString()}; ";
+  }
+
+
+
+
+
+  break;
+  case 5:
+   if(data!["h1"][i].toString()!=""){
+    estilos=estilos+ "font-size: ${data["h1"][i].toString()}px; ";
+  }
+
+  break;
+   case 6:
+   if(data!["h1"][i].toString()!=""){
+    estilos=estilos+ "font-family: ${data["h1"][i].toString()}; ";
+  }
+
+  break;
+
+
+
+
+
+  
+}
+
+
+
+   // estilos=estilos+"${data!["h1"][i].toString()};";
+  }
+
+textoArchivoHTML=textoArchivoHTML+'<h1 style="${estilos}">\n'+h1Encabezado+"\n</h1>\n";
+
 }
 
 //h2 del encabezado
 if(h2Encabezado!=""){
-textoArchivoHTML=textoArchivoHTML+'<h2>\n'+h2Encabezado+"\n</h2>\n";
+  String estilos="";
+  for (var i = 1; i < 7; i++) {
+switch (i) {
+  case 1:
+  if(data!["h2"][i].toString()!=""){
+ estilos=estilos+ "font-weight: ${data["h2"][i].toString()}; ";
+  }
+   
+    
+    break;
+  case 2:
+  if(data!["h2"][i].toString()!=""){
+    estilos=estilos+ "font-style: ${data["h2"][i].toString()}; ";
+  }
+
+    
+  break;
+  case 3:
+  if(data!["h2"][i].toString()!=""){
+    estilos=estilos+ "text-align: ${data["h2"][i].toString()}; ";
+  }
+
+  break;
+  case 4:
+ if(data!["h2"][i].toString()!=""){
+    estilos=estilos+ "color: ${data["h2"][i].toString()}; ";
+  }
+
+
+
+
+
+  break;
+  case 5:
+   if(data!["h2"][i].toString()!=""){
+    estilos=estilos+ "font-size: ${data["h2"][i].toString()}px; ";
+  }
+
+  break;
+
+case 6:
+   if(data!["h2"][i].toString()!=""){
+    estilos=estilos+ "font-family: ${data["h2"][i].toString()}; ";
+  }
+
+  break;
+
+
+
+
+  
+}
+
+
+
+   // estilos=estilos+"${data!["h1"][i].toString()};";
+  }
+textoArchivoHTML=textoArchivoHTML+'<h2 style="${estilos}">\n'+h2Encabezado+"\n</h2>\n";
 }
 
 //h3 del encabezado
 if(h3Encabezado!=""){
-textoArchivoHTML=textoArchivoHTML+'<h3>\n'+h3Encabezado+"\n</h3>\n";
+
+String estilos="";
+  for (var i = 1; i < 7; i++) {
+switch (i) {
+  case 1:
+  if(data!["h3"][i].toString()!=""){
+ estilos=estilos+ "font-weight: ${data["h3"][i].toString()}; ";
+  }
+   
+    
+    break;
+  case 2:
+  if(data!["h3"][i].toString()!=""){
+    estilos=estilos+ "font-style: ${data["h3"][i].toString()}; ";
+  }
+
+    
+  break;
+  case 3:
+  if(data!["h3"][i].toString()!=""){
+    estilos=estilos+ "text-align: ${data["h3"][i].toString()}; ";
+  }
+
+  break;
+  case 4:
+ if(data!["h3"][i].toString()!=""){
+    estilos=estilos+ "color: ${data["h3"][i].toString()}; ";
+  }
+
+
+
+
+
+  break;
+  case 5:
+   if(data!["h2"][i].toString()!=""){
+    estilos=estilos+ "font-size: ${data["h3"][i].toString()}px; ";
+  }
+
+  break;
+case 6:
+   if(data!["h3"][i].toString()!=""){
+    estilos=estilos+ "font-family: ${data["h3"][i].toString()}; ";
+  }
+
+  break;
+
+
+
+
+  
 }
- 
+
+
+}
+
+textoArchivoHTML=textoArchivoHTML+'<h3 style="${estilos}">\n'+h3Encabezado+"\n</h3>\n";
+
+}
 
 
 
 
 for (var div in divsEncabezado.keys.toList().reversed) {
  
+  //pongo cada div y su estilo
+String estiloDivActual="";
+if(estilosDivs.containsKey(div)){
   
-  //abro div
-  textoArchivoHTML=textoArchivoHTML+'<div class="${div}">\n';
+   estiloDivActual=estiloDivActual+ "background-color:${estilosDivs[div]}; ";
+
+
+
+
+  
+}
+
+
+
+  textoArchivoHTML=textoArchivoHTML+'<div class="${div}" style="${estiloDivActual}">\n';
 for (var i = 0; i < divsEncabezado[div].keys.length; i++) {
 
 if(divsEncabezado[div].containsKey("${i}text")){
-textoArchivoHTML=textoArchivoHTML+'<p>${divsEncabezado[div]["${i}text"][0]}</p>'+"\n";
+
+String estilos="";
+  for (var j = 1; j < 7; j++) {
+switch (j) {
+  case 1:
+  if(divsEncabezado[div]["${i}text"][j].toString()!=""){
+ estilos=estilos+ "font-weight: ${divsEncabezado[div]["${i}text"][j].toString()}; ";
+  }
+   
+    
+    break;
+  case 2:
+  if(divsEncabezado[div]["${i}text"][j].toString()!=""){
+    estilos=estilos+ "font-style: ${divsEncabezado[div]["${i}text"][j].toString()}; ";
+  }
+
+    
+  break;
+  case 3:
+  if(divsEncabezado[div]["${i}text"][j].toString()!=""){
+    estilos=estilos+ "text-align: ${divsEncabezado[div]["${i}text"][j].toString()}; ";
+  }
+
+  break;
+  case 4:
+   if(divsEncabezado[div]["${i}text"][j]!=""){
+    estilos=estilos+ "color: ${divsEncabezado[div]["${i}text"][j]}; ";
+  }
+
+
+
+
+  break;
+  case 5:
+   if(divsEncabezado[div]["${i}text"][j].toString()!=""){
+    estilos=estilos+ "font-size: ${divsEncabezado[div]["${i}text"][j].toString()}px; ";
+  }
+
+  break;
+case 6:
+   if(divsEncabezado[div]["${i}text"][j].toString()!=""){
+    estilos=estilos+ "font-family: ${divsEncabezado[div]["${i}text"][j].toString()}; ";
+  }
+
+  break;
+
+
+
+
+  
+}
+
+  
+
+
+
+
+
+
+
+
+}
+
+
+textoArchivoHTML=textoArchivoHTML+'<p style="${estilos}">${divsEncabezado[div]["${i}text"][0]}</p>'+"\n";
 }else if(divsEncabezado[div].containsKey("${i}img")){
    
 final ref = FirebaseStorage.instance.ref().child('uploads').child("${divsEncabezado[div]["${i}img"][0]}");
@@ -286,7 +541,7 @@ textoArchivoHTML=textoArchivoHTML+'<img src="${url}" alt="${url}">'+"\n";
 
 }else{
 String id=divsEncabezado[div]["${i}video"][0].split('=')[1];
- textoArchivoHTML=textoArchivoHTML+'<iframe width="560" height="315" src="https://www.youtube.com/embed/${id}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
+ textoArchivoHTML=textoArchivoHTML+'<iframe width="560" height="315" src="https://www.youtube.com/embed/${id}?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
 +"\n";
 
 }
@@ -325,7 +580,7 @@ String id=divsEncabezado[div][listaKeys[i]].split('=')[1];
 */
 
   }
-
+textoArchivoHTML=textoArchivoHTML+'</div>\n';
 
 
 
@@ -477,7 +732,7 @@ textoArchivoHTML=textoArchivoHTML+"</body>\n";
 //cierro html
 textoArchivoHTML=textoArchivoHTML+"</html>\n";
 
-
+print(textoArchivoHTML);
 return textoArchivoHTML;
 
 

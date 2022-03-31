@@ -195,6 +195,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.1.1"
+  flutter_colorpicker:
+    dependency: "direct main"
+    description:
+      name: flutter_colorpicker
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.3"
   flutter_email_sender:
     dependency: "direct main"
     description:
@@ -624,7 +631,7 @@ packages:
     source: hosted
     version: "0.2.0"
   webview_flutter:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: webview_flutter
       url: "https://pub.dartlang.org"

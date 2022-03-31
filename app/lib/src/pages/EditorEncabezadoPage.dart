@@ -1,6 +1,7 @@
 import 'dart:collection';
 import 'dart:convert';
-
+import 'package:ejemplobbdd/src/classes/ColorExt.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'dart:io' as io;
@@ -102,7 +103,7 @@ Column(
   
  _crearButtonVolver(),
 
-Text('Volver'),
+colorPicker(encabezadoActual, "pageBackground", "", "")
 
 
 
@@ -386,14 +387,20 @@ FloatingActionButton(
 
 
 ),
+SizedBox(height: 20), 
 Text("Color"),
-dropDown(["Negro","Rojo","Verde","Azul","Amarillo"].toList(),encabezadoActual,4,"h1","",""),
+
+colorPicker(encabezadoActual,"h1","",""),
+
+SizedBox(height: 20), 
 
 Text("Tamaño"),
-dropDown(["14","20","30","40","50","70"].toList(),encabezadoActual,5,"h1","","")
+dropDown(["14","20","30","40","50","70"].toList(),encabezadoActual,5,"h1","",""),
 
-
-
+SizedBox(height: 20), 
+//para meter las google fonts seria aqui
+Text("Tipo de letra"),
+dropDown(["Arial","Verdana","Helvetica","Tahoma","'Trebuchet MS'","'Times New Roman'","Georgia","'Courier New'","'Brush Script MT'"].toList(),encabezadoActual,6,"h1","","")
 
 
 
@@ -720,10 +727,14 @@ FloatingActionButton(
 
 ),
 Text("Color"),
-dropDown(["Negro","Rojo","Verde","Azul","Amarillo"].toList(),encabezadoActual,4,"h2","",""),
+colorPicker(encabezadoActual,"h2","",""),
+
 
 Text("Tamaño"),
-dropDown(["14","20","30","40","50","70"].toList(),encabezadoActual,5,"h2","","")
+dropDown(["14","20","30","40","50","70"].toList(),encabezadoActual,5,"h2","",""),
+Text("Tipo de letra"),
+dropDown(["Arial","Verdana","Helvetica","Tahoma","'Trebuchet MS'","'Times New Roman'","Georgia","'Courier New'","'Brush Script MT'"].toList(),encabezadoActual,6,"h2","","")
+
 
 
 
@@ -1053,10 +1064,17 @@ FloatingActionButton(
 
 ),
 Text("Color"),
-dropDown(["Negro","Rojo","Verde","Azul","Amarillo"].toList(),encabezadoActual,4,"h3","",""),
+colorPicker(encabezadoActual,"h3","",""),
+
+
 
 Text("Tamaño"),
-dropDown(["14","20","30","40","50","70"].toList(),encabezadoActual,5,"h3","","")
+dropDown(["14","20","30","40","50","70"].toList(),encabezadoActual,5,"h3","",""),
+
+Text("Tipo de letra"),
+dropDown(["Arial","Verdana","Helvetica","Tahoma","'Trebuchet MS'","'Times New Roman'","Georgia","'Courier New'","'Brush Script MT'"].toList(),encabezadoActual,6,"h3","","")
+
+
 
 
 
@@ -1250,7 +1268,7 @@ elementoMayor=item.toString();
 setState(() {
   
 encabezadoActual.mapaDivs.remove(elementoMayor);
-
+encabezadoActual.divStyles.remove(elementoMayor);
 encabezadoActual.cargarABBDD(paginaActual);
 });
 
@@ -1401,7 +1419,8 @@ children: [
 
 
 Text("Color"),
-dropDown(["Negro","Rojo","Verde","Azul","Amarillo"].toList(),encabezadoActual,4,"estiloDivs",lista[index].nombre,""),
+colorPicker(encabezadoActual,"estiloDivs",lista[index].nombre,""),
+
 
 
 
@@ -1758,11 +1777,13 @@ FloatingActionButton(
 
 ),
 Text("Color"),
-dropDown(["Negro","Rojo","Verde","Azul","Amarillo"].toList(),encabezadoActual,4,"divs",encabezadoActual.contenedores[index].getNombre(),"${index2}text"),
-
+colorPicker(encabezadoActual,"divs",encabezadoActual.contenedores[index].getNombre(),"${index2}text"),
 Text("Tamaño"),
-dropDown(["14","20","30","40","50","70"].toList(),encabezadoActual,5,"divs",encabezadoActual.contenedores[index].getNombre(),"${index2}text")
+dropDown(["14","20","30","40","50","70"].toList(),encabezadoActual,5,"divs",encabezadoActual.contenedores[index].getNombre(),"${index2}text"),
 
+
+Text("Tipo de letra"),
+dropDown(["Arial","Verdana","Helvetica","Tahoma","'Trebuchet MS'","'Times New Roman'","Georgia","'Courier New'","'Brush Script MT'"].toList(),encabezadoActual,6,"divs",encabezadoActual.contenedores[index].getNombre(),"${index2}text")
 
 
 
@@ -2052,14 +2073,14 @@ elementoMayor=item.toString();
 }
 
 
-encabezadoActual.contenedores[index].elementos.putIfAbsent("${(numMayor+1).toString()}text", () => ["Text","","","","",""]);
+encabezadoActual.contenedores[index].elementos.putIfAbsent("${(numMayor+1).toString()}text", () => ["Text","","","","","",""]);
 
 }
 
 }else{
 
 
-encabezadoActual.contenedores[index].elementos.putIfAbsent("${0}text", () => ["Text","","","","",""]);
+encabezadoActual.contenedores[index].elementos.putIfAbsent("${0}text", () => ["Text","","","","","",""]);
 
 
 
@@ -3563,7 +3584,203 @@ setState(() {
 }
 
 
+Widget colorPicker(Encabezado encabezadoActual,String posicionHTML,String pt2,String pt3){
+return ElevatedButton(
+                        onPressed: (){
+                          Color mycolor=Colors.lightBlue;
+                          
+switch(posicionHTML) { 
+                                                          case "h1": { 
+                                                            if(encabezadoActual.h1[4]!=""){
+                                                              
+                                                          mycolor=mycolor.fromHex(encabezadoActual.h1[4]);
+                                                            }
+                                                          
+                                                          
+                                                          } 
+                                                          break; 
+                                                        
+                                                          case "h2": {  
+                                                            if(encabezadoActual.h2[4]!=""){
+                                                           mycolor= mycolor.fromHex(encabezadoActual.h2[4]);
+                                                            }
+                                                           
+                                                             
+                                                          } 
+                                                          break; 
+                                                        
+                                                          case "h3": { 
+                                                            if(encabezadoActual.h3[4]!=""){
+                                                                mycolor=mycolor.fromHex(encabezadoActual.h3[4]);
+                                                            } 
+                                                           
+                                                           
+                                                          } 
+                                                          break; 
+                                                        
+                                                          case "divs": {  
+                                                            if(encabezadoActual.mapaDivs[pt2][pt3][4]!=""){
+                                                             mycolor= mycolor.fromHex(encabezadoActual.mapaDivs[pt2][pt3][4]);
+                                                            }
+                                                             
+                                                   
 
+                                                          }
+                                                          break;
+                                                           case "pageBackground": {  
+                                                            if(encabezadoActual.pageBackground!=""){
+                                                             mycolor= mycolor.fromHex(encabezadoActual.pageBackground);
+                                                            }
+                                                             
+                                                   
+
+                                                          }
+                                                          break;
+                                                          case "estiloDivs":{
+                                                            if(encabezadoActual.divStyles.containsKey(pt2)){
+                                                              if(encabezadoActual.divStyles[pt2]!=""){
+                                                                  mycolor=mycolor.fromHex(encabezadoActual.divStyles[pt2]);
+                                                              }
+                                                              
+                                                              
+                                                            }
+
+                                                          } 
+                                                          break; 
+                                                        
+                                                          default: { print("Invalid choice"); } 
+                                                          break; 
+                                                      } 
+                                                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context){
+                                  return AlertDialog(
+                                      title: Text('Selecciona un color'),
+                                      content: SingleChildScrollView(
+                                        child: ColorPicker(
+                                          pickerColor: mycolor, //default color
+                                          onColorChanged: (Color color){ //on color picked
+                                              setState(() {
+                                                mycolor = color;
+                                              
+                                                    switch(posicionHTML) { 
+      case "h1": { 
+         encabezadoActual.h1[4]=mycolor.toHex();
+        encabezadoActual.cargarABBDD(paginaActual);
+       } 
+      break; 
+     //TODO
+      case "h2": {  
+        
+
+  encabezadoActual.h2[4]=mycolor.toHex();
+        encabezadoActual.cargarABBDD(paginaActual);
+
+       } 
+      break; 
+     
+      case "h3": { 
+          encabezadoActual.h3[4]=mycolor.toHex();
+        encabezadoActual.cargarABBDD(paginaActual);
+       } 
+      break; 
+     
+      case "divs": {  
+        
+encabezadoActual.mapaDivs[pt2][pt3][4]=mycolor.toHex();
+ encabezadoActual.cargarABBDD(paginaActual);
+       } 
+      break;
+      case "pageBackground": {  
+        
+encabezadoActual.pageBackground=mycolor.toHex();
+ encabezadoActual.cargarABBDD(paginaActual);
+       } 
+      break;  
+     case "estiloDivs":{
+         encabezadoActual.aniadirEstiloDiv(pt2,mycolor.toHex());
+encabezadoActual.cargarABBDD(paginaActual);
+       } 
+      break; 
+      default: { print("Invalid choice"); } 
+      break; 
+   } 
+     
+      encabezadoActual.cargarABBDD(paginaActual);
+       
+
+
+
+
+
+
+   }
+
+                                          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                
+                                              );
+                                          }, 
+                                        ),
+                                      ),
+                                      actions: <Widget>[
+                                        ElevatedButton(
+                                          child: const Text('Ok'),
+                                          onPressed: () {
+                                            Navigator.of(context).pop(); //dismiss the color picker
+                                          },
+                                        ),
+                                      ],
+                                  );
+                              }
+                            ); 
+
+
+                        },
+                        child: Text("Cambiar Color"),
+                    );
+
+
+}
 
 
 
@@ -3815,7 +4032,7 @@ nombre=data["nombre_web"].toString();
  x.h3=data["h3"];
 x.mapaDivs=data["divs"];
 x.divStyles=data["divsStyles"];
-
+x.pageBackground=data["pageBackground"];
 
 return x;
 

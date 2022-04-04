@@ -7,6 +7,7 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'dart:io' as io;
 import 'package:ejemplobbdd/src/classes/Encabezado.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:path/path.dart' as path; 
 import 'dart:io';
 import 'package:ejemplobbdd/src/pages/creacionWebsPage.dart';
@@ -50,9 +51,13 @@ paginaActual=nombreWeb;
       future: cargarDeBBDD(),
       
       builder: ( context,AsyncSnapshot<Encabezado> snapshot  ){
-  var h1="Titulo";
-var h2="Subtitulo";
-var h3="Más texto";
+  var h1="";
+var h2="";
+var h3="";
+var h1Hint="Título";
+var h2Hint="Subtítulo";
+var h3Hint="Subsubtítulo";
+
 if (!snapshot.hasData) {
      return Container(
        child: Center(
@@ -71,17 +76,20 @@ encabezadoActual.contenedores.reversed;
 
 
 
-if(encabezadoActual.h2[0].toString().isNotEmpty){
+if(encabezadoActual.h1[0].toString()!=""){
 h1=encabezadoActual.h1[0].toString();
+h1Hint=h1;
 }
 
 
-if(encabezadoActual.h2[0].toString().isNotEmpty){
+if(encabezadoActual.h2[0].toString()!=""){
 h2=encabezadoActual.h2[0].toString();
+h2Hint=h2;
 }
 
-if(encabezadoActual.h3[0].toString().isNotEmpty){
+if(encabezadoActual.h3[0].toString()!=""){
 h3=encabezadoActual.h3[0].toString();
+h3Hint=h3;
 }
 
 
@@ -103,14 +111,15 @@ Column(
   
  _crearButtonVolver(),
 
-colorPicker(encabezadoActual, "pageBackground", "", "")
+botonEstilosFondo(encabezadoActual),
+
 
 
 
 
 
 ]),
-TextField(
+/*TextField(
   
       
       decoration: InputDecoration(
@@ -400,10 +409,12 @@ dropDown(["14","20","30","40","50","70"].toList(),encabezadoActual,5,"h1","","")
 SizedBox(height: 20), 
 //para meter las google fonts seria aqui
 Text("Tipo de letra"),
-dropDown(["Arial","Verdana","Helvetica","Tahoma","'Trebuchet MS'","'Times New Roman'","Georgia","'Courier New'","'Brush Script MT'"].toList(),encabezadoActual,6,"h1","","")
+dropDown(["Arial","Verdana","Helvetica","Tahoma","'Trebuchet MS'","'Times New Roman'","Georgia","'Courier New'","'Brush Script MT'"].toList(),encabezadoActual,6,"h1","",""),
 
 
+SizedBox(height: 20),
 
+eliminarParteH(encabezadoActual,"h1"),
 
 
 ],
@@ -434,8 +445,9 @@ dropDown(["Arial","Verdana","Helvetica","Tahoma","'Trebuchet MS'","'Times New Ro
 
 
         }),
-        hintText: h1.toString(),
-        //labelText: 'Password',
+        hintText: h1Hint,
+
+       // labelText: encabezadoActual.h1[0],
         
         
       ),
@@ -447,9 +459,9 @@ dropDown(["Arial","Verdana","Helvetica","Tahoma","'Trebuchet MS'","'Times New Ro
       }),
    
     ),
-
-
-TextField(
+*/
+crearH1(encabezadoActual, h1Hint),
+/*TextField(
   
      
       decoration: InputDecoration(
@@ -735,7 +747,8 @@ dropDown(["14","20","30","40","50","70"].toList(),encabezadoActual,5,"h2","","")
 Text("Tipo de letra"),
 dropDown(["Arial","Verdana","Helvetica","Tahoma","'Trebuchet MS'","'Times New Roman'","Georgia","'Courier New'","'Brush Script MT'"].toList(),encabezadoActual,6,"h2","","")
 
-
+,
+eliminarParteH(encabezadoActual, "h2")
 
 
 
@@ -771,7 +784,7 @@ dropDown(["Arial","Verdana","Helvetica","Tahoma","'Trebuchet MS'","'Times New Ro
 
 
         }),
-        hintText: h2.toString(),
+        hintText: h2Hint,
         //labelText: 'Password',
         
         
@@ -782,14 +795,14 @@ dropDown(["Arial","Verdana","Helvetica","Tahoma","'Trebuchet MS'","'Times New Ro
       encabezadoActual.cargarABBDD(paginaActual);
       })
     ),
-
-
-TextField(
+*/
+crearH2(encabezadoActual, h2Hint),
+/*TextField(
   
       
       decoration: InputDecoration(
         
-        hintText: h3.toString(),
+        hintText: h3Hint,
 suffixIcon: FloatingActionButton(
    shape: BeveledRectangleBorder(
           borderRadius: BorderRadius.zero
@@ -1072,7 +1085,9 @@ Text("Tamaño"),
 dropDown(["14","20","30","40","50","70"].toList(),encabezadoActual,5,"h3","",""),
 
 Text("Tipo de letra"),
-dropDown(["Arial","Verdana","Helvetica","Tahoma","'Trebuchet MS'","'Times New Roman'","Georgia","'Courier New'","'Brush Script MT'"].toList(),encabezadoActual,6,"h3","","")
+dropDown(["Arial","Verdana","Helvetica","Tahoma","'Trebuchet MS'","'Times New Roman'","Georgia","'Courier New'","'Brush Script MT'"].toList(),encabezadoActual,6,"h3","",""),
+
+eliminarParteH(encabezadoActual, "h3")
 
 
 
@@ -1124,7 +1139,8 @@ dropDown(["Arial","Verdana","Helvetica","Tahoma","'Trebuchet MS'","'Times New Ro
        encabezadoActual.cargarABBDD(paginaActual);
       })
     ),
-    
+    */
+crearH3(encabezadoActual, h3Hint),
     Expanded(child: _crearListaDivs(encabezadoActual.contenedores,encabezadoActual,colorTargeta)),
 
 Row(children: [
@@ -3583,6 +3599,1551 @@ setState(() {
 
 }
 
+Widget eliminarParteH(Encabezado encabezadoActual,String parte ){
+return FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn1",
+        child: Text('Eliminar Esta Parte'),
+         
+        onPressed: (){
+           
+          switch (parte) {
+  case "h1":
+    encabezadoActual.h1[0]="";
+
+            //Navigator.of(context).pop();
+           // encabezadoActual.cargarABBDD(paginaActual);
+            
+    break;
+
+  case "h2":
+  encabezadoActual.h2[0]="";
+
+  break;
+  case "h3":
+  encabezadoActual.h3[0]="";
+
+  break;
+         
+}
+          
+          
+        
+           setState(() {
+            // Navigator.of(context).pop();
+              encabezadoActual.cargarABBDD(paginaActual);
+               final route = MaterialPageRoute(
+
+    builder: (context){
+return EditorEncabezadoPage(paginaActual);
+
+    }
+  );
+
+Navigator.push(context, route);
+           }); 
+           
+           
+           // 
+          });
+
+
+       
+
+
+
+
+
+
+
+}
+Widget botonFondoImagen(Encabezado encabezadoActual){
+
+return FloatingActionButton(
+              child: Text('Sube una imagen'),
+              onPressed: (){
+               showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+
+         return AlertDialog(
+          shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
+         
+          content: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text("Nombre de la imagen"),
+                TextField(
+
+decoration: InputDecoration(
+        
+        hintText: "Nombre de la Imagen",
+        //labelText: 'Password',
+        
+        
+      ),
+
+      onChanged: (valor) =>setState(() {
+       nombreImagen = valor;
+        
+       
+      }),
+  ),
+                Card(
+                  child:( imageFile==null)?Text("Elige una imagen"): Image.file( io.File(  imageFile!.path)),
+                ),
+                MaterialButton(
+                  textColor: Colors.white,
+                  color: Colors.pink,
+                  onPressed: () async {
+
+                   bool nombreExiste=false;
+
+
+
+
+firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
+    .ref()
+    .child('images')
+    .child('defaultProfile.png');
+var listado=await FirebaseStorage.instance.ref().child('uploads').list().then((value){
+for (var item in value.items) {
+  if(item.fullPath.toString()=="uploads/\$"+currentUser.toString()+nombreImagen){
+
+nombreExiste=true;
+  }
+}
+
+if(nombreExiste){
+
+
+
+showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+
+         return AlertDialog(
+          shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
+          title: Text('¡Ya estas usando ese nombre!'),
+          
+          content: Expanded(child: Text("Ya estas usando ese nombre para una imagen, si usas el mismo nombre la imagen se sobreescribirá \n ¿Deseas sobreescribir la imagen?")),
+          actions: <Widget>[
+           
+            TextButton(
+              child: Text('No'),
+              onPressed: (){
+                Navigator.of(context).pop();
+        },
+            ),
+            TextButton(
+              child: Text('Si'),
+              onPressed: (){
+
+                Navigator.of(context).pop();
+
+
+
+
+
+showDialog(context: context,builder: (BuildContext context){
+
+      return AlertDialog(
+        title: Text("Elige una opción",style: TextStyle(color: Colors.blue),),
+        content: SingleChildScrollView(
+        child: ListBody(
+          children: [
+            Divider(height: 1,color: Colors.blue,),
+            ListTile(
+              onTap: (){
+
+
+
+
+
+
+
+
+
+
+                _openGallery(context).then((value){
+
+
+
+
+
+
+if(imageFile!=null){
+
+
+      
+uploadImageToFirebase(context).then((value){
+
+  encabezadoActual.pageBackground="\$"+currentUser!+nombreImagen;
+
+
+ setState(() {
+
+
+  encabezadoActual.cargarABBDD(paginaActual);
+
+ Navigator.of(context).pop();
+
+
+imageFile=null;
+
+
+
+ });
+
+
+});
+
+
+
+
+}
+
+    
+                });
+
+              },
+            title: Text("Gallery"),
+              leading: Icon(Icons.account_box,color: Colors.blue,),
+        ),
+
+            Divider(height: 1,color: Colors.blue,),
+            ListTile(
+              onTap: (){
+                _openCamera(context).then((value){
+
+
+
+
+
+
+if(imageFile!=null){
+
+
+      
+uploadImageToFirebase(context).then((value){
+ encabezadoActual.pageBackground="\$"+currentUser!+nombreImagen;
+
+
+
+ setState(() {
+
+  encabezadoActual.cargarABBDD(paginaActual);
+
+ Navigator.of(context).pop();
+
+
+imageFile=null;
+
+
+
+ });
+
+});
+
+}
+
+                });
+              },
+              title: Text("Camera"),
+              leading: Icon(Icons.camera,color: Colors.blue,),
+            ),
+          ],
+        ),
+      ),);
+    });
+
+        
+        },
+            )
+          ],
+        );
+
+      }
+
+    );
+
+
+
+
+
+}else{
+
+showDialog(context: context,builder: (BuildContext context){
+
+      return AlertDialog(
+        title: Text("Elige una opción",style: TextStyle(color: Colors.blue),),
+        content: SingleChildScrollView(
+        child: ListBody(
+          children: [
+            Divider(height: 1,color: Colors.blue,),
+            ListTile(
+              onTap: (){
+
+                _openGallery(context).then((value){
+
+
+
+
+
+
+if(imageFile!=null){
+
+
+      
+uploadImageToFirebase(context).then((value){
+
+
+  encabezadoActual.pageBackground="\$"+currentUser!+nombreImagen;
+
+
+ setState(() {
+
+
+
+  encabezadoActual.cargarABBDD(paginaActual);
+
+ Navigator.of(context).pop();
+
+
+imageFile=null;
+
+
+
+ });
+
+
+});
+
+
+}
+
+           
+                });
+
+              },
+            title: Text("Gallery"),
+              leading: Icon(Icons.account_box,color: Colors.blue,),
+        ),
+
+            Divider(height: 1,color: Colors.blue,),
+            ListTile(
+              onTap: (){
+                _openCamera(context).then((value){
+
+
+if(imageFile!=null){
+    
+uploadImageToFirebase(context).then((value){
+ encabezadoActual.pageBackground="\$"+currentUser!+nombreImagen;
+ setState(() {
+
+  encabezadoActual.cargarABBDD(paginaActual);
+
+ Navigator.of(context).pop();
+
+
+imageFile=null;
+
+ });
+
+});
+
+}
+
+                });
+              },
+              title: Text("Camera"),
+              leading: Icon(Icons.camera,color: Colors.blue,),
+            ),
+          ],
+        ),
+      ),);
+    });
+
+}
+
+});
+
+      
+                  },
+                  child: Text("Select Image"),
+
+                ),
+                
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Cancelar'),
+              onPressed: ()=> Navigator.of(context).pop(),
+            ),
+            TextButton(
+              child: Text('Ok'),
+              onPressed: (){
+                Navigator.of(context).pop();
+                 Navigator.of(context).pop();
+
+
+
+
+
+
+
+              },
+            ),
+          ],
+        );
+
+      }
+
+    );
+               
+        },
+            );
+
+}
+
+
+
+Widget botonEstilosFondo(Encabezado encabezadoActual){
+
+
+ return FloatingActionButton(
+              child: Text('Editar el Fondo'),
+              onPressed: (){
+               showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+
+         return AlertDialog(
+          shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
+          title: Text('Edita el fondo de la Web'),
+          
+          content: Column(
+mainAxisSize: MainAxisSize.min,
+children: [
+
+colorPicker(encabezadoActual, "pageBackground", "", ""),
+
+botonFondoImagen(encabezadoActual),
+
+
+
+],
+
+          ),
+          actions: <Widget>[
+           
+            TextButton(
+              child: Text('Ok'),
+              onPressed: (){
+                Navigator.of(context).pop();
+        },
+            ),
+          ],
+        );
+
+      }
+
+    );
+               
+        },
+            );
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
+Widget crearH1(Encabezado encabezadoActual,String h1Hint){
+FontWeight bold =FontWeight.normal;
+FontStyle italic=FontStyle.normal;
+TextAlign alineacion=TextAlign.left;
+Color color=Colors.black;
+double tamanio=30;
+if(encabezadoActual.h1[1]!=""){
+bold=FontWeight.bold;
+}
+if(encabezadoActual.h1[2]!=""){
+italic=FontStyle.italic;
+}
+if(encabezadoActual.h1[3]!=""){
+if(encabezadoActual.h1[3]=="center"){
+alineacion=TextAlign.center;
+}else if(encabezadoActual.h1[3]=="right"){
+alineacion=TextAlign.right;
+}else{
+}
+}
+
+if(encabezadoActual.h1[4]!=""){
+color=color.fromHex(encabezadoActual.h1[4]);
+}
+if(encabezadoActual.h1[5]!=""){
+tamanio=double.parse(encabezadoActual.h1[5]);
+}
+
+
+
+
+
+
+TextStyle estilo=TextStyle(fontWeight: bold,fontStyle: italic,fontSize: tamanio,color: color);
+
+return TextField(
+  textAlign: alineacion,
+  style: estilo,
+      
+      decoration: InputDecoration(
+      hintStyle: estilo,
+        suffixIcon: FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn10",
+        child: Text('B'),
+        
+        onPressed: (){
+
+showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+
+         return AlertDialog(
+          shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
+          title: Text('Edición del texto'),
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
+          content: Column(
+            mainAxisSize:MainAxisSize.min,
+children: [
+
+
+
+Row(
+
+children: [
+SizedBox(width: 50),
+FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn20",
+        child: Text('Negrita'),
+        onPressed: (){
+
+
+
+  bool estaYa=false;
+ 
+ if(encabezadoActual.h1[1]=="bold"){
+   estaYa=true;
+ }
+
+
+
+
+
+
+     if(estaYa==false){
+ encabezadoActual.h1[1]="bold";
+      //print(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"]);
+      //encabezadoActual.aniadirAlMapa();
+       
+}else{
+
+encabezadoActual.h1[1]="";
+
+
+}
+ encabezadoActual.cargarABBDD(paginaActual);
+ Navigator.of(context).pop();
+     setState(() {
+       
+     });
+    
+
+
+        }),
+SizedBox(width: 50),
+FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn21",
+        child: Text('Cursiva'),
+        onPressed: (){
+
+
+
+  bool estaYa=false;
+ 
+ if(encabezadoActual.h1[2]=="italic"){
+   estaYa=true;
+ }
+
+
+
+
+
+
+     if(estaYa==false){
+ encabezadoActual.h1[2]="italic";
+      //print(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"]);
+      //encabezadoActual.aniadirAlMapa();
+       
+}else{
+
+encabezadoActual.h1[2]="";
+
+
+}
+ encabezadoActual.cargarABBDD(paginaActual);
+ Navigator.of(context).pop();
+     setState(() {
+       
+     });
+    
+
+
+
+        }),
+
+
+
+
+
+
+
+
+
+
+],
+
+
+          ),
+
+SizedBox(height: 30),
+Text("Alineación"),
+SizedBox(height: 15),
+Row(
+
+
+
+children: [
+SizedBox(width: 10),
+
+FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn21",
+        child: Text('Izquierda'),
+        onPressed: (){
+
+
+
+
+  bool estaYa=false;
+ 
+ if(encabezadoActual.h1[3]=="left"){
+   estaYa=true;
+ }
+
+
+
+
+
+
+     if(estaYa==false){
+ encabezadoActual.h1[3]="left";
+     
+       
+}
+ encabezadoActual.cargarABBDD(paginaActual);
+ Navigator.of(context).pop();
+     setState(() {
+       
+     });
+    
+
+
+        }),
+  SizedBox(width: 20), 
+FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn21",
+        child: Text('Centro'),
+        onPressed: (){
+
+
+
+
+  bool estaYa=false;
+ 
+ if(encabezadoActual.h1[3]=="center"){
+   estaYa=true;
+ }
+
+
+
+
+
+
+     if(estaYa==false){
+ encabezadoActual.h1[3]="center";
+      //print(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"]);
+      //encabezadoActual.aniadirAlMapa();
+       
+}
+ encabezadoActual.cargarABBDD(paginaActual);
+ Navigator.of(context).pop();
+     setState(() {
+       
+     });
+    
+
+
+        }),
+   SizedBox(width: 20), 
+FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn21",
+        child: Text('Derecha'),
+        onPressed: (){
+
+
+
+  bool estaYa=false;
+ 
+ if(encabezadoActual.h1[3]=="right"){
+   estaYa=true;
+ }
+
+
+
+
+
+
+     if(estaYa==false){
+ encabezadoActual.h1[3]="right";
+      //print(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"]);
+      //encabezadoActual.aniadirAlMapa();
+     }
+
+ encabezadoActual.cargarABBDD(paginaActual);
+ Navigator.of(context).pop();
+     setState(() {
+       
+     });
+    
+
+
+
+        })
+
+
+
+
+
+],
+
+
+
+
+),
+SizedBox(height: 20), 
+Text("Color"),
+
+colorPicker(encabezadoActual,"h1","",""),
+
+SizedBox(height: 20), 
+
+Text("Tamaño"),
+dropDown(["14","20","30","40","50","70"].toList(),encabezadoActual,5,"h1","",""),
+
+SizedBox(height: 20), 
+//para meter las google fonts seria aqui
+Text("Tipo de letra"),
+dropDown(["Arial","Verdana","Helvetica","Tahoma","'Trebuchet MS'","'Times New Roman'","Georgia","'Courier New'","'Brush Script MT'"].toList(),encabezadoActual,6,"h1","",""),
+
+
+SizedBox(height: 20),
+
+eliminarParteH(encabezadoActual,"h1"),
+
+
+],
+
+
+
+
+
+
+
+
+            
+          ),
+          actions: <Widget>[
+           
+            TextButton(
+              child: Text('Ok'),
+              onPressed: (){
+                Navigator.of(context).pop();
+        },
+            ),
+          ],
+        );
+
+      }
+
+    );
+
+
+        }),
+        hintText: h1Hint,
+        
+       // labelText: encabezadoActual.h1[0],
+        
+        
+      ),
+
+      onChanged: (valor) =>setState(() {
+        encabezadoActual.h1[0] = valor;
+        encabezadoActual.cargarABBDD(paginaActual);
+       
+      }),
+   
+    );
+
+
+}
+
+Widget crearH2(Encabezado encabezadoActual,String h2Hint){
+
+return TextField(
+  
+     
+      decoration: InputDecoration(
+        suffixIcon: FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn15",
+        child: Text('B'),
+        onPressed: (){
+
+showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+
+         return AlertDialog(
+          shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
+          title: Text('Edición del texto'),
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
+          content: Column(
+            mainAxisSize:MainAxisSize.min,
+children: [
+
+
+
+Row(
+
+children: [
+SizedBox(width: 50),
+FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn20",
+        child: Text('Negrita'),
+        onPressed: (){
+
+
+
+  bool estaYa=false;
+ 
+ if(encabezadoActual.h2[1]=="bold"){
+   estaYa=true;
+ }
+
+
+
+
+
+
+     if(estaYa==false){
+ encabezadoActual.h2[1]="bold";
+      //print(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"]);
+      //encabezadoActual.aniadirAlMapa();
+       
+}else{
+
+encabezadoActual.h2[1]="";
+
+
+}
+ encabezadoActual.cargarABBDD(paginaActual);
+ Navigator.of(context).pop();
+     setState(() {
+       
+     });
+    
+
+
+        }),
+SizedBox(width: 50),
+FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn21",
+        child: Text('Cursiva'),
+        onPressed: (){
+
+
+
+  bool estaYa=false;
+ 
+ if(encabezadoActual.h2[2]=="italic"){
+   estaYa=true;
+ }
+
+
+
+
+
+
+     if(estaYa==false){
+ encabezadoActual.h2[2]="italic";
+      //print(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"]);
+      //encabezadoActual.aniadirAlMapa();
+       
+}else{
+
+encabezadoActual.h2[2]="";
+
+
+}
+ encabezadoActual.cargarABBDD(paginaActual);
+ Navigator.of(context).pop();
+     setState(() {
+       
+     });
+    
+
+
+
+        }),
+
+
+
+
+
+
+
+
+
+
+],
+
+
+          ),
+
+SizedBox(height: 30),
+Text("Alineación"),
+SizedBox(height: 15),
+Row(
+
+
+
+children: [
+SizedBox(width: 10),
+
+FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn21",
+        child: Text('Izquierda'),
+        onPressed: (){
+
+
+
+
+  bool estaYa=false;
+ 
+ if(encabezadoActual.h2[3]=="left"){
+   estaYa=true;
+ }
+
+
+
+
+
+
+     if(estaYa==false){
+ encabezadoActual.h2[3]="left";
+     
+       
+}
+ encabezadoActual.cargarABBDD(paginaActual);
+ Navigator.of(context).pop();
+     setState(() {
+       
+     });
+    
+
+
+        }),
+  SizedBox(width: 20), 
+FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn21",
+        child: Text('Centro'),
+        onPressed: (){
+
+
+
+
+  bool estaYa=false;
+ 
+ if(encabezadoActual.h2[3]=="center"){
+   estaYa=true;
+ }
+
+
+
+
+
+
+     if(estaYa==false){
+ encabezadoActual.h2[3]="center";
+      //print(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"]);
+      //encabezadoActual.aniadirAlMapa();
+       
+}
+ encabezadoActual.cargarABBDD(paginaActual);
+ Navigator.of(context).pop();
+     setState(() {
+       
+     });
+    
+
+
+        }),
+   SizedBox(width: 20), 
+FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn21",
+        child: Text('Derecha'),
+        onPressed: (){
+
+
+
+  bool estaYa=false;
+ 
+ if(encabezadoActual.h2[3]=="right"){
+   estaYa=true;
+ }
+
+
+
+
+
+
+     if(estaYa==false){
+ encabezadoActual.h2[3]="right";
+      //print(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"]);
+      //encabezadoActual.aniadirAlMapa();
+     }
+
+ encabezadoActual.cargarABBDD(paginaActual);
+ Navigator.of(context).pop();
+     setState(() {
+       
+     });
+    
+
+
+
+        })
+
+
+
+
+
+],
+
+
+
+
+),
+Text("Color"),
+colorPicker(encabezadoActual,"h2","",""),
+
+
+Text("Tamaño"),
+dropDown(["14","20","30","40","50","70"].toList(),encabezadoActual,5,"h2","",""),
+Text("Tipo de letra"),
+dropDown(["Arial","Verdana","Helvetica","Tahoma","'Trebuchet MS'","'Times New Roman'","Georgia","'Courier New'","'Brush Script MT'"].toList(),encabezadoActual,6,"h2","","")
+
+,
+eliminarParteH(encabezadoActual, "h2")
+
+
+
+
+
+
+
+],
+
+
+
+
+
+
+
+
+            
+          ),
+          actions: <Widget>[
+           
+            TextButton(
+              child: Text('Ok'),
+              onPressed: (){
+                Navigator.of(context).pop();
+        },
+            ),
+          ],
+        );
+
+      }
+
+    );
+
+
+        }),
+        hintText: h2Hint,
+        //labelText: 'Password',
+        
+        
+      ),
+      onChanged: (valor) =>setState(() {
+
+      encabezadoActual.h2[0] = valor;
+      encabezadoActual.cargarABBDD(paginaActual);
+      })
+    );
+
+
+
+}
+
+Widget crearH3(Encabezado encabezadoActual,String h3Hint){
+return TextField(
+  
+      
+      decoration: InputDecoration(
+        
+        hintText: h3Hint,
+suffixIcon: FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn16",
+        child: Text('B'),
+        onPressed: (){
+
+showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+
+         return AlertDialog(
+          shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
+          title: Text('Edición del texto'),
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
+          content: Column(
+            mainAxisSize:MainAxisSize.min,
+children: [
+
+
+
+Row(
+
+children: [
+SizedBox(width: 50),
+FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn20",
+        child: Text('Negrita'),
+        onPressed: (){
+
+
+
+  bool estaYa=false;
+ 
+ if(encabezadoActual.h3[1]=="bold"){
+   estaYa=true;
+ }
+
+
+
+
+
+
+     if(estaYa==false){
+ encabezadoActual.h3[1]="bold";
+      //print(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"]);
+      //encabezadoActual.aniadirAlMapa();
+       
+}else{
+
+encabezadoActual.h3[1]="";
+
+
+}
+ encabezadoActual.cargarABBDD(paginaActual);
+ Navigator.of(context).pop();
+     setState(() {
+       
+     });
+    
+
+
+        }),
+SizedBox(width: 50),
+FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn21",
+        child: Text('Cursiva'),
+        onPressed: (){
+
+
+
+  bool estaYa=false;
+ 
+ if(encabezadoActual.h3[2]=="italic"){
+   estaYa=true;
+ }
+
+
+
+
+
+
+     if(estaYa==false){
+ encabezadoActual.h3[2]="italic";
+      //print(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"]);
+      //encabezadoActual.aniadirAlMapa();
+       
+}else{
+
+encabezadoActual.h3[2]="";
+
+
+}
+ encabezadoActual.cargarABBDD(paginaActual);
+ Navigator.of(context).pop();
+     setState(() {
+       
+     });
+    
+
+
+
+        }),
+
+
+
+
+
+
+
+
+
+
+],
+
+
+          ),
+
+SizedBox(height: 30),
+Text("Alineación"),
+SizedBox(height: 15),
+Row(
+
+
+
+children: [
+SizedBox(width: 10),
+
+FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn21",
+        child: Text('Izquierda'),
+        onPressed: (){
+
+
+
+
+  bool estaYa=false;
+ 
+ if(encabezadoActual.h3[3]=="left"){
+   estaYa=true;
+ }
+
+
+
+
+
+
+     if(estaYa==false){
+ encabezadoActual.h3[3]="left";
+     
+       
+}
+ encabezadoActual.cargarABBDD(paginaActual);
+ Navigator.of(context).pop();
+     setState(() {
+       
+     });
+    
+
+
+        }),
+  SizedBox(width: 20), 
+FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn21",
+        child: Text('Centro'),
+        onPressed: (){
+
+
+
+
+  bool estaYa=false;
+ 
+ if(encabezadoActual.h3[3]=="center"){
+   estaYa=true;
+ }
+
+
+
+
+
+
+     if(estaYa==false){
+ encabezadoActual.h3[3]="center";
+      //print(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"]);
+      //encabezadoActual.aniadirAlMapa();
+       
+}
+ encabezadoActual.cargarABBDD(paginaActual);
+ Navigator.of(context).pop();
+     setState(() {
+       
+     });
+    
+
+
+        }),
+   SizedBox(width: 20), 
+FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn21",
+        child: Text('Derecha'),
+        onPressed: (){
+
+
+
+  bool estaYa=false;
+ 
+ if(encabezadoActual.h3[3]=="right"){
+   estaYa=true;
+ }
+
+
+
+
+
+
+     if(estaYa==false){
+ encabezadoActual.h3[3]="right";
+      //print(encabezadoActual.mapaDivs[encabezadoActual.contenedores[index].getNombre()]["${index2}text"]);
+      //encabezadoActual.aniadirAlMapa();
+     }
+
+ encabezadoActual.cargarABBDD(paginaActual);
+ Navigator.of(context).pop();
+     setState(() {
+       
+     });
+    
+
+
+
+        })
+
+
+
+
+
+],
+
+
+
+
+),
+Text("Color"),
+colorPicker(encabezadoActual,"h3","",""),
+
+
+
+Text("Tamaño"),
+dropDown(["14","20","30","40","50","70"].toList(),encabezadoActual,5,"h3","",""),
+
+Text("Tipo de letra"),
+dropDown(["Arial","Verdana","Helvetica","Tahoma","'Trebuchet MS'","'Times New Roman'","Georgia","'Courier New'","'Brush Script MT'"].toList(),encabezadoActual,6,"h3","",""),
+
+eliminarParteH(encabezadoActual, "h3")
+
+
+
+
+
+
+
+
+
+
+],
+
+
+
+
+
+
+
+
+            
+          ),
+          actions: <Widget>[
+           
+            TextButton(
+              child: Text('Ok'),
+              onPressed: (){
+                Navigator.of(context).pop();
+        },
+            ),
+          ],
+        );
+
+      }
+
+    );
+
+
+        })
+
+
+
+
+        //labelText: 'Password',
+        
+        
+      ),
+      onChanged: (valor) =>setState(() {
+       encabezadoActual.h3[0] = valor;
+       encabezadoActual.cargarABBDD(paginaActual);
+      })
+    );
+
+}
 
 Widget colorPicker(Encabezado encabezadoActual,String posicionHTML,String pt2,String pt3){
 return ElevatedButton(
@@ -3591,7 +5152,7 @@ return ElevatedButton(
                           
 switch(posicionHTML) { 
                                                           case "h1": { 
-                                                            if(encabezadoActual.h1[4]!=""){
+                                                            if(encabezadoActual.h1[4]!=""  ){
                                                               
                                                           mycolor=mycolor.fromHex(encabezadoActual.h1[4]);
                                                             }
@@ -3628,7 +5189,7 @@ switch(posicionHTML) {
                                                           }
                                                           break;
                                                            case "pageBackground": {  
-                                                            if(encabezadoActual.pageBackground!=""){
+                                                            if((encabezadoActual.pageBackground!="") && (!encabezadoActual.pageBackground.contains("\$"))){
                                                              mycolor= mycolor.fromHex(encabezadoActual.pageBackground);
                                                             }
                                                              

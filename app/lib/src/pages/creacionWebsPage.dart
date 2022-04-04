@@ -239,7 +239,14 @@ String textoArchivoHTML="";
 //abro html
 
 if(pageBackground.toString()!=""){
+  if(pageBackground.contains("\$")){
+    final ref = FirebaseStorage.instance.ref().child('uploads').child("${pageBackground.replaceFirst("\$", "")}");
+var url = await ref.getDownloadURL();
+    textoArchivoHTML=textoArchivoHTML+'<html style="background-image: url(${url});background-repeat: no-repeat;background-attachment: fixed;background-size: 100% 100%;">\n';
+  }else{
 textoArchivoHTML=textoArchivoHTML+'<html style="background-color:${pageBackground}">\n';
+  }
+
   }else{
 textoArchivoHTML=textoArchivoHTML+'<html>\n';
   }
@@ -248,7 +255,7 @@ textoArchivoHTML=textoArchivoHTML+'<html>\n';
 textoArchivoHTML=textoArchivoHTML+"<Title> ${nombreWeb} </Title>"+"\n";
 
 //abro body
-textoArchivoHTML=textoArchivoHTML+"<body>\n";
+textoArchivoHTML=textoArchivoHTML+"<body >\n";
 
 //abro el div del marco
 textoArchivoHTML=textoArchivoHTML+'<div class="marco">\n';
@@ -732,7 +739,7 @@ textoArchivoHTML=textoArchivoHTML+"</body>\n";
 //cierro html
 textoArchivoHTML=textoArchivoHTML+"</html>\n";
 
-print(textoArchivoHTML);
+
 return textoArchivoHTML;
 
 
@@ -823,9 +830,15 @@ child: FloatingActionButton(
 _crearHTML().then((value1) {
 
 
+String urlFinal="";
 
+List url=value1.split(">");
+if(!url[0].toString().contains("background-color")){
 
-
+List url2=url[0].toString().split(")");
+List url3=url2[0].toString().split("(");
+ urlFinal=url3[1];
+}
 
 
 
@@ -833,7 +846,7 @@ _crearHTML().then((value1) {
 final route = MaterialPageRoute(
 
     builder: (context){
-return VisualizadorPage(value1,paginaActual);
+return VisualizadorPage(value1,urlFinal,paginaActual);
 
     }
   );

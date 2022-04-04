@@ -3,30 +3,32 @@ import 'package:ejemplobbdd/src/pages/ayudaPage.dart';
 import 'package:ejemplobbdd/src/pages/creacionWebsPage.dart';
 import 'package:ejemplobbdd/src/pages/homepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 
 class VisualizadorPage extends StatefulWidget {
   String nombreWeb="";
   String htmlCode="";
-  
-  VisualizadorPage(String html,web){
+  String imgFondoX="";
+  VisualizadorPage(String html,String myImg,web){
 htmlCode=html;
-
+imgFondoX=myImg;
 nombreWeb=web;
   }
   
  @override
-  _VisualizadorPage createState() => _VisualizadorPage(htmlCode,nombreWeb);
+  _VisualizadorPage createState() => _VisualizadorPage(htmlCode,"${imgFondoX}",nombreWeb);
   
 }
 
 class _VisualizadorPage extends State<VisualizadorPage>{
   String htmlCode="";
   String nombreWeb="";
-  
-  _VisualizadorPage(String html,web){
-
+  String imgFondoX="";
+  Color scaffoldColor=Colors.white;
+  _VisualizadorPage(String html,String imgFondo,web){
+imgFondoX=imgFondo;
 htmlCode=html;
 
 nombreWeb=web;
@@ -36,9 +38,24 @@ nombreWeb=web;
  @override
   Widget build(BuildContext context) {
 
-    return Scaffold(
+if(imgFondoX!=""){
+
+scaffoldColor=Colors.transparent;
+
+}else{
+   imgFondoX="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Google_Images_2015_logo.svg/640px-Google_Images_2015_logo.svg.png";
+}
+
+
+
+return Container(
+decoration: BoxDecoration(
+      image: DecorationImage(image: NetworkImage("${imgFondoX}"),
+      fit: BoxFit.cover)
+    ),
+  child: Scaffold(
       
-      
+      backgroundColor: scaffoldColor,
      
       body: SingleChildScrollView(
         child: Column(
@@ -48,6 +65,7 @@ nombreWeb=web;
 _crearButtonVolver(),
            Center(
         child: SingleChildScrollView(
+          
           child: Html(
             
           data:htmlCode
@@ -81,7 +99,9 @@ _crearButtonVolver(),
       
       
       
-     );
+     ),
+);
+    
   }
 
 

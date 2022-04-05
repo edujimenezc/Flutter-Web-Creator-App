@@ -35,7 +35,7 @@ _crearButtonDesdeCero(),
 
 
 SizedBox(height: 50),
-_crearButtonConIA(),
+_crearButtonTemas(),
 SizedBox(height: 50),
 
 
@@ -232,6 +232,76 @@ showDialog(
 
 }
 
+GestureDetector cargaTemaPredefinido(String nombreWebCarga,String url,String nombreWeb,List h1,List h2,List h3,Map divs,Map divStyles,String pageBackground){
+
+return GestureDetector(
+                onTap: () {
+                  
+                 crearTemaEnBBDD(nombreWeb,h1,h2, h3,divs,divStyles,pageBackground);
+                 final route = MaterialPageRoute(
+
+    builder: (context){
+return CreacionWebsPage(nombreWebCarga);
+
+    }
+  );
+
+Navigator.push(context, route);
+
+                },
+                child: Image.network(
+                url,
+                width: 200,
+                fit: BoxFit.cover,
+                ),
+            );
+
+} 
+
+Future<void> crearTemaEnBBDD(String nombreWeb,List h1,List h2,List h3,Map divs,Map divStyles,String pageBackground)async {
+  
+  
+ String autor=currentUser.toString();
+
+DocumentReference webActual = FirebaseFirestore.instance.collection('webs').doc(nombreWeb);//.collection("encabezado").doc("unique");
+
+ webActual.set({
+
+"autor" : autor,
+
+
+
+ });
+   
+
+
+
+
+   DocumentReference webActual2 = FirebaseFirestore.instance.collection('webs').doc(nombreWeb).collection("encabezado").doc("unique");
+
+ return webActual2.set({
+
+"autor" : autor,
+"nombre_web" : nombreWeb,
+"h1" : h1,//["Titulo","","","","","",""],
+"h2" : h2,//["Subtitulo","","","","","",""],
+"h3" :h3,//["Subsubtitulo","","","","","",""],
+"divs" : divs,
+"divsStyles":divStyles,
+"pageBackground":pageBackground,
+
+
+ }
+
+ )
+          
+          
+          .catchError((error) => print("Failed to add user: $error"));
+
+
+}
+
+
 
 Future<void> cargarABBDD(String nombreWeb)async {
   
@@ -262,7 +332,8 @@ DocumentReference webActual = FirebaseFirestore.instance.collection('webs').doc(
 "h3" :["Subsubtitulo","","","","","",""],
 "divs" : {},
 "divsStyles":{},
-"pageBackground":""
+"pageBackground":"",
+//"pageBackgroundURL":""
 
  }
 
@@ -274,7 +345,7 @@ DocumentReference webActual = FirebaseFirestore.instance.collection('webs').doc(
 
 }
 
-Widget _crearButtonConIA(){
+Widget _crearButtonTemas(){
 
 
 return Column(children: <Widget>[
@@ -288,13 +359,184 @@ child: FloatingActionButton(
           borderRadius: BorderRadius.zero
      ),
     heroTag: "btn2",
-        child: Text('Generar con Inteligencia Artificial'),
-        onPressed: (){
+        child: Text('Usar un tema predefinido'),
+        onPressed: ()async {
 
 
-//TODO
+String nombreWeb="default";
+showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
 
-        }),
+         return AlertDialog(
+          shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
+          title: Text('Introduce un nombre para tu web'),
+          
+          content: TextField(
+            onChanged: (valor)=>setState(() {
+              nombreWeb=valor;
+            }),
+          ),
+          actions: <Widget>[
+           
+            TextButton(
+              child: Text('Ok'),
+              onPressed: () async {
+
+
+
+
+bool docExists = await checkIfDocExists(currentUser!+"."+nombreWeb);
+
+if(!docExists){
+
+
+//cargarABBDD(currentUser!+"."+nombreWeb);
+//Navigator.of(context).pop();
+
+showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+
+         return AlertDialog(
+          shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
+          title: Text('Selecciona un tema'),
+          
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+
+              Row(
+children: [
+
+cargaTemaPredefinido(nombreWeb,"https://c8.alamy.com/compes/dnhb9a/troll-aka-muneca-muneca-presa-creada-el-1959-por-thomas-dam-dnhb9a.jpg",currentUser!+"."+nombreWeb,["Titulo","","","","","",""],["Subtitulo","","","","","",""],["Subsubtitulo","","","","","",""],{},{},"\$elu@gmail.comDefault"),
+
+
+],
+
+              )
+
+
+            ],
+
+          ),
+          
+
+
+
+
+          actions: <Widget>[
+           
+            TextButton(
+              child: Text('Cancelar'),
+              onPressed: (){
+                Navigator.of(context).pop();
+        },
+            ),
+          ],
+        );
+
+      }
+
+    );
+
+
+
+
+
+
+
+
+
+
+
+}else{
+
+
+
+showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+
+         return AlertDialog(
+          shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
+          title: Text('Error'),
+          
+          content: Text("Ya tienes una web con ese nombre"),
+          actions: <Widget>[
+           
+            TextButton(
+              child: Text('Ok'),
+              onPressed: (){
+                Navigator.of(context).pop();
+        },
+            ),
+          ],
+        );
+
+      }
+
+    );
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+        },
+            ),
+          ],
+        );
+
+      }
+
+    );
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+}),
 
 ),
 

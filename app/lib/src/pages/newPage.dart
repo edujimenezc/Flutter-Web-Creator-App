@@ -289,7 +289,7 @@ DocumentReference webActual = FirebaseFirestore.instance.collection('webs').doc(
 "divs" : divs,
 "divsStyles":divStyles,
 "pageBackground":pageBackground,
-
+"footer":{"texto":["Pie de página","","","","","","",""],"img":[""]},
 
  }
 
@@ -327,12 +327,13 @@ DocumentReference webActual = FirebaseFirestore.instance.collection('webs').doc(
 
 "autor" : autor,
 "nombre_web" : nombreWeb,
-"h1" : ["Titulo","","","","","",""],
-"h2" : ["Subtitulo","","","","","",""],
-"h3" :["Subsubtitulo","","","","","",""],
+"h1" : ["Titulo","","","","","","",""],
+"h2" : ["Subtitulo","","","","","","",""],
+"h3" :["Subsubtitulo","","","","","","",""],
 "divs" : {},
 "divsStyles":{},
 "pageBackground":"",
+"footer":{"texto":["Pie de página","","","","","","",""],"img":[""]},
 //"pageBackgroundURL":""
 
  }
@@ -411,7 +412,7 @@ showDialog(
               Row(
 children: [
 
-cargaTemaPredefinido(nombreWeb,"https://c8.alamy.com/compes/dnhb9a/troll-aka-muneca-muneca-presa-creada-el-1959-por-thomas-dam-dnhb9a.jpg",currentUser!+"."+nombreWeb,["Titulo","","","","","",""],["Subtitulo","","","","","",""],["Subsubtitulo","","","","","",""],{},{},"\$elu@gmail.comDefault"),
+cargaTemaPredefinido(nombreWeb,"https://c8.alamy.com/compes/dnhb9a/troll-aka-muneca-muneca-presa-creada-el-1959-por-thomas-dam-dnhb9a.jpg",currentUser!+"."+nombreWeb,["Titulo","","","","","","",""],["Subtitulo","","","","","","",""],["Subsubtitulo","","","","","","",""],{},{},"\$elu@gmail.comDefault"),
 
 
 ],

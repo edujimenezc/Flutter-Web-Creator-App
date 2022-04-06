@@ -16,7 +16,7 @@ List h3=[];
 Map divStyles={};
 String pageBackground="";
 String pageBackgroundURL="";
-
+Map footer={};
 List<Contenedor> contenedores=[];
 Map<dynamic,dynamic> mapaDivs=Map<dynamic,dynamic>();
 
@@ -140,7 +140,7 @@ DocumentReference webActual = FirebaseFirestore.instance.collection('webs').doc(
 "divs" : mapaDivs,
 "divsStyles" :divStyles,
 "pageBackground":pageBackground,
-
+"footer":footer,
  }
    
 

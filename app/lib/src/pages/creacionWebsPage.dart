@@ -6,6 +6,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ejemplobbdd/src/classes/Encabezado.dart';
 import 'package:ejemplobbdd/src/pages/EditorEncabezadoPage.dart';
+import 'package:ejemplobbdd/src/pages/EditorCuerpoPage.dart';
+import 'package:ejemplobbdd/src/pages/EditorPiePage.dart';
 import 'package:ejemplobbdd/src/pages/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
@@ -250,24 +252,18 @@ textoArchivoHTML=textoArchivoHTML+'<html style="background-color:${pageBackgroun
   }else{
 textoArchivoHTML=textoArchivoHTML+'<html>\n';
   }
+//abro head
+textoArchivoHTML=textoArchivoHTML+'<head>\n';
+
 
 //title
-textoArchivoHTML=textoArchivoHTML+"<Title> ${nombreWeb} </Title>"+"\n";
-
-//abro body
-textoArchivoHTML=textoArchivoHTML+"<body >\n";
-
-//abro el div del marco
-textoArchivoHTML=textoArchivoHTML+'<div class="marco">\n';
-
-//abro el div encabezado
-textoArchivoHTML=textoArchivoHTML+'<div class="encabezado">\n';
-
+textoArchivoHTML=textoArchivoHTML+"<Title> ${nombreWeb.split(".")[2]} </Title>"+"\n";
 
 //h1 del encabezado
 if(h1Encabezado!=""){
   String estilos="";
-  for (var i = 1; i < 7; i++) {
+  String url="";
+  for (var i = 1; i < 8; i++) {
 switch (i) {
   case 1:
   if(data!["h1"][i].toString()!=""){
@@ -316,22 +312,34 @@ switch (i) {
 
 
 
+ case 7:
+   if(data!["h1"][i].toString()!=""){
+    url='<a href="${data["h1"][i].toString()}">${h1Encabezado}</a>';
+  }
+
+  break;
+
   
 }
 
 
+}
 
-   // estilos=estilos+"${data!["h1"][i].toString()};";
-  }
+if(url!=""){
 
+textoArchivoHTML=textoArchivoHTML+'<h1 style="${estilos}">\n'+url+"\n</h1>\n";
+}else{
 textoArchivoHTML=textoArchivoHTML+'<h1 style="${estilos}">\n'+h1Encabezado+"\n</h1>\n";
+
+}
 
 }
 
 //h2 del encabezado
 if(h2Encabezado!=""){
+  String url="";
   String estilos="";
-  for (var i = 1; i < 7; i++) {
+  for (var i = 1; i < 8; i++) {
 switch (i) {
   case 1:
   if(data!["h2"][i].toString()!=""){
@@ -377,24 +385,33 @@ case 6:
 
   break;
 
+case 7:
+   if(data!["h2"][i].toString()!=""){
+    url='<a href="${data["h2"][i].toString()}">${h2Encabezado}</a>';
+  }
 
-
+  break;
 
   
 }
 
 
+}
 
-   // estilos=estilos+"${data!["h1"][i].toString()};";
-  }
+if(url!=""){
+  
+textoArchivoHTML=textoArchivoHTML+'<h2 style="${estilos}">\n'+url+"\n</h2>\n";
+}else{
 textoArchivoHTML=textoArchivoHTML+'<h2 style="${estilos}">\n'+h2Encabezado+"\n</h2>\n";
+
+}
 }
 
 //h3 del encabezado
 if(h3Encabezado!=""){
-
+String url="";
 String estilos="";
-  for (var i = 1; i < 7; i++) {
+  for (var i = 1; i < 8; i++) {
 switch (i) {
   case 1:
   if(data!["h3"][i].toString()!=""){
@@ -440,7 +457,12 @@ case 6:
   break;
 
 
+case 7:
+   if(data!["h3"][i].toString()!=""){
+    url='<a href="${data["h3"][i].toString()}">${h3Encabezado}</a>';
+  }
 
+  break;
 
   
 }
@@ -448,9 +470,35 @@ case 6:
 
 }
 
+if(url!=""){
+ 
+textoArchivoHTML=textoArchivoHTML+'<h3 style="${estilos}">\n'+url+"\n</h3>\n";
+}else{
 textoArchivoHTML=textoArchivoHTML+'<h3 style="${estilos}">\n'+h3Encabezado+"\n</h3>\n";
 
 }
+
+
+
+}
+
+
+
+
+//cierro head
+textoArchivoHTML=textoArchivoHTML+'</head>\n';
+
+
+
+//abro body
+textoArchivoHTML=textoArchivoHTML+"<body>\n";
+
+//abro el div del marco
+textoArchivoHTML=textoArchivoHTML+'<div class="marco">\n';
+
+//abro el div encabezado
+textoArchivoHTML=textoArchivoHTML+'<div class="encabezado">\n';
+
 
 
 
@@ -475,9 +523,9 @@ if(estilosDivs.containsKey(div)){
 for (var i = 0; i < divsEncabezado[div].keys.length; i++) {
 
 if(divsEncabezado[div].containsKey("${i}text")){
-
+String url="";
 String estilos="";
-  for (var j = 1; j < 7; j++) {
+  for (var j = 1; j < 8; j++) {
 switch (j) {
   case 1:
   if(divsEncabezado[div]["${i}text"][j].toString()!=""){
@@ -523,23 +571,27 @@ case 6:
 
 
 
+case 7:
+   if(divsEncabezado[div]["${i}text"][j].toString()!=""){
+    url='<a href="${divsEncabezado[div]["${i}text"][j].toString()}">${divsEncabezado[div]["${i}text"][0]}</a>';
+  }
+
+  break;
 
   
 }
 
-  
-
-
-
-
-
-
-
 
 }
 
+if(url!=""){
+ textoArchivoHTML=textoArchivoHTML+'<p style="${estilos}">${url}</p>'+"\n";
 
+}else{
 textoArchivoHTML=textoArchivoHTML+'<p style="${estilos}">${divsEncabezado[div]["${i}text"][0]}</p>'+"\n";
+
+}
+
 }else if(divsEncabezado[div].containsKey("${i}img")){
    
 final ref = FirebaseStorage.instance.ref().child('uploads').child("${divsEncabezado[div]["${i}img"][0]}");
@@ -837,7 +889,10 @@ if(!url[0].toString().contains("background-color")){
 
 List url2=url[0].toString().split(")");
 List url3=url2[0].toString().split("(");
+if(url3.length>1){
  urlFinal=url3[1];
+}
+
 }
 
 
@@ -1023,7 +1078,7 @@ return InkWell(
 ListTile(
   leading: Icon(Icons.photo_album),
   title: Text('Cabecera'),
-  subtitle: Text('Texto'),
+
 ),
 /*Row(
   mainAxisAlignment: MainAxisAlignment.end,
@@ -1073,23 +1128,24 @@ Navigator.push(context, route);
 Widget  _cardCuerpo() {
 
 
-
-return Card(
+return InkWell(
+    child: Card(
+  
   elevation:1.0 ,//sombra
   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),//borde redondeado
   child: Column(
+    
     children: <Widget>[
 ListTile(
   leading: Icon(Icons.photo_album),
   title: Text('Cuerpo'),
-  subtitle: Text('Texto'),
+
 ),
 /*Row(
   mainAxisAlignment: MainAxisAlignment.end,
   children: <Widget>[
 
-TextButton(onPressed: (){}, child: Text('mamaguebo')),
-TextButton(onPressed: (){}, child: Text('mamapinga')),
+
 
   ],
 )*/
@@ -1097,7 +1153,35 @@ TextButton(onPressed: (){}, child: Text('mamapinga')),
 
     ],
   ),
+),
+    onTap: () { 
+        
+
+
+
+ final route = MaterialPageRoute(
+
+    builder: (context){
+return EditorCuerpoPage(paginaActual);
+
+    }
+  );
+
+Navigator.push(context, route);
+
+
+
+
+
+
+
+    },
 );
+
+
+
+
+
 
 
 
@@ -1106,36 +1190,50 @@ TextButton(onPressed: (){}, child: Text('mamapinga')),
 
 Widget  _cardPie() {
 
-
-
-return Card(
+return InkWell(
+    child: Card(
+  
   elevation:1.0 ,//sombra
   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),//borde redondeado
   child: Column(
+    
     children: <Widget>[
 ListTile(
   leading: Icon(Icons.photo_album),
-  title: Text('Pie'),
-  subtitle: Text('Texto'),
+  title: Text('Pie de Página'),
+//sbutitle
 ),
-/*Row(
-  mainAxisAlignment: MainAxisAlignment.end,
-  children: <Widget>[
-
-TextButton(onPressed: (){}, child: Text('mamaguebo')),
-TextButton(onPressed: (){}, child: Text('mamapinga')),
-
-  ],
-)*/
 
 
     ],
   ),
+),
+    onTap: () { 
+        
+
+
+
+ final route = MaterialPageRoute(
+
+    builder: (context){
+return EditorPiePage(paginaActual);
+
+    }
+  );
+
+Navigator.push(context, route);
+
+
+
+
+
+
+
+    },
 );
 
 
 
-
 }
 
 
@@ -1144,3 +1242,4 @@ TextButton(onPressed: (){}, child: Text('mamapinga')),
 
 
 }
+

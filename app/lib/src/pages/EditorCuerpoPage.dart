@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'dart:collection';
 import 'dart:convert';
 import 'package:ejemplobbdd/src/classes/ColorExt.dart';
@@ -18,20 +20,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 
-class EditorEncabezadoPage extends StatefulWidget {
+class EditorCuerpoPage extends StatefulWidget {
   String paginaActual="";
-  EditorEncabezadoPage(String nombreWeb){
+  EditorCuerpoPage(String nombreWeb){
 paginaActual=nombreWeb;
 
   }
  @override
-  _EditorEncabezadoPage createState() => _EditorEncabezadoPage(paginaActual);
+  _EditorCuerpoPage createState() => _EditorCuerpoPage(paginaActual);
   
 }
 
-class _EditorEncabezadoPage extends State<EditorEncabezadoPage>{
+class _EditorCuerpoPage extends State<EditorCuerpoPage>{
    String paginaActual="";
-  _EditorEncabezadoPage(String nombreWeb){
+  _EditorCuerpoPage(String nombreWeb){
 paginaActual=nombreWeb;
 
   }
@@ -76,22 +78,6 @@ encabezadoActual.contenedores.reversed;
 fondoImagen=encabezadoActual.pageBackgroundURL;
 
 
-
-if(encabezadoActual.h1[0].toString()!=""){
-h1=encabezadoActual.h1[0].toString();
-h1Hint=h1;
-}
-
-
-if(encabezadoActual.h2[0].toString()!=""){
-h2=encabezadoActual.h2[0].toString();
-h2Hint=h2;
-}
-
-if(encabezadoActual.h3[0].toString()!=""){
-h3=encabezadoActual.h3[0].toString();
-h3Hint=h3;
-}
 String fondoActual=encabezadoActual.pageBackground;
 NetworkImage imgFondoX;
   Color scaffoldColor=Colors.white;
@@ -180,9 +166,7 @@ botonEstilosFondo(encabezadoActual),
 
 
 ]),
-crearH1(encabezadoActual, h1Hint),
-crearH2(encabezadoActual, h2Hint),
-crearH3(encabezadoActual, h3Hint),
+
     Expanded(child: _crearListaDivs(encabezadoActual.contenedores,encabezadoActual,colorTargeta)),
 
 Row(children: [
@@ -424,9 +408,7 @@ botonEstilosFondo(encabezadoActual),
 
 
 ]),
-crearH1(encabezadoActual, h1Hint),
-crearH2(encabezadoActual, h2Hint),
-crearH3(encabezadoActual, h3Hint),
+
     Expanded(child: _crearListaDivs(encabezadoActual.contenedores,encabezadoActual,colorTargeta)),
 
 Row(children: [
@@ -654,8 +636,16 @@ return url;
 Widget _crearListaDivs(List<dynamic> lista,Encabezado x,colorTargetaX){
   Color colorTargeta=colorTargetaX;
   lista.reversed;
-  
+
 Encabezado encabezadoActual=x;
+if(encabezadoActual.mapaDivs.isEmpty){
+
+return Container( alignment: Alignment.center,child: Text("No tienes ningún contenedor aún, ¡Crea uno!"));
+
+
+
+}else{
+
 return ListView.builder(
   padding: const EdgeInsets.all(8),
   itemCount: lista.length,
@@ -2892,6 +2882,9 @@ setState(() {
 );
 
 
+}
+
+
 
 
 
@@ -2955,7 +2948,7 @@ return FloatingActionButton(
                final route = MaterialPageRoute(
 
     builder: (context){
-return EditorEncabezadoPage(paginaActual);
+return EditorCuerpoPage(paginaActual);
 
     }
   );
@@ -3376,7 +3369,7 @@ botonFondoImagen(encabezadoActual),
                 final route = MaterialPageRoute(
 
     builder: (context){
-return EditorEncabezadoPage(paginaActual);
+return EditorCuerpoPage(paginaActual);
 
     }
   );

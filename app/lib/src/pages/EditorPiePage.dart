@@ -232,14 +232,6 @@ crearFooter(encabezadoActual)
  
 }
 
-/*
-Future<String> urlFondo(String fondoActual) async {
-  final ref = FirebaseStorage.instance.ref().child('uploads').child("${fondoActual}");
-  String url="";
-await ref.getDownloadURL().then((value) =>  url=value);
-return url;
-}
-*/
 
 Future<String> urlFondo(String fondoActual) async {
   final ref = FirebaseStorage.instance.ref().child('uploads').child("${fondoActual}");
@@ -271,13 +263,16 @@ crearBotonImagen(encabezadoActual,"Seleccionar imagen"),
 
 }else{
 
-return Column(children: [
+return Column(
+   
+  crossAxisAlignment: CrossAxisAlignment.stretch,
+  children: [
 
 FutureBuilder (
       
-      future: getImageFromDatabase(encabezadoActual.footer["img"][0]),
+      future: getImageFromDatabaseFondo(encabezadoActual.footer["img"][0]),
       
-      builder: ( context,AsyncSnapshot<Widget> snapshot  ){
+      builder: ( context,AsyncSnapshot<String> snapshot  ){
   
 if (!snapshot.hasData) {
      return Container(
@@ -287,7 +282,8 @@ if (!snapshot.hasData) {
      );
 }else{
 
-return snapshot.data!;
+return Image.network(snapshot.data!,height: 150,
+        width: 150,);
 
 
 
@@ -327,6 +323,364 @@ return FloatingActionButton(
     heroTag: "btn2",
         child: Text(mensaje),
         onPressed: (){
+
+ showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+
+         return AlertDialog(
+          shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
+         
+          content: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text("Selecciona una imagen"),
+                TextField(
+
+decoration: InputDecoration(
+        
+        hintText: "Nombre para la Imagen",
+       
+        
+        
+      ),
+
+      onChanged: (valor) =>setState(() {
+       nombreImagen = valor;
+        
+       
+      }),
+  ),
+                Card(
+                  child:( imageFile==null)?Text("Elige una imagen"): Image.file( io.File(  imageFile!.path)),
+                ),
+                MaterialButton(
+                  textColor: Colors.white,
+                  color: Colors.pink,
+                  onPressed: () async {
+
+                    bool nombreExiste=false;
+
+
+
+
+firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
+    .ref()
+    .child('images')
+    .child('defaultProfile.png');
+var listado=await FirebaseStorage.instance.ref().child('uploads').list().then((value){
+for (var item in value.items) {
+  if(item.fullPath.toString()=="uploads/"+currentUser.toString()+nombreImagen){
+
+nombreExiste=true;
+  }
+}
+
+if(nombreExiste){
+
+
+
+showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+
+         return AlertDialog(
+          shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
+          title: Text('¡Ya estas usando ese nombre!'),
+          
+          content: Expanded(child: Text("Ya estas usando ese nombre para una imagen, si usas el mismo nombre la imagen se sobreescribirá \n ¿Deseas sobreescribir la imagen?")),
+          actions: <Widget>[
+           
+            TextButton(
+              child: Text('No'),
+              onPressed: (){
+                Navigator.of(context).pop();
+        },
+            ),
+            TextButton(
+              child: Text('Si'),
+              onPressed: (){
+
+                Navigator.of(context).pop();
+
+
+
+
+
+showDialog(context: context,builder: (BuildContext context){
+
+      return AlertDialog(
+        title: Text("Elige una opción",style: TextStyle(color: Colors.blue),),
+        content: SingleChildScrollView(
+        child: ListBody(
+          children: [
+            Divider(height: 1,color: Colors.blue,),
+            ListTile(
+              onTap: (){
+
+
+
+
+
+
+
+
+
+
+                _openGallery(context).then((value){
+
+
+
+
+
+
+if(imageFile!=null){
+
+
+
+
+
+if(imageFile!=null){
+
+
+      
+uploadImageToFirebase(context).then((value){
+
+  encabezadoActual.pageBackground="\$"+currentUser!+nombreImagen;
+
+
+ setState(() {
+
+
+  encabezadoActual.cargarABBDD(paginaActual);
+
+ 
+imageFile=null;
+
+
+
+ });
+
+
+});
+
+
+
+
+}
+
+    
+                }});
+
+              },
+            title: Text("Gallery"),
+              leading: Icon(Icons.account_box,color: Colors.blue,),
+        ),
+
+            Divider(height: 1,color: Colors.blue,),
+            ListTile(
+              onTap: (){
+                _openCamera(context).then((value){
+
+
+
+
+
+
+if(imageFile!=null){
+
+
+      
+uploadImageToFirebase(context).then((value){
+ encabezadoActual.pageBackground="\$"+currentUser!+nombreImagen;
+
+
+
+ setState(() {
+
+  encabezadoActual.cargarABBDD(paginaActual);
+
+// Navigator.of(context).pop();
+
+
+imageFile=null;
+
+
+
+ });
+
+});
+
+}
+
+                });
+              },
+              title: Text("Camera"),
+              leading: Icon(Icons.camera,color: Colors.blue,),
+            ),
+          ],
+        ),
+      ),);
+    });
+
+        
+        },
+            )
+          ],
+        );
+
+      }
+
+    );
+
+
+
+
+
+}else{
+
+showDialog(context: context,builder: (BuildContext context){
+
+      return AlertDialog(
+        title: Text("Elige una opción",style: TextStyle(color: Colors.blue),),
+        content: SingleChildScrollView(
+        child: ListBody(
+          children: [
+            Divider(height: 1,color: Colors.blue,),
+            ListTile(
+              onTap: (){
+
+                _openGallery(context).then((value){
+
+
+
+
+
+
+if(imageFile!=null){
+
+
+      
+uploadImageToFirebase(context).then((value){
+
+
+  encabezadoActual.footer["img"][0]="\$"+currentUser!+nombreImagen;
+
+
+ setState(() {
+
+
+
+  encabezadoActual.cargarABBDD(paginaActual);
+
+ Navigator.of(context).pop();
+
+
+imageFile=null;
+
+
+
+ });
+
+
+});
+
+
+}
+
+           
+                });
+
+              },
+            title: Text("Galeria"),
+              leading: Icon(Icons.account_box,color: Colors.blue,),
+        ),
+
+            Divider(height: 1,color: Colors.blue,),
+            ListTile(
+              onTap: (){
+                _openCamera(context).then((value){
+
+
+if(imageFile!=null){
+    
+uploadImageToFirebase(context).then((value){
+ encabezadoActual.footer["img"][0]="\$"+currentUser!+nombreImagen;
+ setState(() {
+
+  encabezadoActual.cargarABBDD(paginaActual);
+
+ Navigator.of(context).pop();
+
+
+imageFile=null;
+
+ });
+
+});
+
+}
+
+                });
+              },
+              title: Text("Camara"),
+              leading: Icon(Icons.camera,color: Colors.blue,),
+            ),
+          ],
+        ),
+      ),);
+    });
+
+}
+
+});
+
+      
+                  },
+                  child: Text("Seleccionar imagen"),
+
+                ),
+                
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Cancelar'),
+              onPressed: ()=> Navigator.of(context).pop(),
+            ),
+            TextButton(
+              child: Text('Ok'),
+              onPressed: (){
+                Navigator.of(context).pop();
+                 Navigator.of(context).pop();
+
+
+
+
+
+
+
+              },
+            ),
+          ],
+        );
+
+      }
+
+    );
+              
+
+
+
+
+
+
+
+
 
 
 

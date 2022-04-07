@@ -217,7 +217,7 @@ String h3Encabezado="";
 Map divsEncabezado={};
 Map estilosDivs={};
 String pageBackground="";
-
+Map footer={};
 
 
 
@@ -231,6 +231,7 @@ nombreWeb=data["nombre_web"].toString();
 divsEncabezado=data["divs"];
 estilosDivs=data['divsStyles'];
 pageBackground=data['pageBackground'];
+footer=data['footer'];
 
 }
 
@@ -784,6 +785,113 @@ textoArchivoHTML=textoArchivoHTML+'</div>\n';
 
 //cierro marco
 textoArchivoHTML=textoArchivoHTML+'</div>\n';
+
+
+
+//creo footer
+
+String url="";
+String estilos="";
+  for (var j = 1; j < 8; j++) {
+switch (j) {
+  case 1:
+  if(footer["texto"][j].toString()!=""){
+ estilos=estilos+ "font-weight: ${footer["texto"][j].toString()}; ";
+  }
+   
+    
+    break;
+  case 2:
+  if(footer["texto"][j].toString()!=""){
+    estilos=estilos+ "font-style: ${footer["texto"][j].toString()}; ";
+  }
+
+    
+  break;
+  case 3:
+  if(footer["texto"][j].toString()!=""){
+    estilos=estilos+ "text-align: ${footer["texto"][j].toString()}; ";
+  }
+
+  break;
+  case 4:
+   if(footer["texto"][j]!=""){
+    estilos=estilos+ "color: ${footer["texto"][j]}; ";
+  }
+
+
+
+
+  break;
+  case 5:
+   if(footer["texto"][j].toString()!=""){
+    estilos=estilos+ "font-size: ${footer["texto"][j].toString()}px; ";
+  }
+
+  break;
+case 6:
+   if(footer["texto"][j].toString()!=""){
+    estilos=estilos+ "font-family: ${footer["texto"][j].toString()}; ";
+  }
+
+  break;
+
+
+
+case 7:
+   if(footer["texto"][j].toString()!=""){
+    url='<a href="${footer["texto"][j].toString()}">${footer["texto"][0]}</a>';
+  }
+
+  break;
+
+  
+}
+
+
+}
+
+String imgURL="";
+if(footer["img"][0]!=""){
+
+final ref = FirebaseStorage.instance.ref().child('uploads').child("${footer["img"][0].replaceFirst("\$", "")}");
+var urlBuena= await ref.getDownloadURL();
+imgURL= "<img style='display:inline-block; width:5 ; height:5;' src='${urlBuena}'  />";
+}
+
+print(imgURL);
+
+
+
+
+
+
+
+if(url!=""){
+  textoArchivoHTML=textoArchivoHTML+"<footer><div class='row'>	<div class='site-info'>${imgURL}<p style='${estilos}'>${url}</p></div></div></footer>";
+
+
+}else{
+    textoArchivoHTML=textoArchivoHTML+"<footer><div class='row'>	<div style=display:inline-block>${imgURL}<p style='${estilos};display:inline-block'>${footer['texto'][0]}</p></div></div></footer>";
+
+
+}
+
+
+
+
+
+	
+	
+			
+
+		
+	
+
+
+
+
+
 
 //cierro body
 textoArchivoHTML=textoArchivoHTML+"</body>\n";

@@ -290,8 +290,14 @@ return Image.network(snapshot.data!,height: 150,
 
 }
       }),
-      crearBotonImagen(encabezadoActual,"Cambiar imagen"),
+      Row(children: [
 
+ crearBotonImagen(encabezadoActual,"Cambiar imagen"),
+        _crearButtonEliminarImagen(encabezadoActual)
+      ],)
+     
+
+      
 
 
 
@@ -312,7 +318,27 @@ return Image.network(snapshot.data!,height: 150,
 
 
 }
+Widget _crearButtonEliminarImagen(Encabezado encabezadoActual){
 
+
+return FloatingActionButton(
+   shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+    heroTag: "btn3",
+        child: Text('Eliminar imagen'),
+        onPressed: (){
+encabezadoActual.footer["img"][0]="";
+setState(() {
+  encabezadoActual.cargarABBDD(paginaActual);
+});
+
+
+        });
+
+
+
+}
 
 Widget crearBotonImagen(Encabezado encabezadoActual, String mensaje){
 

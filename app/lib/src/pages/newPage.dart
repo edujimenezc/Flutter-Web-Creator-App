@@ -404,24 +404,19 @@ showDialog(
          return AlertDialog(
           shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
           title: Text('Selecciona un tema'),
-          
-          content: Column(
+          content:new SingleChildScrollView(
+            child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-
-              Row(
-children: [
-
-cargaTemaPredefinido(nombreWeb,"https://c8.alamy.com/compes/dnhb9a/troll-aka-muneca-muneca-presa-creada-el-1959-por-thomas-dam-dnhb9a.jpg",currentUser!+"."+nombreWeb,["Titulo","","","","","","",""],["Subtitulo","","","","","","",""],["Subsubtitulo","","","","","","",""],{},{},"\$elu@gmail.comDefault"),
-
-
-],
-
-              )
+cargaTemaPredefinido(nombreWeb,"https://firebasestorage.googleapis.com/v0/b/ejemploflutt.appspot.com/o/uploads%2Fedujc%40gmail.comPrevEspacio.png?alt=media&token=9f5c406a-ff26-4066-b4b9-6d12abccb9d5",currentUser!+"."+nombreWeb,["Tema del Espacio","","","center","#fff9f9f9","","",""],["The last frontier","","italic","center","#fff7f7f7","","",""],["","","","","","","",""],{"div1":{"0text":["Texto","","","","","","",""],"1img":["edujc@gmail.comspace2.jpg"]},"div2":{"0text":["Texto","","","","","","",""],"1text":["Rellenar con otro texto","","","","","","",""],"2text":["Rellenar con otro texto","","","","","","",""]},"div3":{"0text":["Texto","","","","","","",""],"1video":["https://www.youtube.com/watch?v=4HGlPLYWz5A"]}},{"div1":"#c0b0b0b0","div2":"#9d0f4563","div3":"#c0b0b0b0"},"\$edujc@gmail.comspace.jpg"),
+cargaTemaPredefinido(nombreWeb,"https://firebasestorage.googleapis.com/v0/b/ejemploflutt.appspot.com/o/uploads%2Fedujc%40gmail.comPrevBlog.png?alt=media&token=94e243c1-76f8-40fe-a1dc-50d65a5f871c",currentUser!+"."+nombreWeb,["Mi blog Personal","","","center","#fff9f9f9","","",""],["","","","","","","",""],["","","","","","","",""],{"div1":{"0text":["Mi nueva receta de cocina","","","","","","",""],"1img":["edujc@gmail.comgalletas.jpg"]},"div2":{"0text":["Lecturas recomendadas","","","","","","",""],"1text":["Rellenar con otro texto","","","","","","",""],"2text":["Rellenar con otro texto","","","","","","",""]}},{"div1":"#fff4e7b4","div2":"#fff69568"},"#ff98daf8"),
+cargaTemaPredefinido(nombreWeb,"https://firebasestorage.googleapis.com/v0/b/ejemploflutt.appspot.com/o/uploads%2Fedujc%40gmail.comPrevCarniceria.png?alt=media&token=7441e8d8-9539-4faf-9e5b-54728e037473",currentUser!+"."+nombreWeb,["Carniceria Flaviu","","","center","#fff9f9f9","","",""],["","","","","","","",""],["","","","","","","",""],{"div1":{"0img":["edujc@gmail.comcarne.jpg"],"1text":["Visitanos ya!","","","","","","",""],"2text":["Puedes encontrarnos en Calle Albaricoque, 29120 Málaga","","","","","","",""]}},{"div1":"#c0b0b0b0"},"\$edujc@gmail.comcarne2.jpg"),
+//cargaTemaPredefinido(nombreWeb,"https://c8.alamy.com/compes/dnhb9a/troll-aka-muneca-muneca-presa-creada-el-1959-por-thomas-dam-dnhb9a.jpg",currentUser!+"."+nombreWeb,["Mi CV Online","","","center","#fff9f9f9","","",""],["Nombre y Apellidos","","","","","","",""],["","","","","","","",""],{"div1":{"0text":["Estudios","","","","","","",""],"1text":["Ejemplo","","","","","","",""],"2text":["Idiomas","","","","","","",""],"3text":["Ejemplos de idiomas","","","","","","",""]},"div2":{"0img":[""],"1text":["Visitanos ya!","","","","","","",""],"2text":["Puedes encontrarnos en Calle Albaricoque, 29120 Málaga","","","","","","",""]}},{"div1":"#c0b0b0b0"},"\$edujc@gmail.comspace.jpg"),          
 
 
             ],
 
+          ),
           ),
           
 

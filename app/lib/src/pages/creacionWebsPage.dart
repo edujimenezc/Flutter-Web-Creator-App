@@ -1707,16 +1707,19 @@ pre code {
 @media (min-width: 768px) {
   .container {
     width: 750px;
+        text-align: center;
   }
 }
 @media (min-width: 992px) {
   .container {
     width: 970px;
+        text-align: center;
   }
 }
 @media (min-width: 1200px) {
   .container {
     width: 1170px;
+        text-align: center;
   }
 }
 .container-fluid {
@@ -12838,6 +12841,8 @@ if(estilosDivs.containsKey(div)){
 
 
   
+}else{
+   estiloDivActual=estiloDivActual+ "background-color:#FFFFFF; ";
 }
 
 

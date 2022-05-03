@@ -3,6 +3,7 @@ import 'package:ejemplobbdd/src/pages/newPage.dart';
 import 'package:ejemplobbdd/src/pages/perfilPage.dart';
 import 'package:ejemplobbdd/src/pages/userWebsPage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 class HomePage extends StatefulWidget {
   
@@ -17,12 +18,14 @@ class _HomePage extends State<HomePage>{
   Widget build(BuildContext context) {
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
 body: Center(
   child: Column(
 mainAxisSize: MainAxisSize.min,
 children: <Widget>[
 SizedBox(height: 75),
-Text('¿Qué vas a hacer hoy?'),
+
+Text('¿Qué vas a hacer hoy?',style: TextStyle(color: colorFromHex("#165364"),fontSize: 25),),
 SizedBox(height: 50),
 Row(
    mainAxisAlignment: MainAxisAlignment.center,
@@ -67,11 +70,26 @@ height: 450.0,
         width: 185.0,
 
 child: FloatingActionButton(
+  backgroundColor: colorFromHex("#ff9a3d"),
    shape: BeveledRectangleBorder(
           borderRadius: BorderRadius.zero
      ),
     heroTag: "btn1",
-        child: Text('Crea un nuevo Proyecto'),
+    
+        child:Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+  crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+           
+           Image(
+        image: AssetImage('assets/newpage.png'),
+        fit: BoxFit.cover,
+        height: 50,
+    ),SizedBox(height: 20),
+     Text('Crea un nuevo Proyecto',style: TextStyle(color: colorFromHex("#165364")),),
+        ],),
+        
+        
         onPressed: (){
 
 
@@ -106,11 +124,24 @@ return Container(
         width: 185.0,
 
 child: FloatingActionButton(
+  backgroundColor: colorFromHex("#ffc93d"),
    shape: BeveledRectangleBorder(
           borderRadius: BorderRadius.zero
      ),
     heroTag: "btn2",
-        child: Text('Edita un Proyecto Existente'),
+     
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+  crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+             Image(
+        image: AssetImage('assets/editpages.png'),
+        fit: BoxFit.cover,
+        height: 50,
+    ), SizedBox(height: 20),
+            Text('Edita un Proyecto Existente',style: TextStyle(color: colorFromHex("#165364"),),textAlign:TextAlign.center ,)],
+        ),
+     
         onPressed: (){
 
 
@@ -141,11 +172,19 @@ return Column(children: <Widget>[
         width: 75.0,
 
 child: FloatingActionButton(
+   backgroundColor: colorFromHex("#165364"),
    shape: BeveledRectangleBorder(
           borderRadius: BorderRadius.zero
      ),
     heroTag: "btn3",
-        child: Text('Mi cuenta img'),
+        child:  Image(
+        image: AssetImage('assets/profile.png'),
+        fit: BoxFit.cover,
+        height: 60,
+    ),
+        
+        
+       
         onPressed: (){
 
 
@@ -164,7 +203,8 @@ Navigator.push(context, route);
 ),
 
 
-Text('Mi Cuenta'),
+Text('Mi cuenta',style: TextStyle(color: colorFromHex("#165364")),),
+      
 
 
 
@@ -186,11 +226,16 @@ return Column(children: <Widget>[
         width: 75.0,
 
 child: FloatingActionButton(
+   backgroundColor: colorFromHex("#165364"),
    shape: BeveledRectangleBorder(
           borderRadius: BorderRadius.zero
      ),
     heroTag: "btn4",
-        child: Text('Ayuda img'),
+        child:  Image(
+        image: AssetImage('assets/help.png'),
+        fit: BoxFit.cover,
+        height: 60,
+    ),
         onPressed: (){
 
 
@@ -209,7 +254,8 @@ Navigator.push(context, route);
 
 ),
 
-Text('Ayuda'),
+Text('Ayuda',style: TextStyle(color: colorFromHex("#165364")),),
+      
 
 
 

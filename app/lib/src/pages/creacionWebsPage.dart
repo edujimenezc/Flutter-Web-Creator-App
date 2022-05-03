@@ -12,6 +12,9 @@ import 'package:ejemplobbdd/src/pages/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:flutter_archive/flutter_archive.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'dart:io' as io;
+import 'package:path/path.dart' as path; 
 class CreacionWebsPage extends StatefulWidget {
   String paginaActual="";
   CreacionWebsPage(String nombreWeb){
@@ -186,7 +189,7 @@ final File file2 = File('${directoryExternal!.path}/${currentUser!+"."+paginaAct
     //return directoryExternal!.absolute.path;
 
     //print(directory.absolute.path);
-  return directory.absolute.path;
+  return '${directory.path}/${currentUser!+"."+paginaActual}.html';
 }
 
 Future<String> _read() async {
@@ -13178,12 +13181,28 @@ return Column(children: <Widget>[
  height: 50.0,
         width: 50.0,
 
-child: FloatingActionButton(
+child: Column(
+  children: [
+
+FloatingActionButton(
    shape: BeveledRectangleBorder(
           borderRadius: BorderRadius.zero
      ),
     heroTag: "btn2",
-        child: Text('Vista Previa'),
+        child: 
+         Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+  crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+ Image(
+        image: AssetImage('assets/eye.png'),
+        fit: BoxFit.cover,
+        height: 60,
+    ),
+
+          ],
+        ),
+        
         onPressed: (){
 
 /*
@@ -13232,6 +13251,12 @@ Navigator.push(context, route);
 });
         }),
 
+     Text('Vista Previa'),
+  ],
+)
+
+
+
 ),
 
 
@@ -13264,12 +13289,25 @@ return Column(children: <Widget>[
  height: 50.0,
         width: 50.0,
 
-child: FloatingActionButton(
+child:Column(
+  children: [  FloatingActionButton(
    shape: BeveledRectangleBorder(
           borderRadius: BorderRadius.zero
      ),
     heroTag: "btn5",
-        child: Text('Guardar Web'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+  crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+             Image(
+        image: AssetImage('assets/save.png'),
+        fit: BoxFit.cover,
+        height: 50,
+    ), SizedBox(height: 20),
+          ]
+        ),
+        
+        
         onPressed: (){
 
 /*
@@ -13289,16 +13327,27 @@ _crearHTML().then((value1) {
 
 
 
-
   
-_write(value1).then((value2)  /*_sendEmail(value)*/{
+_write(value1).then((value2)  {
+
+
+subirWebFirebase(value2,this.paginaActual).then((value) => null);
+
+
+
 
 });
-//_read().then((value) => print(value)),
+
 
 
 });
         }),
+        Text('Guardar Web'),],
+)
+
+
+
+
 
 ),
 
@@ -13320,7 +13369,36 @@ _write(value1).then((value2)  /*_sendEmail(value)*/{
 
 
 
+Future<void> subirWebFirebase(String miPath,String nombreWeb) async {
+print(miPath);
+ String fileName = path.basename(miPath);
+    firebase_storage.Reference ref =
+    firebase_storage.FirebaseStorage.instance
+        .ref().child('uploads').child('/${currentUser!+nombreWeb}');
 
+    final metadata = firebase_storage.SettableMetadata(
+        contentType: 'file/html',
+        customMetadata: {'picked-file-path': nombreWeb});
+    firebase_storage.UploadTask uploadTask;
+    //late StorageUploadTask uploadTask = firebaseStorageRef.putFile(_imageFile);
+    uploadTask = ref.putFile(io.File(miPath), metadata);
+
+    firebase_storage.UploadTask task= await Future.value(uploadTask);
+    Future.value(uploadTask).then((value) => {
+    
+    setState((){
+
+    })
+
+
+    }).onError((error, stackTrace) => {
+      print("Upload file path error ${error.toString()} ")
+    });
+
+
+
+
+}
 
 
 

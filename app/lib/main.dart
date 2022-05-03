@@ -2,10 +2,12 @@
 
 import 'dart:async';
 
+import 'package:ejemplobbdd/colors/color.dart';
 import 'package:ejemplobbdd/src/pages/registro.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 import 'src/pages/homepage.dart';
 
@@ -27,7 +29,8 @@ builder: (context,snapshot){
 	return MaterialApp(
 	title: 'Splash Screen',
 	theme: ThemeData(
-		primarySwatch: Colors.green,
+		primarySwatch:primaryBlue
+    
 	),
 	home: MyHomePage(),
 	debugShowCheckedModeBanner: false,
@@ -70,7 +73,11 @@ Widget build(BuildContext context) {
   
 	return Container(
 	color: Colors.teal.shade100,
-	child:FlutterLogo(size:MediaQuery.of(context).size.height)
+	child:Image(
+        image: AssetImage('assets/logoweb.jpg'),
+        fit: BoxFit.cover,
+        height: 50,
+    )
 	);
 }
 }
@@ -100,12 +107,16 @@ class _LoginPage extends State<LoginPage>{
     
     
       return Scaffold(
+        resizeToAvoidBottomInset: false,
 body: Center(
   child: Column(
 mainAxisSize: MainAxisSize.min,
 children: <Widget>[
-Text('Iniciar Sesión'),
-SizedBox(height: 100),
+  SizedBox(height: 20),
+Text('Iniciar Sesión',style: TextStyle(color: colorFromHex("#165364"),fontSize: 45),),
+SizedBox(height: 80),
+Text('Accede para continuar',style: TextStyle(color: colorFromHex("#165364"),fontSize: 15),),
+SizedBox(height: 50),
  _crearEmail(),
  SizedBox(height: 25),
 _crearPassword(),
@@ -137,15 +148,22 @@ _crearPassword(),
 Widget _crearEmail() {
 
     return TextField(
+      style: TextStyle(color: colorFromHex("#165364")),
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
+       focusColor: colorFromHex("#165364") ,
+       hoverColor:colorFromHex("#165364") ,
+       labelStyle:  TextStyle(color: colorFromHex("#165364")),
         border: OutlineInputBorder(
+          
           borderRadius: BorderRadius.circular(20.0)
         ),
         hintText: 'Email',
+        
         labelText: 'Email',
         suffixIcon: Icon( Icons.alternate_email ),
-        icon: Icon( Icons.email )
+        icon: Icon( Icons.email ),
+        //iconColor: colorFromHex("#165364")
       ),
       onChanged: (valor) =>setState(() {
         _email = valor;
@@ -156,8 +174,12 @@ Widget _crearEmail() {
  Widget _crearPassword(){
 
      return TextField(
+        style: TextStyle(color: colorFromHex("#165364")),
       obscureText: true,
       decoration: InputDecoration(
+         focusColor: colorFromHex("#165364") ,
+       hoverColor:colorFromHex("#165364") ,
+       labelStyle:  TextStyle(color: colorFromHex("#165364")),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20.0)
         ),
@@ -183,8 +205,9 @@ return Container(
    height: 100.0,
         width: 100.0,
 child: FloatingActionButton(
+  backgroundColor: colorFromHex("#ff703d"),
    heroTag: "btn2",
-        child: Text('Acceder'),
+        child: Text('Acceder',style: TextStyle(color: colorFromHex("#165364")),),
         onPressed: () async {
 
 if(_email.isEmpty || _pass.isEmpty){
@@ -357,11 +380,12 @@ return Container(
         width: 100.0,
 
 child: FloatingActionButton(
+  backgroundColor: colorFromHex("#ff9a3d"),
    shape: BeveledRectangleBorder(
           borderRadius: BorderRadius.zero
      ),
     heroTag: "btn1",
-        child: Text('Registrarse'),
+        child: Text('Registrarse',style: TextStyle(color: colorFromHex("#165364")),),
         onPressed: (){
 
 

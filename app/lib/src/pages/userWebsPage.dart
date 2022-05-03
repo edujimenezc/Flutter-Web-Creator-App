@@ -4,6 +4,7 @@ import 'package:ejemplobbdd/src/pages/creacionWebsPage.dart';
 import 'package:ejemplobbdd/src/pages/homepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 import 'EditorEncabezadoPage.dart';
 
@@ -38,6 +39,7 @@ if (!snapshot.hasData) {
 
 
 return Scaffold(
+  resizeToAvoidBottomInset: false,
 body: Center(
   child: Column(
 mainAxisSize: MainAxisSize.min,
@@ -48,7 +50,7 @@ Row(children: <Widget>[
 _crearButtonVolver(),
 SizedBox(width: 40),
 ],),
-Text('Tus Webs'),
+Text('Tus Webs',style: TextStyle(color: colorFromHex("#165364"),fontSize: 30),),
 
      Expanded(child:Align(
        
@@ -197,11 +199,12 @@ if(data!=null){
 
 Widget _crearLista(List listaWebs ){
   if(listaWebs.isEmpty){
-return Text("¡No tienes Webs Aún!");
+return Text("¡No tienes Webs Aún!",style: TextStyle(color: colorFromHex("#165364")),);
 
   }
 
 return ListView.builder(
+  
   //shrinkWrap: true,
   padding: const EdgeInsets.all(10.0),
  
@@ -223,9 +226,26 @@ if(arrayActual.length>3){
  String nombreFinal="";
           return ListTile(
 
+           iconColor: colorFromHex("#ff9a3d"),
+            title:Row(
+               mainAxisAlignment: MainAxisAlignment.center,
+    crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+ Image(
+        image: AssetImage('assets/web.png'),
+        fit: BoxFit.cover,
+        height: 50,
+    ),
+    SizedBox(width: 80),
+ Text(nombreActual,style: TextStyle(color: colorFromHex("#ff9a3d")),textAlign: TextAlign.center,),
+SizedBox(width: 120)
+            ],),
+            
            
-            title:Text(nombreActual),
-             
+             hoverColor: colorFromHex("#ff9a3d"),
+              selectedColor:colorFromHex("#ff9a3d"),
+              selectedTileColor:colorFromHex("#ff9a3d"),
+              
            onTap: () {
               setState(() {
               String nombreWeb=listaWebs[index];

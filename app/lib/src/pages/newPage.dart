@@ -3,6 +3,7 @@ import 'package:ejemplobbdd/src/pages/creacionWebsPage.dart';
 import 'package:ejemplobbdd/src/pages/homepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 class NewPage extends StatefulWidget {
   
@@ -27,7 +28,7 @@ Row(children: <Widget>[
 _crearButtonVolver(),
 SizedBox(width: 40),
 ],),
-Text('¿Cómo prefieres hacer tu Web?'),
+Text('¿Cómo prefieres hacer tu Web?',style: TextStyle(color: colorFromHex("#165364"),fontSize: 25),),
 SizedBox(height: 50),
 
 _crearButtonDesdeCero(),
@@ -81,11 +82,26 @@ return Container(
         width: 250.0,
 
 child: FloatingActionButton(
+   backgroundColor: colorFromHex("#ff9a3d"),
    shape: BeveledRectangleBorder(
           borderRadius: BorderRadius.zero
      ),
     heroTag: "btn1",
-        child: Text('Crear Web desde Cero'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+  crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+ Image(
+        image: AssetImage('assets/plus.png'),
+        fit: BoxFit.cover,
+        height: 60,
+    ),
+    SizedBox(height: 20),
+ Text('Crear Web desde Cero',style: TextStyle(color: colorFromHex("#165364"),)),
+          ],
+        ),
+        
+       
         onPressed: () async {
 
 
@@ -235,6 +251,7 @@ showDialog(
 GestureDetector cargaTemaPredefinido(String nombreWebCarga,String url,String nombreWeb,List h1,List h2,List h3,Map divs,Map divStyles,String pageBackground){
 
 return GestureDetector(
+  
                 onTap: () {
                   
                  crearTemaEnBBDD(nombreWeb,h1,h2, h3,divs,divStyles,pageBackground);
@@ -356,11 +373,25 @@ return Column(children: <Widget>[
         width: 200.0,
 
 child: FloatingActionButton(
+  backgroundColor: colorFromHex("#ffc93d"),
    shape: BeveledRectangleBorder(
           borderRadius: BorderRadius.zero
      ),
     heroTag: "btn2",
-        child: Text('Usar un tema predefinido'),
+        child: 
+         Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+  crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+ Image(
+        image: AssetImage('assets/brush.png'),
+        fit: BoxFit.cover,
+        height: 60,
+    ), SizedBox(height: 10),
+ Text('Usar un tema predefinido',style: TextStyle(color: colorFromHex("#165364"),)),
+          ],
+        ),
+        
         onPressed: ()async {
 
 

@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 
 class RegistroPage extends StatefulWidget {
@@ -24,14 +25,21 @@ class _RegistroPage extends State<RegistroPage>{
   Widget build(BuildContext context) {
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
 body: Center(
   child: Column(
 mainAxisSize: MainAxisSize.min,
 children: <Widget>[
-Text('Registro'),
+Text('Registro',style: TextStyle(color: colorFromHex("#165364"),fontSize: 45),),
+SizedBox(height: 100),
+Text('Crea una cuenta para continuar',style: TextStyle(color: colorFromHex("#165364"),fontSize: 15),),
+SizedBox(height: 50),
  _crearEmail(),
+ SizedBox(height: 25),
 _crearPassword(),
+ SizedBox(height: 25),
 _crearButtonAccess(),
+ SizedBox(height: 25),
 _crearButtonVolver(),
 ],
 
@@ -45,8 +53,13 @@ _crearButtonVolver(),
 Widget _crearEmail() {
 
     return TextField(
+       style: TextStyle(color: colorFromHex("#165364")),
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
+         focusColor: colorFromHex("#165364") ,
+       hoverColor:colorFromHex("#165364") ,
+       labelStyle:  TextStyle(color: colorFromHex("#165364")),
+       
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20.0)
         ),
@@ -64,8 +77,13 @@ Widget _crearEmail() {
  Widget _crearPassword(){
 
      return TextField(
+       style: TextStyle(color: colorFromHex("#165364")),
       obscureText: true,
       decoration: InputDecoration(
+         focusColor: colorFromHex("#165364") ,
+       hoverColor:colorFromHex("#165364") ,
+       labelStyle:  TextStyle(color: colorFromHex("#165364")),
+       
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20.0)
         ),
@@ -84,9 +102,16 @@ Widget _crearEmail() {
 
 Widget _crearButtonAccess(){
 
-return FloatingActionButton(
+return  Container(
+   height: 100.0,
+        width: 100.0,
+
+
+child: FloatingActionButton(
+    backgroundColor: colorFromHex("#ff703d"),
    heroTag: "btn2",
-        child: Text('Acceder'),
+       child: Text('Acceder',style: TextStyle(color: colorFromHex("#165364")),),
+      
         onPressed: () async {
 
 
@@ -301,7 +326,7 @@ showDialog(
 
 
 
-        });
+        }));
 
 }
 
@@ -309,7 +334,12 @@ Widget _crearButtonVolver(){
 
 return FloatingActionButton(
     heroTag: "btn1",
-        child: Text('Volver'),
+    backgroundColor: colorFromHex("#ff9a3d"),
+    shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
+        child: Text('Volver',style: TextStyle(color: colorFromHex("#165364")),),
+       
         onPressed: (){
 
 

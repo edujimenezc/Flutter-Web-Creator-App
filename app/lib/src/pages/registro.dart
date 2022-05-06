@@ -335,9 +335,8 @@ Widget _crearButtonVolver(){
 return FloatingActionButton(
     heroTag: "btn1",
     backgroundColor: colorFromHex("#ff9a3d"),
-    shape: BeveledRectangleBorder(
-          borderRadius: BorderRadius.zero
-     ),
+     shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(12)),
         child: Text('Volver',style: TextStyle(color: colorFromHex("#165364")),),
        
         onPressed: (){

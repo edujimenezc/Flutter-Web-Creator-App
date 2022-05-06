@@ -601,11 +601,14 @@ return Column(
         width: 75.0,
 
 child: FloatingActionButton(
-   shape: BeveledRectangleBorder(
-          borderRadius: BorderRadius.zero
-     ),
+   shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(12)),
     heroTag: "btn3",
-        child: Text('Volver img'),
+        child:Image(
+        image: AssetImage('assets/back.png'),
+        fit: BoxFit.cover,
+        height: 50,
+    ),
         onPressed: (){
 
 

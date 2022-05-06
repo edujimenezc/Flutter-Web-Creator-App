@@ -18,6 +18,7 @@ class _NewPage extends State<NewPage>{
   Widget build(BuildContext context) {
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
 body: Center(
   child: Column(
 mainAxisSize: MainAxisSize.min,
@@ -83,9 +84,8 @@ return Container(
 
 child: FloatingActionButton(
    backgroundColor: colorFromHex("#ff9a3d"),
-   shape: BeveledRectangleBorder(
-          borderRadius: BorderRadius.zero
-     ),
+   shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(12)),
     heroTag: "btn1",
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -374,9 +374,8 @@ return Column(children: <Widget>[
 
 child: FloatingActionButton(
   backgroundColor: colorFromHex("#ffc93d"),
-   shape: BeveledRectangleBorder(
-          borderRadius: BorderRadius.zero
-     ),
+   shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(12)),
     heroTag: "btn2",
         child: 
          Column(
@@ -593,11 +592,14 @@ return Column(
         width: 75.0,
 
 child: FloatingActionButton(
-   shape: BeveledRectangleBorder(
-          borderRadius: BorderRadius.zero
-     ),
+   shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(12)),
     heroTag: "btn3",
-        child: Text('Volver img'),
+       child:Image(
+        image: AssetImage('assets/back.png'),
+        fit: BoxFit.cover,
+        height: 50,
+    ),
         onPressed: (){
 
 

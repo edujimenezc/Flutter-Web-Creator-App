@@ -143,6 +143,7 @@ return containerCentral(encabezadoActual,scaffoldColor,h1Hint,h2Hint,h3Hint);
 
 Widget containerCentralImgFondo(String url,Encabezado encabezadoActual,Color scaffoldColor,String h1Hint,String h2Hint,String h3Hint){
  return Container(
+    
 decoration: BoxDecoration(
       image: DecorationImage(image: NetworkImage("${url}"),
       fit: BoxFit.cover)
@@ -152,12 +153,13 @@ decoration: BoxDecoration(
     body: Container(
  alignment: Alignment.center,
  child: Column(children: <Widget>[
+   SizedBox(height: 75),
 Column(
 
   children: <Widget>[
-  
+  SizedBox(height: 75),
  _crearButtonVolver(),
-
+SizedBox(height: 15),
 botonEstilosFondo(encabezadoActual),
 
 crearFooter(encabezadoActual)
@@ -207,9 +209,9 @@ decoration: BoxDecoration(
 Column(
 
   children: <Widget>[
-  
+  SizedBox(height: 75),
  _crearButtonVolver(),
-
+SizedBox(height: 15),
 botonEstilosFondo(encabezadoActual),
 
 crearFooter(encabezadoActual)
@@ -247,6 +249,7 @@ if(encabezadoActual.footer["img"][0]==""){
 
 return Column(children: [
 Text("No has seleccionado ninguna imagen"),
+SizedBox(height: 30.0 ),
 crearBotonImagen(encabezadoActual,"Seleccionar imagen"),
 
 
@@ -342,11 +345,10 @@ setState(() {
 
 Widget crearBotonImagen(Encabezado encabezadoActual, String mensaje){
 
-return FloatingActionButton(
-   shape: BeveledRectangleBorder(
-          borderRadius: BorderRadius.zero
-     ),
-    heroTag: "btn2",
+return MaterialButton(
+       shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(12)),
+ color: colorFromHex("#ff9a3d"),
         child: Text(mensaje),
         onPressed: (){
 
@@ -730,11 +732,13 @@ return Container(
 
   child: Column(
     children: [
-      
-Text("Texto del Pie de Página"),
+      SizedBox(height: 30.0 ),
 
+SizedBox(height: 30.0 ),
 textoFooter(encabezadoActual),
-Text("Imagen del Pie de Página"),
+SizedBox(height: 30.0 ),
+
+SizedBox(height: 30.0 ),
 crearImgFooter(encabezadoActual),
     ],
   ),
@@ -1108,7 +1112,10 @@ imageFile=null;
 Widget botonEstilosFondo(Encabezado encabezadoActual){
 
 
- return FloatingActionButton(
+ return MaterialButton(
+       shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(12)),
+ color: colorFromHex("#ffc93d"),
               child: Text('Editar el Fondo'),
               onPressed: (){
                showDialog(
@@ -1117,7 +1124,9 @@ Widget botonEstilosFondo(Encabezado encabezadoActual){
       builder: (context) {
 
          return AlertDialog(
-          shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
+          shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.zero
+     ),
           title: Text('Edita el fondo de la Web'),
           
           content: Column(
@@ -1231,6 +1240,7 @@ showDialog(
       builder: (context) {
 
          return AlertDialog(
+           scrollable: true,
           shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
           title: Text('Edición del texto'),
           
@@ -2068,11 +2078,14 @@ return Column(
         width: 75.0,
 
 child: FloatingActionButton(
-   shape: BeveledRectangleBorder(
-          borderRadius: BorderRadius.zero
-     ),
+   shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(12)),
     heroTag: "btn3",
-        child: Text('Volver img'),
+       child:Image(
+        image: AssetImage('assets/back.png'),
+        fit: BoxFit.cover,
+        height: 50,
+    ),
         onPressed: (){
 /*sleep(Duration(seconds:1));
 xNow.aniadirAlMapa();

@@ -228,7 +228,7 @@ if(arrayActual.length>3){
 
            iconColor: colorFromHex("#ff9a3d"),
             title:Row(
-               mainAxisAlignment: MainAxisAlignment.center,
+               mainAxisAlignment: MainAxisAlignment.start,
     crossAxisAlignment: CrossAxisAlignment.center,
               children: [
  Image(
@@ -236,9 +236,9 @@ if(arrayActual.length>3){
         fit: BoxFit.cover,
         height: 50,
     ),
-    SizedBox(width: 80),
+    SizedBox(width: 5),
  Text(nombreActual,style: TextStyle(color: colorFromHex("#ff9a3d")),textAlign: TextAlign.center,),
-SizedBox(width: 120)
+
             ],),
             
            
@@ -434,11 +434,14 @@ return Column(
         width: 75.0,
 
 child: FloatingActionButton(
-   shape: BeveledRectangleBorder(
-          borderRadius: BorderRadius.zero
-     ),
+  shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(12)),
     heroTag: "btn3",
-        child: Text('Volver img'),
+        child:Image(
+        image: AssetImage('assets/back.png'),
+        fit: BoxFit.cover,
+        height: 50,
+    ),
         onPressed: (){
 
 

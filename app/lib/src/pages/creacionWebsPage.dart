@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:ejemplobbdd/src/pages/visualizarWebPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ejemplobbdd/src/classes/Encabezado.dart';
@@ -41,14 +43,7 @@ body: Center(
 mainAxisSize: MainAxisSize.min,
 children: <Widget>[
 SizedBox(height: 75),
-Row(children: <Widget>[
-  SizedBox(width: 10),
 _crearButtonVolver(),
-SizedBox(width: 120),
-_crearButtonVistaPrevia(),
-SizedBox(width: 20),
-_crearButtonGuardarWeb(),
-],),
 
       
 
@@ -61,7 +56,10 @@ _crearButtonGuardarWeb(),
 
 
 SizedBox(height: 25),
-Text(paginaActual),
+Text(paginaActual,style: new TextStyle(
+      fontSize: 50.0,
+      color: Colors.black,
+    ),),
 SizedBox(height: 25),
 
 
@@ -79,7 +77,18 @@ children: <Widget>[
   SizedBox(height: 10.0 ,),
   _cardPie(),
   SizedBox(height: 10.0 ,),
-  
+  SizedBox(height: 75),
+  Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+crossAxisAlignment: CrossAxisAlignment.center,
+    children: <Widget>[
+  SizedBox(width: 10),
+
+//SizedBox(width: 120),
+_crearButtonVistaPrevia(),
+SizedBox(width: 100),
+_crearButtonGuardarWeb(),
+],),
 ],
 
 )
@@ -13178,16 +13187,16 @@ Widget _crearButtonVistaPrevia(){
 return Column(children: <Widget>[
   
   Container(
- height: 50.0,
-        width: 50.0,
+ height: 90.0,
+        width: 90.0,
 
 child: Column(
   children: [
 
 FloatingActionButton(
-   shape: BeveledRectangleBorder(
-          borderRadius: BorderRadius.zero
-     ),
+  backgroundColor: colorFromHex("#ff9a3d"),
+   shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(12)),
     heroTag: "btn2",
         child: 
          Column(
@@ -13197,7 +13206,7 @@ FloatingActionButton(
  Image(
         image: AssetImage('assets/eye.png'),
         fit: BoxFit.cover,
-        height: 60,
+        height: 50,
     ),
 
           ],
@@ -13286,14 +13295,14 @@ Widget _crearButtonGuardarWeb(){
 return Column(children: <Widget>[
   
   Container(
- height: 50.0,
-        width: 50.0,
+ height: 90.0,
+        width: 90.0,
 
 child:Column(
   children: [  FloatingActionButton(
-   shape: BeveledRectangleBorder(
-          borderRadius: BorderRadius.zero
-     ),
+    backgroundColor: colorFromHex("#ffc93d"),
+   shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(12)),
     heroTag: "btn5",
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -13303,7 +13312,7 @@ child:Column(
         image: AssetImage('assets/save.png'),
         fit: BoxFit.cover,
         height: 50,
-    ), SizedBox(height: 20),
+    ),
           ]
         ),
         
@@ -13417,11 +13426,14 @@ return Column(
         width: 75.0,
 
 child: FloatingActionButton(
-   shape: BeveledRectangleBorder(
-          borderRadius: BorderRadius.zero
-     ),
+   shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(12)),
     heroTag: "btn3",
-        child: Text('Volver img'),
+        child:Image(
+        image: AssetImage('assets/back.png'),
+        fit: BoxFit.cover,
+        height: 50,
+    ),
         onPressed: (){
 
 

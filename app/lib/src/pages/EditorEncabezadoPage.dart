@@ -171,7 +171,7 @@ Column(
   children: <Widget>[
   
  _crearButtonVolver(),
-
+SizedBox(height: 15),
 botonEstilosFondo(encabezadoActual),
 
 
@@ -413,9 +413,9 @@ children: <Widget>[
 Column(
 
   children: <Widget>[
-  
+  SizedBox(height: 75),
  _crearButtonVolver(),
-
+SizedBox(height: 15),
 botonEstilosFondo(encabezadoActual),
 
 
@@ -690,15 +690,15 @@ colorAct=colorAct.fromHex(encabezadoActual.divStyles[lista[index].nombre]);
       SizedBox(height: 30.0 ,),
 Row(children: [
 SizedBox(width: 150.0 ),
-Text(lista[index].nombre),
+
 SizedBox(width: 80.0 ),
 
-FloatingActionButton(
-   shape: BeveledRectangleBorder(
-          borderRadius: BorderRadius.zero
-     ),
-    heroTag: "btn17",
-        child: Text('Editar contenedor'),
+MaterialButton(
+   shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(12)),
+ color: colorFromHex("#ff9a3d"),
+   
+        child: Text('Editar\ncontenedor'),
         onPressed: (){
 
 showDialog(
@@ -866,6 +866,7 @@ showDialog(
       builder: (context) {
 
          return AlertDialog(
+           scrollable: true,
           shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
           title: Text('Edición del texto'),
           
@@ -3340,9 +3341,16 @@ imageFile=null;
 
 Widget botonEstilosFondo(Encabezado encabezadoActual){
 
-
- return FloatingActionButton(
-              child: Text('Editar el Fondo'),
+return Container(
+   
+   height: 70.0,
+  
+    child: MaterialButton(
+       shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(12)),
+ color: colorFromHex("#ffc93d"),
+   
+              child: Text('Editar el Fondo', softWrap: false,),
               onPressed: (){
                showDialog(
       context: context,
@@ -3350,7 +3358,7 @@ Widget botonEstilosFondo(Encabezado encabezadoActual){
       builder: (context) {
 
          return AlertDialog(
-          shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
+         
           title: Text('Edita el fondo de la Web'),
           
           content: Column(
@@ -3392,7 +3400,10 @@ Navigator.push(context, route);
     );
                
         },
-            );
+            ) ,
+  
+);
+
 
 
 
@@ -3464,6 +3475,7 @@ showDialog(
       builder: (context) {
 
          return AlertDialog(
+           scrollable: true,
           shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
           title: Text('Edición del texto'),
           
@@ -3841,6 +3853,7 @@ showDialog(
       builder: (context) {
 
          return AlertDialog(
+           scrollable: true,
           shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
           title: Text('Edición del texto'),
           
@@ -4222,6 +4235,7 @@ showDialog(
       builder: (context) {
 
          return AlertDialog(
+           scrollable: true,
           shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
           title: Text('Edición del texto'),
           
@@ -5285,11 +5299,14 @@ return Column(
         width: 75.0,
 
 child: FloatingActionButton(
-   shape: BeveledRectangleBorder(
-          borderRadius: BorderRadius.zero
-     ),
+   shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(12)),
     heroTag: "btn3",
-        child: Text('Volver img'),
+        child:Image(
+        image: AssetImage('assets/back.png'),
+        fit: BoxFit.cover,
+        height: 50,
+    ),
         onPressed: (){
 /*sleep(Duration(seconds:1));
 xNow.aniadirAlMapa();

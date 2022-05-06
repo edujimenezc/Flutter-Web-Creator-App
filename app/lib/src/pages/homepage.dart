@@ -71,9 +71,8 @@ height: 450.0,
 
 child: FloatingActionButton(
   backgroundColor: colorFromHex("#ff9a3d"),
-   shape: BeveledRectangleBorder(
-          borderRadius: BorderRadius.zero
-     ),
+    shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(12)),
     heroTag: "btn1",
     
         child:Column(
@@ -125,9 +124,8 @@ return Container(
 
 child: FloatingActionButton(
   backgroundColor: colorFromHex("#ffc93d"),
-   shape: BeveledRectangleBorder(
-          borderRadius: BorderRadius.zero
-     ),
+   shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(12)),
     heroTag: "btn2",
      
         child: Column(
@@ -173,9 +171,8 @@ return Column(children: <Widget>[
 
 child: FloatingActionButton(
    backgroundColor: colorFromHex("#165364"),
-   shape: BeveledRectangleBorder(
-          borderRadius: BorderRadius.zero
-     ),
+    shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(12)),
     heroTag: "btn3",
         child:  Image(
         image: AssetImage('assets/profile.png'),
@@ -227,9 +224,8 @@ return Column(children: <Widget>[
 
 child: FloatingActionButton(
    backgroundColor: colorFromHex("#165364"),
-   shape: BeveledRectangleBorder(
-          borderRadius: BorderRadius.zero
-     ),
+   shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(12)),
     heroTag: "btn4",
         child:  Image(
         image: AssetImage('assets/help.png'),

@@ -74,7 +74,7 @@ Widget build(BuildContext context) {
 	return Container(
 	color: Colors.teal.shade100,
 	child:Image(
-        image: AssetImage('assets/logoweb.jpg'),
+        image: AssetImage('assets/logo.jpg'),
         fit: BoxFit.cover,
         height: 50,
     )
@@ -205,6 +205,8 @@ return Container(
    height: 100.0,
         width: 100.0,
 child: FloatingActionButton(
+   shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(12)),
   backgroundColor: colorFromHex("#ff703d"),
    heroTag: "btn2",
         child: Text('Acceder',style: TextStyle(color: colorFromHex("#165364")),),
@@ -381,9 +383,8 @@ return Container(
 
 child: FloatingActionButton(
   backgroundColor: colorFromHex("#ff9a3d"),
-   shape: BeveledRectangleBorder(
-          borderRadius: BorderRadius.zero
-     ),
+   shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(12)),
     heroTag: "btn1",
         child: Text('Registrarse',style: TextStyle(color: colorFromHex("#165364")),),
         onPressed: (){

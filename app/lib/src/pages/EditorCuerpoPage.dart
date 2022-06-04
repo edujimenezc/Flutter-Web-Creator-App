@@ -3459,6 +3459,7 @@ showDialog(
       builder: (context) {
 
          return AlertDialog(
+           scrollable: true,
           shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
           title: Text('Edición del texto'),
           
@@ -3836,6 +3837,7 @@ showDialog(
       builder: (context) {
 
          return AlertDialog(
+           scrollable: true,
           shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
           title: Text('Edición del texto'),
           
@@ -4217,6 +4219,7 @@ showDialog(
       builder: (context) {
 
          return AlertDialog(
+           scrollable: true,
           shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
           title: Text('Edición del texto'),
           

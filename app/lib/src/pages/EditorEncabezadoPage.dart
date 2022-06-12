@@ -1006,7 +1006,7 @@ FloatingActionButton(
           borderRadius: BorderRadius.zero
      ),
     heroTag: "btn21",
-        child: Text('Izquierda'),
+        child: Text('Izq.'),
         onPressed: (){
 
 
@@ -1080,7 +1080,7 @@ FloatingActionButton(
           borderRadius: BorderRadius.zero
      ),
     heroTag: "btn21",
-        child: Text('Derecha'),
+        child: Text('Der.'),
         onPressed: (){
 
 
@@ -2906,7 +2906,7 @@ return FloatingActionButton(
           borderRadius: BorderRadius.zero
      ),
     heroTag: "btn1",
-        child: Text('Eliminar Esta Parte'),
+        child: Text('Elimina Esta Parte'),
          
         onPressed: (){
            
@@ -3615,7 +3615,7 @@ FloatingActionButton(
           borderRadius: BorderRadius.zero
      ),
     heroTag: "btn21",
-        child: Text('Izquierda'),
+        child: Text('Izq.'),
         onPressed: (){
 
 
@@ -3689,7 +3689,7 @@ FloatingActionButton(
           borderRadius: BorderRadius.zero
      ),
     heroTag: "btn21",
-        child: Text('Derecha'),
+        child: Text('Der.'),
         onPressed: (){
 
 
@@ -3993,7 +3993,7 @@ FloatingActionButton(
           borderRadius: BorderRadius.zero
      ),
     heroTag: "btn21",
-        child: Text('Izquierda'),
+        child: Text('Izq.'),
         onPressed: (){
 
 
@@ -4067,7 +4067,7 @@ FloatingActionButton(
           borderRadius: BorderRadius.zero
      ),
     heroTag: "btn21",
-        child: Text('Derecha'),
+        child: Text('Der.'),
         onPressed: (){
 
 
@@ -4376,7 +4376,7 @@ FloatingActionButton(
           borderRadius: BorderRadius.zero
      ),
     heroTag: "btn21",
-        child: Text('Izquierda'),
+        child: Text('Izq.'),
         onPressed: (){
 
 
@@ -4450,7 +4450,7 @@ FloatingActionButton(
           borderRadius: BorderRadius.zero
      ),
     heroTag: "btn21",
-        child: Text('Derecha'),
+        child: Text('Der.'),
         onPressed: (){
 
 
@@ -4791,7 +4791,11 @@ if(x==""){
   x="Introduce la URL";
 }
 
-return FloatingActionButton(onPressed: () {
+return MaterialButton(
+  shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(12)),
+    color: colorFromHex("#145463"),
+        child: Text('Añadir URL',style: TextStyle(color: Colors.white)),onPressed: () {
   
 showDialog(
       context: context,

@@ -35,9 +35,12 @@ SizedBox(height: 25),
      alignment: Alignment.center,
        
        child:Column(children: [
-_crearListaPreguntas("¿Cómo creo una página web?","Pidiendomela y dandome 500 paveles"),
-_crearListaPreguntas("¿Cómo esto?","Pidiendomela y dandome 500 paveles"),
-_crearListaPreguntas("¿Cómo esto?","Pidiendomela y dandome 500 paveles")
+_crearListaPreguntas("¿Cómo creo una página web?","En la pantalla principal pulsa el botón naranja de Crea un nuevo proyecto, luego podrás elegir si la quieres crear desde cero o con una plantilla, se te pedirá un nombre para tu web, y listo!"),
+_crearListaPreguntas("¿Cómo publico mi página web?","Sólo necesitas pulsar el botón de Publicar Web, del resto nos encargamos nosotros!"),
+_crearListaPreguntas("¿Puedo tener dos páginas con el mismo nombre?","La respuesta es No, ya que cada web es única"),
+_crearListaPreguntas("¿Puedo crear un tema predefinido?","Actualmente no, pero estamos trabando en ello y será posible muy pronto"),
+_crearListaPreguntas("¿Cómo elimino una web?","En el apartado de editar un proyecto existente, deja pulsada la web que desees borrar durante 2 segundos")
+
 
 
        ],)

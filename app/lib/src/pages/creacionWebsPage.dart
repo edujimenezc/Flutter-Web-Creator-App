@@ -13351,7 +13351,7 @@ subirWebFirebase(value2,this.paginaActual).then((value) => null);
 
 });
         }),
-        Text('Guardar Web'),],
+        Text('Publicar Web'),],
 )
 
 

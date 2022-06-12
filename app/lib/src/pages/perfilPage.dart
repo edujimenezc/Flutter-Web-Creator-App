@@ -143,7 +143,7 @@ showDialog(
           shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
           title: Text('Donaciones'),
           
-          content: Expanded(child: Text("Puedes donar a mi Paypal \n miCorreo@example.com")),
+          content: Expanded(child: Text("Puedes donar a mi Paypal \n edujimenez010502@gmail.com")),
           actions: <Widget>[
            
             TextButton(

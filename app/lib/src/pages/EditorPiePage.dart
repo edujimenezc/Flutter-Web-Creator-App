@@ -294,8 +294,9 @@ return Image.network(snapshot.data!,height: 150,
 }
       }),
       Row(children: [
-
+SizedBox(width: 70),
  crearBotonImagen(encabezadoActual,"Cambiar imagen"),
+SizedBox(width: 20),
         _crearButtonEliminarImagen(encabezadoActual)
       ],)
      
@@ -324,12 +325,11 @@ return Image.network(snapshot.data!,height: 150,
 Widget _crearButtonEliminarImagen(Encabezado encabezadoActual){
 
 
-return FloatingActionButton(
-   shape: BeveledRectangleBorder(
-          borderRadius: BorderRadius.zero
-     ),
-    heroTag: "btn3",
-        child: Text('Eliminar imagen'),
+return MaterialButton(
+  shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(12)),
+    color: colorFromHex("#ffc93d"),
+        child: Text('Eliminar\nimagen'),
         onPressed: (){
 encabezadoActual.footer["img"][0]="";
 setState(() {
@@ -1380,7 +1380,7 @@ FloatingActionButton(
           borderRadius: BorderRadius.zero
      ),
     heroTag: "btn21",
-        child: Text('Izquierda'),
+        child: Text('Izq.'),
         onPressed: (){
 
 
@@ -1454,7 +1454,7 @@ FloatingActionButton(
           borderRadius: BorderRadius.zero
      ),
     heroTag: "btn21",
-        child: Text('Derecha'),
+        child: Text('Der.'),
         onPressed: (){
 
 
@@ -1685,7 +1685,11 @@ if(x==""){
   x="Introduce la URL";
 }
 
-return FloatingActionButton(onPressed: () {
+return MaterialButton(
+  shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(12)),
+    color: colorFromHex("#145463"),
+        child: Text('Añadir URL',style: TextStyle(color: Colors.white)),onPressed: () {
   
 showDialog(
       context: context,

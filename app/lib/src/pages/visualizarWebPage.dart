@@ -7,6 +7,9 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 
+/**
+ * Clase VisualizadorPage extiende de StatefulWidget y crea el State de _VisualizadorPage
+ */
 class VisualizadorPage extends StatefulWidget {
   String nombreWeb="";
   String htmlCode="";
@@ -22,11 +25,16 @@ nombreWeb=web;
   
 }
 
+/**
+ * Clase _VisualizadorPage extiende de State<VisualizadorPage>
+ * construirá la página para visualización
+ */
 class _VisualizadorPage extends State<VisualizadorPage>{
   String htmlCode="";
   String nombreWeb="";
   String imgFondoX="";
   Color scaffoldColor=Colors.white;
+
   _VisualizadorPage(String html,String imgFondo,web){
 imgFondoX=imgFondo;
 htmlCode=html;
@@ -105,7 +113,10 @@ _crearButtonVolver(),
   }
 
 
-
+/** 
+ * Widget _crearButtonVolver boton para volver a la página anterior
+ * @return Column
+*/
 Widget _crearButtonVolver(){
 
 

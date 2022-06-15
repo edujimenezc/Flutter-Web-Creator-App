@@ -1,13 +1,19 @@
 import 'package:ejemplobbdd/src/pages/homepage.dart';
 import 'package:flutter/material.dart';
-
+/**
+ * Clase AyudaPage extiende de StatefulWidget y crea el State de _AyudaPage
+ */
 class AyudaPage extends StatefulWidget {
   
  @override
   _AyudaPage createState() => _AyudaPage();
   
 }
-
+/**
+ * Clase _AyudaPage extiende de State<AyudaPage>
+ * construirá la página de ayuda al usuario la cual tiene textos desplegables con preguntas y respuestas
+ * @return Scaffold
+ */
 class _AyudaPage extends State<AyudaPage>{
  
  @override

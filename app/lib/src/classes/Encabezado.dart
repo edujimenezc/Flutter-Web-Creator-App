@@ -5,21 +5,50 @@ import 'package:ejemplobbdd/src/classes/Contenedor.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
+/**
+ * Clase Encabezado, que recojerá todo el cuerpo de la web desde base de datos para recuperar valores de este, y los subirá a la base de datos
+ * @author Eduardo Jimenez Cobos
+*/
+
  class Encabezado{
+  //usuario actual logado
   var currentUser = FirebaseAuth.instance.currentUser;
+  //instancia de Firebase
   FirebaseFirestore firestore = FirebaseFirestore.instance;
+  //autor del encabezado
   String autor="";
+  //nombre del encabezado
   String nombre="";
+  //lista con los elementos de h1
 List h1=[];
+  //lista con los elementos de h2
 List h2=[];
+  //lista con los elementos de h3
 List h3=[];
+  //mapa con los estilos de los divs
 Map divStyles={};
+  //fondo de la página (Color)
 String pageBackground="";
+  //fondo de la página (URL)
 String pageBackgroundURL="";
+  //mapa con los elementos del footer
 Map footer={};
+  //lista de los contenedores (divs) de la página
 List<Contenedor> contenedores=[];
+  //mapa con los divs de la página
 Map<dynamic,dynamic> mapaDivs=Map<dynamic,dynamic>();
 
+/**
+ * Constructor de Encabezado
+ * @param nombre, nombre de la web
+ * @param h1 lista con los elementos de h1
+ * @param h2 lista con los elementos de h2
+ * @param h3 lista con los elementos de h3
+ * @param mapadivs, map con los divs de la página web
+ * @param mapadivsCSS, map con los estilos de cada div
+ * @param autor, autor de la web
+ */
 Encabezado.constructor1( String nombre,List h1, List h2, List h3, Map<dynamic,dynamic> mapadivs,Map<dynamic,dynamic> mapadivsCSS, String autor){
 
 this.nombre=nombre;
@@ -32,7 +61,9 @@ this.mapaDivs=mapaDivs;
 this.autor=autor;
 
 }
-
+/**
+ * COnstructor vacio de Encabezado
+ */
 Encabezado.constructor2();
 
 List get getH1{
@@ -58,15 +89,27 @@ this.h2=text;
 void set setH3(List text){
 this.h3=text;
 }
-
+/**
+ * funcion que pone los estilos a los divs
+ * @param mapa, map con los estilos de los divs
+ */
 void setStyles(Map mapa){
 this.divStyles=mapa;
 
 }
+/**
+ * funcion que devuelve los estilos de los divs
+ * @return Map con los estilos de los divs
+ */
 Map getStyles(){
 return this.divStyles;
 
 }
+/**
+ * funcion que añade los estilos a los divs dependiendo de su nombre
+ * @param nombreDiv, nombre del div al que se le quiere añadir estilos
+ * @param color, color para el div 
+ */
 void aniadirEstiloDiv(String nombreDiv,String color){
   if(divStyles.containsKey(nombreDiv)){
     divStyles[nombreDiv]=color;
@@ -78,26 +121,18 @@ void aniadirEstiloDiv(String nombreDiv,String color){
   
 }
 
-
+/**
+ * funcion que añade los contenedores desde mapaDivs a una Lista<Contenedor>
+ */
 
 void aniadirAContenedores(){
  
-  //var i=0;
-
-  /*for (var item in mapaDivs.values) {
-    
-    
-    this.contenedores.add(Contenedor());
-for (var x in item.keys) {
-  if(x.toString().contains("text")){
-    
-contenedores[i].texto.add(item[x]);
-  }*/
+ 
    mapaDivs.forEach((key, value) {
 
 
 contenedores.add(new Contenedor(key.toString(),value));
-//print(key.toString());
+
 
 
     });
@@ -105,18 +140,15 @@ contenedores=List.from(contenedores.reversed);
 
 
 
-//contenedores.sort();
-//contenedores.forEach((element) {print(element.toString());});
-
-
- /*if(x.toString().contains("image")){
-print(item[x]);
-  }*/
 
 
 
 }
 
+/**
+ * función asíncrona que sube la página web a la base de datos
+ * @param nombreWeb nombre de la web a subir
+ */
 Future<void> cargarABBDD(String nombreWeb)async {
   
   
@@ -167,6 +199,9 @@ DocumentReference webActual = FirebaseFirestore.instance.collection('webs').doc(
 
 
 /*
+/**
+ * Función que guarda la web en estilo json, la dejo comentada por si fuera necesaria en futuras implementaciones
+ */
 static Encabezado fromJson(json)=> Encabezado(
   nombre : "nombrePorDefecto",
   h1: json["h1"],

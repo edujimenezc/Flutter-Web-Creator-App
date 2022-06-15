@@ -1,4 +1,3 @@
-// ignore_for_file: must_be_immutable
 
 import 'dart:collection';
 import 'dart:convert';
@@ -19,7 +18,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
-
+/**
+ * Clase EditorPiePage extiende de StatefulWidget y crea el state para _EditorPiePage
+ */
 class EditorPiePage extends StatefulWidget {
   String paginaActual="";
   EditorPiePage(String nombreWeb){
@@ -30,6 +31,10 @@ paginaActual=nombreWeb;
   _EditorPiePage createState() => _EditorPiePage(paginaActual);
   
 }
+/**
+ * Clase _EditorPiePage extiende de State<EditorPiePage>
+ * Contiene el editor del pie de la página web
+ */
 
 class _EditorPiePage extends State<EditorPiePage>{
    String paginaActual="";
@@ -37,13 +42,22 @@ class _EditorPiePage extends State<EditorPiePage>{
 paginaActual=nombreWeb;
 
   }
+    //color de fondo de la web, por defecto blanco
   Color colorTargeta=Colors.white;
+  //imagen seleccionada en las acciones de añadir imagen
    PickedFile? imageFile=null;
+   //imagen de fondo para la web
    String fondoImagen="";
+   //nombre por defecto para las acciones de añadir una images
     String nombreImagen="Default";
+        //email del usuario actual
      String? currentUser = FirebaseAuth.instance.currentUser!.email;
 
-
+/**
+ * Widget que construye el editor del cuerpo de la web con el que se puede modificar la página y personalizarla
+ * @ param context Contexto actual
+ * @return FutureBuilder
+ */
  @override
   Widget build(BuildContext context) {
     
@@ -139,7 +153,16 @@ return containerCentral(encabezadoActual,scaffoldColor,h1Hint,h2Hint,h3Hint);
     );
   }
 
-
+/**
+ * Widget containerCentralImgFondo, es el contenedor central que contiene toda la estructura editable de la web
+ * @param url, url de la imagen de fondo
+ * @param encabezadoActual, Encabezado traido desde la base de datos
+ * @param scaffoldColor para el fondo de la web
+ * @param h1Hint, hint para el encabezado h1 por defecto
+ * @param h2Hint, hint para el encabezado h2 por defecto
+ * @param h3Hint, hint para el encabezado h3 por defecto
+ * @return Container
+ */
 
 Widget containerCentralImgFondo(String url,Encabezado encabezadoActual,Color scaffoldColor,String h1Hint,String h2Hint,String h3Hint){
  return Container(
@@ -192,6 +215,15 @@ crearFooter(encabezadoActual)
 }
 
 
+/**
+ * Widget containerCentral, es el contenedor central que contiene toda la estructura editable de la web
+ * @param encabezadoActual, Encabezado traido desde la base de datos
+ * @param scaffoldColor para el fondo de la web
+ * @param h1Hint, hint para el encabezado h1 por defecto
+ * @param h2Hint, hint para el encabezado h2 por defecto
+ * @param h3Hint, hint para el encabezado h3 por defecto
+ * @return Container
+ */
 
 
 Widget containerCentral(Encabezado encabezadoActual,Color scaffoldColor,String h1Hint,String h2Hint,String h3Hint){
@@ -234,13 +266,18 @@ crearFooter(encabezadoActual)
  
 }
 
-
+/**
+ * funcion asincrona que devuelve la url de una imagen de firebase storage a partir del nombre
+ * @param fondoActual nombre de la imagen a recuperar
+ * @return String
+ */
 Future<String> urlFondo(String fondoActual) async {
   final ref = FirebaseStorage.instance.ref().child('uploads').child("${fondoActual}");
   String url="";
 await ref.getDownloadURL().then((value) =>  url=value);
 return url;
 }
+
 
 Widget crearImgFooter(Encabezado encabezadoActual){
 
@@ -322,6 +359,12 @@ SizedBox(width: 20),
 
 
 }
+
+/**
+ * Widget _crearButtonEliminarImagen boton que aparece si hay una imagen asignada al footer para eliminarla
+ * @return Container
+ */
+
 Widget _crearButtonEliminarImagen(Encabezado encabezadoActual){
 
 
@@ -342,6 +385,13 @@ setState(() {
 
 
 }
+
+/**
+ * Widget crearBotonImagen boton que aparece si no hay una imagen asignada al footer para subir una
+ * @return Container
+ */
+
+
 
 Widget crearBotonImagen(Encabezado encabezadoActual, String mensaje){
 
@@ -726,7 +776,11 @@ imageFile=null;
 
 
 
-
+/**
+ * Widget que crea todo el footer editable de manera visual
+ * @param encabezadoActual del que traer y guardar valores
+ * @return Container
+ */
 Widget crearFooter(Encabezado encabezadoActual){
 return Container(
 
@@ -747,6 +801,13 @@ crearImgFooter(encabezadoActual),
 
 
 }
+
+
+/**
+ * Widget botonFondoImagen, boton para poner como fondo de la página una imagen
+ * @param encabezadoActual, Encabezado actual para guardar el fondo
+ * @return FloatingActionButton
+ */
 
 Widget botonFondoImagen(Encabezado encabezadoActual){
 
@@ -1109,6 +1170,11 @@ imageFile=null;
 
 
 
+/**
+ * Widget botonEstilosFondo boton para cambiarle el estilo al fondo ya sea una imagen o un color
+ * @param encabezadoActual, Encabezado actual para guardar el fondo
+ * @return MaterialButton
+ */
 Widget botonEstilosFondo(Encabezado encabezadoActual){
 
 
@@ -1182,7 +1248,11 @@ Navigator.push(context, route);
 
 }
 
-
+/**
+ * Widget textoFooter TextView que recupera el texto desde el encabezado y permite al usuario editarlo
+ * @param encabezadoActual Encabezado desde el que cojer y guardar el texto
+ * @return TextField
+ */
 
 Widget textoFooter(Encabezado encabezadoActual){
 FontWeight bold =FontWeight.normal;
@@ -1561,6 +1631,14 @@ SizedBox(height: 20),
 
 
 }
+/**
+ * Widget colorPicker, seleccionador de color visual
+ * @param encabezadoActual, Encabezado actual para guardar el color
+ * @param posicionHTML, elemento en el que que se va a guardar el color
+ * @param p2,  parte del div a la que pertenece
+ * @param p3,  parte del elemento al que pertenece
+ * @return ElevatedButton
+ */
 
 Widget colorPicker(Encabezado encabezadoActual,String posicionHTML){
 return ElevatedButton(
@@ -1676,6 +1754,14 @@ encabezadoActual.pageBackground=mycolor.toHex();
 
 
 }
+/**
+ * Widget aniadirURL, boton para añadir url a un texto, muestra un mensaje en el que se pide la url
+ * @param encabezadoActual, encabezado actual para cambiar/añadir la url
+ * @param parteCSS, parte en la que se guarda esta propiedad
+ * @param pt2,  parte del div a la que pertenece
+ * @param pt3,  parte del elemento al que pertenece
+ * @return MaterialButton
+ */
 
 Widget aniadirURL(Encabezado encabezadoActual){
   String x="";
@@ -1820,7 +1906,16 @@ encabezadoActual.cargarABBDD(paginaActual);
 
 
 }
-
+/**
+ * Widget dropDown lista de elementos desplegables para seleccionar 
+ * @param elementos lista de los elementos a mostrar
+ * @param encabezadoActual encabezado en el  que guardar el valor seleccionado
+ * @param posicionHTML posición en la que se guardará esta parte dentro de las propiedades internas del encabezado
+ * @param parteCSS, parte en la que se guarda esta propiedad
+ * @param pt2,  parte del div a la que pertenece
+ * @param pt3,  parte del elemento al que pertenece
+ * @return MaterialButton
+ */
 
 Widget dropDown(List<String> elementos,Encabezado encabezadoActual,int parteCSS){
   String x="";
@@ -1879,7 +1974,11 @@ return DropdownButtonFormField<String>(
 
 
 
-
+/**
+ * Función para abrir la galería y seleccionar una foto 
+ * @param context context actual
+ */
+ 
  
  Future<void> _openGallery(BuildContext context) async{
     // ignore: deprecated_member_use
@@ -1893,7 +1992,10 @@ return DropdownButtonFormField<String>(
 
     Navigator.pop(context);
   }
-
+/**
+ * función para abrir la cámara y tomar una foto
+ * @param context context actual
+ */
   Future<void> _openCamera(BuildContext context)  async{
       // ignore: deprecated_member_use
       final pickedFile = await ImagePicker().getImage(
@@ -1907,7 +2009,11 @@ return DropdownButtonFormField<String>(
 
 
 
-
+/**
+ * función asincrona que trae una imagen de base de datos y la convierte en widget
+ * @param imageName nombre de la imagen a mostrar
+ * @return Image
+ */
 
 Future<Widget> getImageFromDatabase(String imageName) async {
 
@@ -1920,6 +2026,11 @@ return Image.network(url);
 
 
 } 
+/**
+ * función asincrona que trae una imagen de base de datos para el fondo y la convierte en widget
+ * @param imageName nombre de la imagen a mostrar
+ * @return Image
+ */
 
 Future<String> getImageFromDatabaseFondo(String imageName) async {
 
@@ -1933,6 +2044,10 @@ return url;
 
 } 
 
+/**
+ * funcion para subir una imagen a firebase storage
+ * @param context contexto actual
+ */
 
 Future uploadImageToFirebase(BuildContext context) async {
 
@@ -1970,7 +2085,10 @@ if(imageFile==null){
   }
 }
 
-
+/**
+ * funcion que carga un Encabezado desde la base de datos
+ * @return Encabezado
+ */
 Future<Encabezado> cargarDeBBDD() async {
 
 var nombre;
@@ -2025,47 +2143,10 @@ return x;
 }
 
 
-
-
-
-
-
-
-
-
-/*
-
-  Future<Encabezado> readJson() async {
-
-    final String response = await rootBundle.loadString('assets/jsonBase.json');
-    final datos =json.decode(response);
-    
-
-
-   return encabezadoActual.cargarDeBBDD();
-    
-  
-}*/
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/**
+ * Widget _crearButtonVolver boton para volver a la pantalla anterior
+ * @return Column
+ */
 
 Widget _crearButtonVolver(){
  

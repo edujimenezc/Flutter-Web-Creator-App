@@ -4,16 +4,22 @@ import 'package:ejemplobbdd/src/pages/perfilPage.dart';
 import 'package:ejemplobbdd/src/pages/userWebsPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-
+/**
+ * Clase HomePage hereda de StatefulWidget y crea el state para _HomePage
+ */
 class HomePage extends StatefulWidget {
   
  @override
   _HomePage createState() => _HomePage();
   
 }
-
+/**
+ * Clase _HomePage hereda de State<HomePage> y construye la homepage
+ */
 class _HomePage extends State<HomePage>{
- 
+ /**
+  * funcion build que genera la homepage donde el usuario tiene opciones distintas para elegir qué hacer
+  */
  @override
   Widget build(BuildContext context) {
 
@@ -58,7 +64,10 @@ _crearButtonAyuda(),
     );
   }
 
-
+/**
+ * Widget _crearButtonEditarWeb botón para acceder a la pantalla de crear webs
+ * @return Container
+ */
 
 Widget _crearButtonCrearWeb(){
 
@@ -112,7 +121,10 @@ Navigator.push(context, route);
 
 
 
-
+/**
+ * Widget _crearButtonEditarWeb botón para acceder a la pantalla de editar webs
+ * @return Container
+ */
 Widget _crearButtonEditarWeb(){
 
 
@@ -160,6 +172,10 @@ Navigator.push(context, route);
 
 }
 
+/**
+ * Widget _crearButtonMiCuenta botón para acceder a la pantalla del perfil de usuario
+ * @return Column
+ */
 Widget _crearButtonMiCuenta(){
 
 
@@ -212,6 +228,10 @@ Text('Mi cuenta',style: TextStyle(color: colorFromHex("#165364")),),
 
 }
 
+/**
+ * Widget _crearButtonAyuda botón para acceder a la pantalla de ayuda
+ * @return Column
+ */
 
 Widget _crearButtonAyuda(){
 

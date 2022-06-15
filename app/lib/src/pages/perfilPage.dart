@@ -3,14 +3,19 @@ import 'package:ejemplobbdd/src/pages/ayudaPage.dart';
 import 'package:ejemplobbdd/src/pages/homepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
+/**
+ * Clase PerfilPage extiende de StatefulWidget y crea el State de _PerfilPage
+ */
 class PerfilPage extends StatefulWidget {
   
  @override
   _PerfilPage createState() => _PerfilPage();
   
 }
-
+/**
+ * Clase _PerfilPage extiende de State<PerfilPage>
+ * construirá la página de perfil
+ */
 class _PerfilPage extends State<PerfilPage>{
  var currentUser = FirebaseAuth.instance.currentUser;
  @override

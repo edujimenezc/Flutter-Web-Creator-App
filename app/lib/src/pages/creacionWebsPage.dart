@@ -17,6 +17,11 @@ import 'package:flutter_archive/flutter_archive.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'dart:io' as io;
 import 'package:path/path.dart' as path; 
+
+
+/**
+ * Clase CreacionWebsPage hereda de StatefulWidget y construye el state para _CreacionWebsPage
+ */
 class CreacionWebsPage extends StatefulWidget {
   String paginaActual="";
   CreacionWebsPage(String nombreWeb){
@@ -27,13 +32,23 @@ paginaActual=nombreWeb;
   _CreacionWebsPage createState() => _CreacionWebsPage(paginaActual);
   
 }
-
+/**
+ * Clase _CreacionWebsPage hereda de State<CreacionWebsPage>, construirá la página de creación de paginas web
+ */
 class _CreacionWebsPage extends State<CreacionWebsPage>{
    String paginaActual="";
     String? currentUser = FirebaseAuth.instance.currentUser!.email;
+    /**
+     * Constructor de la clase _CreacionWebsPage
+     * @param String nombre, nombre de la web a construir
+     */
  _CreacionWebsPage(String nombreWeb){
    paginaActual=nombreWeb;
  }
+  /**
+  * Widget build que construye la pantalla CreacionWebsPage, en la que el usuario puede decidir si editar las partes de su web, previsualizarla o construirla
+  * @retrun Scaffold
+  */
  @override
   Widget build(BuildContext context) {
 
@@ -130,7 +145,10 @@ _crearButtonGuardarWeb(),
 
 
 
-//creo q esta aqui no sirve
+/**
+ * Función que trae desde base de datos de manera asíncrona los datos de una web y los guarda en un Encabezado
+ * @return Encabezado
+ */
 Future<Encabezado> cargarDeBBDD() async {
 
 var nombre;
@@ -185,6 +203,11 @@ return x;
 }
 
 
+/**
+ * Función que crea un archivo html a partir de un texto dado
+ * @param text, cuerpo del html
+ * @return String con el directorio del html creado
+ */
 Future<String> _write(String text) async {
 
  
@@ -201,6 +224,9 @@ final File file2 = File('${directoryExternal!.path}/${currentUser!+"."+paginaAct
   return '${directory.path}/${currentUser!+"."+paginaActual}.html';
 }
 
+/**
+ * Funcion asincrona que lee un archivo del dispositivo
+ */
 Future<String> _read() async {
   String text="";
   try {
@@ -214,7 +240,11 @@ Future<String> _read() async {
 }
 
 
-
+/**
+ * Funcion asíncrona que crea un html a partir del Encabezado actual traído desde base de datos
+ * haciendo uso del correo del usuario actual y del nombre de la web
+ * @return String,codigo html
+ */
 
 Future<String> _crearHTML() async{
 
@@ -13118,7 +13148,10 @@ return textoArchivoHTML;
 
 }
 
-
+/**
+ * Función que comprime archivos a zip, la dejo comentada porque la necesito para futuras implementaciones
+ *
+ */
 /*
 _comprimirArchivos(String directory,String htmlFile,String cssFile) async {
 
@@ -13153,8 +13186,10 @@ _comprimirArchivos(String directory,String htmlFile,String cssFile) async {
 */
 
 
-
-
+/**
+ * funcion que envía un archivo por correo, la dejo comentada porque la necesito en futuras implementaciones
+ */
+/*
 _sendEmail(String ruta)async{
   print("ha llegao al correo");
 final Email email = Email(
@@ -13168,7 +13203,7 @@ final Email email = Email(
 await FlutterEmailSender.send(email);
 
 
-}
+}*/
 
 
 

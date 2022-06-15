@@ -17,7 +17,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
-
+/**
+ * Clase EditorEncabezadoPage extiende de StatefulWidget y crea el state para _EditorCuerpoPage
+ */
 class EditorEncabezadoPage extends StatefulWidget {
   String paginaActual="";
   EditorEncabezadoPage(String nombreWeb){
@@ -28,19 +30,37 @@ paginaActual=nombreWeb;
   _EditorEncabezadoPage createState() => _EditorEncabezadoPage(paginaActual);
   
 }
-
+/**
+ * Clase _EditorEncabezadoPage extiende de State<EditorEncabezadoPage>
+ * Contiene el editor del cuerpo de la página web
+ */
 class _EditorEncabezadoPage extends State<EditorEncabezadoPage>{
+   //nombre de la web actual
    String paginaActual="";
+      /**
+    * Constructor de _EditorEncabezadoPage 
+    * @param nombreWeb, nombre de la web actual
+    */
   _EditorEncabezadoPage(String nombreWeb){
 paginaActual=nombreWeb;
 
   }
+ //color de fondo de la web, por defecto blanco
   Color colorTargeta=Colors.white;
+ //imagen seleccionada en las acciones de añadir imagen
    PickedFile? imageFile=null;
+   //imagen de fondo para la web
    String fondoImagen="";
+ //nombre por defecto para las acciones de añadir una images
     String nombreImagen="Default";
+        //email del usuario actual
      String? currentUser = FirebaseAuth.instance.currentUser!.email;
  // Encabezado encabezadoActual=cargarDeBBDD() as Encabezado;
+/**
+ * Widget que construye el editor del cuerpo de la web con el que se puede modificar la página y personalizarla
+ * @ param context Contexto actual
+ * @return FutureBuilder
+ */
 
  @override
   Widget build(BuildContext context) {
@@ -154,6 +174,16 @@ return containerCentral(encabezadoActual,scaffoldColor,h1Hint,h2Hint,h3Hint);
   }
 
 
+/**
+ * Widget containerCentralImgFondo, es el contenedor central que contiene toda la estructura editable de la web
+ * @param url, url de la imagen de fondo
+ * @param encabezadoActual, Encabezado traido desde la base de datos
+ * @param scaffoldColor para el fondo de la web
+ * @param h1Hint, hint para el encabezado h1 por defecto
+ * @param h2Hint, hint para el encabezado h2 por defecto
+ * @param h3Hint, hint para el encabezado h3 por defecto
+ * @return Container
+ */
 
 Widget containerCentralImgFondo(String url,Encabezado encabezadoActual,Color scaffoldColor,String h1Hint,String h2Hint,String h3Hint){
  return Container(
@@ -396,7 +426,15 @@ encabezadoActual.cargarABBDD(paginaActual);
 }
 
 
-
+/**
+ * Widget containerCentral, es el contenedor central que contiene toda la estructura editable de la web
+ * @param encabezadoActual, Encabezado traido desde la base de datos
+ * @param scaffoldColor para el fondo de la web
+ * @param h1Hint, hint para el encabezado h1 por defecto
+ * @param h2Hint, hint para el encabezado h2 por defecto
+ * @param h3Hint, hint para el encabezado h3 por defecto
+ * @return Container
+ */
 
 Widget containerCentral(Encabezado encabezadoActual,Color scaffoldColor,String h1Hint,String h2Hint,String h3Hint){
 
@@ -631,26 +669,30 @@ encabezadoActual.cargarABBDD(paginaActual);
  
 }
 
-/*
+
+
+/**
+ * Funcion que descarga una url de imagen  a partir de un nombre de imagen 
+ * @param fondoActual, nombre del fondo a descargar desde firebase
+ * @return String con la url de la imagen
+ */
 Future<String> urlFondo(String fondoActual) async {
   final ref = FirebaseStorage.instance.ref().child('uploads').child("${fondoActual}");
   String url="";
 await ref.getDownloadURL().then((value) =>  url=value);
 return url;
 }
-*/
-
-Future<String> urlFondo(String fondoActual) async {
-  final ref = FirebaseStorage.instance.ref().child('uploads').child("${fondoActual}");
-  String url="";
-await ref.getDownloadURL().then((value) =>  url=value);
-return url;
-}
 
 
 
 
-
+/**
+ * Widget que crea el editor de divs a partir de una lista, encabezado y color de targeta
+ * @param lista, lista con los contenedores a generar
+ * @param x, Encabezado del que editar y recojer datos
+ * @ colorTargetaX color para el fondo de la targeta
+ * @return ListView
+ */
 Widget _crearListaDivs(List<dynamic> lista,Encabezado x,colorTargetaX){
   Color colorTargeta=colorTargetaX;
   lista.reversed;
@@ -2900,6 +2942,13 @@ setState(() {
 
 }
 
+
+/**
+ * Widget eliminarParteH boton para eliminar una parde del contenedor
+ * @param encabezadoActual, Encabezado del que forma parte la sección a eliminar
+ * @param parte, nombre de la parte a eliminar
+ * @return FloatingActionButton
+ */
 Widget eliminarParteH(Encabezado encabezadoActual,String parte ){
 return FloatingActionButton(
    shape: BeveledRectangleBorder(
@@ -2978,6 +3027,11 @@ Navigator.push(context, route);
 
 
 }
+/**
+ * Widget botonFondoImagen, boton para poner como fondo de la página una imagen
+ * @param encabezadoActual, Encabezado actual para guardar el fondo
+ * @return FloatingActionButton
+ */
 Widget botonFondoImagen(Encabezado encabezadoActual){
 
 return FloatingActionButton(
@@ -3339,6 +3393,11 @@ imageFile=null;
 
 
 
+/**
+ * Widget botonEstilosFondo boton para cambiarle el estilo al fondo ya sea una imagen o un color
+ * @param encabezadoActual, Encabezado actual para guardar el fondo
+ * @return MaterialButton
+ */
 Widget botonEstilosFondo(Encabezado encabezadoActual){
 
 return Container(
@@ -3419,6 +3478,12 @@ Navigator.push(context, route);
 
 
 
+/**
+ * Widget que crea un TextField con los valores de h1 y se sube a base de datos al editarlo
+ * @param encabezadoActual, Encabezado actual para guardar el h1
+ * @param h1Hint valor por defecto para el h1
+ * @return TextField
+ */
 Widget crearH1(Encabezado encabezadoActual,String h1Hint){
 FontWeight bold =FontWeight.normal;
 FontStyle italic=FontStyle.normal;
@@ -3798,6 +3863,12 @@ eliminarParteH(encabezadoActual,"h1"),
 
 }
 
+/**
+ * Widget que crea un TextField con los valores de h2 y se sube a base de datos al editarlo
+ * @param encabezadoActual, Encabezado actual para guardar el h2
+ * @param h2Hint valor por defecto para el h2
+ * @return TextField
+ */
 Widget crearH2(Encabezado encabezadoActual,String h2Hint){
 FontWeight bold =FontWeight.normal;
 FontStyle italic=FontStyle.normal;
@@ -4177,6 +4248,12 @@ eliminarParteH(encabezadoActual, "h2")
 
 }
 
+/**
+ * Widget que crea un TextField con los valores de h3 y se sube a base de datos al editarlo
+ * @param encabezadoActual, Encabezado actual para guardar el h3
+ * @param h1Hint valor por defecto para el h3
+ * @return TextField
+ */
 Widget crearH3(Encabezado encabezadoActual,String h3Hint){
   
 FontWeight bold =FontWeight.normal;
@@ -4558,6 +4635,14 @@ eliminarParteH(encabezadoActual, "h3")
 
 }
 
+/**
+ * Widget colorPicker, seleccionador de color visual
+ * @param encabezadoActual, Encabezado actual para guardar el color
+ * @param posicionHTML, elemento en el que que se va a guardar el color
+ * @param p2,  parte del div a la que pertenece
+ * @param p3,  parte del elemento al que pertenece
+ * @return ElevatedButton
+ */
 Widget colorPicker(Encabezado encabezadoActual,String posicionHTML,String pt2,String pt3){
 return ElevatedButton(
                         onPressed: (){
@@ -4756,6 +4841,14 @@ encabezadoActual.cargarABBDD(paginaActual);
 
 }
 
+/**
+ * Widget aniadirURL, boton para añadir url a un texto, muestra un mensaje en el que se pide la url
+ * @param encabezadoActual, encabezado actual para cambiar/añadir la url
+ * @param parteCSS, parte en la que se guarda esta propiedad
+ * @param pt2,  parte del div a la que pertenece
+ * @param pt3,  parte del elemento al que pertenece
+ * @return MaterialButton
+ */
 Widget aniadirURL(Encabezado encabezadoActual,String parteCSS,String pt2,String pt3){
   String x="";
 switch(parteCSS) { 
@@ -4955,7 +5048,16 @@ encabezadoActual.cargarABBDD(paginaActual);
 
 }
 
-
+/**
+ * Widget dropDown lista de elementos desplegables para seleccionar 
+ * @param elementos lista de los elementos a mostrar
+ * @param encabezadoActual encabezado en el  que guardar el valor seleccionado
+ * @param posicionHTML posición en la que se guardará esta parte dentro de las propiedades internas del encabezado
+ * @param parteCSS, parte en la que se guarda esta propiedad
+ * @param pt2,  parte del div a la que pertenece
+ * @param pt3,  parte del elemento al que pertenece
+ * @return MaterialButton
+ */
 Widget dropDown(List<String> elementos,Encabezado encabezadoActual,int parteCSS,String posicionHTML,String pt2,String pt3){
   String x="";
 switch(posicionHTML) { 
@@ -5087,7 +5189,11 @@ encabezadoActual.cargarABBDD(paginaActual);
 
 
 
-
+/**
+ * función que obtiene el Thumbnail de un video de youtube
+ * @param videoUrl url del video que se quiere obtener el id
+ * @retrun string con el id del video (thumbnail)
+ */
 String? getYoutubeThumbnail(String videoUrl) {
   final Uri? uri = Uri.tryParse(videoUrl);
   if (uri == null) {
@@ -5101,6 +5207,10 @@ String? getYoutubeThumbnail(String videoUrl) {
 
 
 
+ /**
+ * Función para abrir la galería y seleccionar una foto 
+ * @param context context actual
+ */
  
  Future<void> _openGallery(BuildContext context) async{
     // ignore: deprecated_member_use
@@ -5115,6 +5225,10 @@ String? getYoutubeThumbnail(String videoUrl) {
     Navigator.pop(context);
   }
 
+/**
+ * función para abrir la cámara y tomar una foto
+ * @param context context actual
+ */
   Future<void> _openCamera(BuildContext context)  async{
       // ignore: deprecated_member_use
       final pickedFile = await ImagePicker().getImage(
@@ -5129,7 +5243,11 @@ String? getYoutubeThumbnail(String videoUrl) {
 
 
 
-
+/**
+ * función asincrona que trae una imagen de base de datos y la convierte en widget
+ * @param imageName nombre de la imagen a mostrar
+ * @return Image
+ */
 Future<Widget> getImageFromDatabase(String imageName) async {
 
   
@@ -5142,6 +5260,11 @@ return Image.network(url);
 
 } 
 
+/**
+ * función asincrona que trae una imagen de base de datos para el fondo y la convierte en widget
+ * @param imageName nombre de la imagen a mostrar
+ * @return Image
+ */
 Future<String> getImageFromDatabaseFondo(String imageName) async {
 
   final ref = FirebaseStorage.instance.ref().child('uploads').child("${imageName.replaceFirst("\$", "")}");
@@ -5154,7 +5277,10 @@ return url;
 
 } 
 
-
+/**
+ * funcion para subir una imagen a firebase storage
+ * @param context contexto actual
+ */
 Future uploadImageToFirebase(BuildContext context) async {
 
 if(imageFile==null){
@@ -5191,7 +5317,10 @@ if(imageFile==null){
   }
 }
 
-
+/**
+ * funcion que carga un Encabezado desde la base de datos
+ * @return Encabezado
+ */
 Future<Encabezado> cargarDeBBDD() async {
 
 var nombre;
@@ -5254,19 +5383,9 @@ return x;
 
 
 
-/*
-
-  Future<Encabezado> readJson() async {
-
-    final String response = await rootBundle.loadString('assets/jsonBase.json');
-    final datos =json.decode(response);
-    
 
 
-   return encabezadoActual.cargarDeBBDD();
-    
-  
-}*/
+
   
 
 
@@ -5286,6 +5405,10 @@ return x;
 
 
 
+/**
+ * Widget _crearButtonVolver boton para volver a la pantalla anterior
+ * @return Column
+ */
 
 
 Widget _crearButtonVolver(){

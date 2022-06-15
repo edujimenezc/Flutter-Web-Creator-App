@@ -7,7 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 import 'EditorEncabezadoPage.dart';
-
+/**
+ * Clase UserWebsPage extiende de StatefulWidget y crea el State de _UserWebsPage
+ */
 class UserWebsPage extends StatefulWidget {
   
  @override
@@ -15,6 +17,10 @@ class UserWebsPage extends StatefulWidget {
   
 }
 
+/**
+ * Clase _RegistroPage extiende de State<RegistroPage>
+ * construirá la página de registro
+ */
 class _UserWebsPage extends State<UserWebsPage>{
  String? currentUser = FirebaseAuth.instance.currentUser!.email;
  @override
@@ -122,18 +128,15 @@ Row(
 
 
 
+/**
+ * función que carga una lista de webs para editarlas o borrarlas
+ * @return List<String> con los nombres de las webs
+ */
 
 Future<List<String>> cargarWebs() async {
 
 List<String> userWebs=[];
-/*
 
-final db = FirebaseFirestore.instance;
-var result=await db.collection('webs').get();
-result.docs.forEach((res) {print(res.id); });
-
-
-*/
 
 
 
@@ -195,7 +198,12 @@ if(data!=null){
 
 
 
-
+/**
+ * Widget que crea una lista de webs de forma visual a partir de un list
+ * @param listaWebs lista con las webs a construir
+ * @return widget
+ * 
+ */
 
 Widget _crearLista(List listaWebs ){
   if(listaWebs.isEmpty){
@@ -318,7 +326,11 @@ if(arrayActual.length>3){
 });
 }
 
-
+/**
+ * funcion que crea un alert que permite eliminar la web seleccionada
+ * @param context contexto actual
+ * @param nombreWeb nombre de la web a borrar
+ */
 void _crearAlertEliminar(BuildContext context,String nombreWeb){
 
  showDialog(
@@ -377,7 +389,10 @@ void _crearAlertEliminar(BuildContext context,String nombreWeb){
 */
 }
 
-
+/**
+ * funcion que elimina una web de la base de datos
+ * @param paginaActual página a borrar
+ */
 
 Future<void> eliminarDeBBDD(String paginaActual) async {
 
@@ -420,6 +435,10 @@ child: FloatingActionButton(
 
 }}
 
+/** 
+ * Widget _crearButtonVolver boton para volver a la página anterior
+ * @return Column
+*/
 
 Widget _crearButtonVolver(){
 

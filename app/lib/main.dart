@@ -11,13 +11,18 @@ import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 import 'src/pages/homepage.dart';
-
+/**
+ * funcion main del programa, controla y ejecuta toda la aplicación
+ */
 void main()  {
  WidgetsFlutterBinding.ensureInitialized();
      SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 runApp(MyApp());
 }
-
+/**
+ * clase MyApp extiende de StatelessWidget, carga el splash screen mientras carga la app y luego llama a MyHomePage
+ * @return FutureBuilder
+ */
 class MyApp extends StatelessWidget {
   final Future<FirebaseApp> _inicialization = Firebase.initializeApp();
 @override
@@ -52,11 +57,16 @@ builder: (context,snapshot){
 
 }
 }
-
+/**
+ * Clase MyHomePage que extiende de StatefulWidget, crea el state para _MyHomePageState
+ */
 class MyHomePage extends StatefulWidget {
 @override
 _MyHomePageState createState() => _MyHomePageState();
 }
+/**
+ * Clase _MyHomePageState que extiende de State<MyHomePage>, espera tres segundos desde la inicialización y carga la LoginPage
+ */
 class _MyHomePageState extends State<MyHomePage> {
 @override
 void initState() {
@@ -84,22 +94,31 @@ Widget build(BuildContext context) {
 }
 }
 
-
+/**
+ * Clase LoginPage que extiende de StatefulWidget, crea el state para _LoginPage
+ */
 class LoginPage extends StatefulWidget {
   
  @override
   _LoginPage createState() => _LoginPage();
   
 }
-
+/**
+ * Clase _LoginPage que extiende de State<LoginPage>, contiene la página para logarse en la aplicación
+ */
 class _LoginPage extends State<LoginPage>{
+  //inicialización de firebase
   final Future<FirebaseApp> _inicialization =Firebase.initializeApp();
 
- 
+ //email del usuario
   String _email  = '';
+  //contraseña del usuario
     String _pass  = '';
    
-    
+    /**
+     * Constructor del widget que devuelve un scaffold con la pantalla de Login
+     * @return Scaffold
+     */
  @override
   Widget build(BuildContext context) {
 
@@ -146,7 +165,10 @@ _crearPassword(),
 
    
   }
-
+/**
+ * Widget _crearEmail, devuelve un textfield con el campo de email, que al cambiar, acutalizará el valor de la variable _email
+ * @return TextField
+ */
 Widget _crearEmail() {
 
     return TextField(
@@ -173,6 +195,10 @@ Widget _crearEmail() {
     );
 
   }
+  /**
+ * Widget _crearPassword, devuelve un textfield con el campo de email, que al cambiar, acutalizará el valor de la variable _pass
+ * @return TextField
+ */
  Widget _crearPassword(){
 
      return TextField(
@@ -198,8 +224,11 @@ Widget _crearEmail() {
   }
 
 
-Future<void> _loguearUsuario() async{
-}
+/**
+ * Widget _crearButtonAccess devuelve un Container, al pulsarlo mirará si están rellenos los campos usuario y cotnraseña e intentará
+ * hacer login
+ * @return Container
+ */
 Widget _crearButtonAccess(){
 
 
@@ -373,7 +402,10 @@ showDialog(
 
 
 }
-
+/**
+ * Widget _crearButtonRegistro, botón de registro en la app, al pulsarlo si están rellenos los campos email y contraseña intentará registrar al usuario en firebase
+ * @return Container
+ */
 Widget _crearButtonRegistro(){
 
 

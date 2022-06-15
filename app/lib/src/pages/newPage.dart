@@ -4,7 +4,9 @@ import 'package:ejemplobbdd/src/pages/homepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-
+/**
+ * Clase NewPage extiende de StatefulWidget y crea el state para _NewPage
+ */
 class NewPage extends StatefulWidget {
   
  @override
@@ -12,8 +14,15 @@ class NewPage extends StatefulWidget {
   
 }
 
+/**
+ * Clase _NewPage extiende de State<NewPage>
+ */
 class _NewPage extends State<NewPage>{
   String? currentUser = FirebaseAuth.instance.currentUser!.email;
+  /**
+   * Widget que construye la pantalla NewPage en la que el usuario puede elegir cómo crear su web
+   * @return Scaffold
+   */
  @override
   Widget build(BuildContext context) {
 
@@ -58,7 +67,11 @@ SizedBox(height: 50),
 
 
 
-
+/**
+ * función que mira en firebase si el usuario tiene un documento con un id dado
+ * @param docId id para comprobar si existe
+ * @return bool con la respues de si existe=true o no =false
+ */
 
 
 Future<bool> checkIfDocExists(String docId) async {
@@ -72,6 +85,11 @@ var querySnapshot = await webActual.get();
     throw e;
   }
 }
+
+/**
+ * Widget _crearButtonDesdeCero botón para crear una web desde cero, lanza una alerta que pide un nombre, s el usuario no tiene una web con ese nombre la crea y lo lleva al editor
+ * @return Container
+ */
 
 Widget _crearButtonDesdeCero(){
 
@@ -248,6 +266,21 @@ showDialog(
 
 }
 
+/**
+ * GestureDetector cargaTemaPredefinido botón con los temas predefinidos a elegir por el usuario
+ * si el usuario no tiene una web con ese nombre la crea y lo lleva al editor
+ * @param nombreWebCarga nombre para la plantilla a cargar
+ * @param url ur de la imagen de cada tema
+ * @nombreWeb nombre para crear la web
+ * @param h1 encabezado para crear la web
+ * @param h2 encabezado para crear la web
+ * @param h3 encabezado para crear la web
+ * @param divs contenedores para crear la web
+ * @param pageBackground fondo por defecto para la página
+ * @return GestureDetector
+ */
+
+
 GestureDetector cargaTemaPredefinido(String nombreWebCarga,String url,String nombreWeb,List h1,List h2,List h3,Map divs,Map divStyles,String pageBackground){
 
 return GestureDetector(
@@ -274,6 +307,16 @@ Navigator.push(context, route);
             );
 
 } 
+
+/**
+ * funcion que crea un tema en la base de datos con los parametros dados
+ * @nombreWeb nombre para crear la web
+ * @param h1 encabezado para crear la web
+ * @param h2 encabezado para crear la web
+ * @param h3 encabezado para crear la web
+ * @param divs contenedores para crear la web
+ * @param pageBackground fondo por defecto para la página
+ */
 
 Future<void> crearTemaEnBBDD(String nombreWeb,List h1,List h2,List h3,Map divs,Map divStyles,String pageBackground)async {
   
@@ -319,7 +362,10 @@ DocumentReference webActual = FirebaseFirestore.instance.collection('webs').doc(
 }
 
 
-
+/**
+ * funcion para cargar una web a la base de datos a partir del nombre
+ * @param nombreWeb nombre de la web a crear
+ */
 Future<void> cargarABBDD(String nombreWeb)async {
   
   
@@ -362,6 +408,11 @@ DocumentReference webActual = FirebaseFirestore.instance.collection('webs').doc(
 
 
 }
+
+/** 
+ * Widget _crearButtonTemas boton para crear una app a partir de un tema
+ * @return Column
+*/
 
 Widget _crearButtonTemas(){
 
@@ -581,7 +632,10 @@ showDialog(
 
 }
 
-
+/** 
+ * Widget _crearButtonVolver boton para volver a la página anterior
+ * @return Column
+*/
 Widget _crearButtonVolver(){
 
 

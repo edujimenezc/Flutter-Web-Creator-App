@@ -9,17 +9,24 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
-
+/**
+ * Clase RegistroPage extiende de StatefulWidget y crea el State de _RegistroPage
+ */
 class RegistroPage extends StatefulWidget {
   
  @override
   _RegistroPage createState() => _RegistroPage();
   
 }
-
+/**
+ * Clase _RegistroPage extiende de State<RegistroPage>
+ * construirá la página de registro
+ */
 class _RegistroPage extends State<RegistroPage>{
   FirebaseAuth auth = FirebaseAuth.instance;
+  //email del usuario
   String _email  = '';
+  //contraseña del usuario
   String _pass = "";
  @override
   Widget build(BuildContext context) {
@@ -50,6 +57,11 @@ _crearButtonVolver(),
     );
   }
 
+/**
+ * Widget _crearEmail, devuelve un textfield con el campo de email, que al cambiar, acutalizará el valor de la variable _email
+ * @return TextField
+ */
+
 Widget _crearEmail() {
 
     return TextField(
@@ -74,6 +86,12 @@ Widget _crearEmail() {
     );
 
   }
+ 
+   /**
+ * Widget _crearPassword, devuelve un textfield con el campo de email, que al cambiar, acutalizará el valor de la variable _pass
+ * @return TextField
+ */
+ 
  Widget _crearPassword(){
 
      return TextField(
@@ -98,7 +116,11 @@ Widget _crearEmail() {
     );
 
   }
-
+/**
+ * Widget _crearButtonAccess devuelve un Container, al pulsarlo mirará si están rellenos los campos usuario y cotnraseña e intentará
+ * hacer login
+ * @return Container
+ */
 
 Widget _crearButtonAccess(){
 
@@ -330,6 +352,10 @@ showDialog(
 
 }
 
+/** 
+ * Widget _crearButtonVolver boton para volver a la página anterior
+ * @return Column
+*/
 Widget _crearButtonVolver(){
 
 return FloatingActionButton(

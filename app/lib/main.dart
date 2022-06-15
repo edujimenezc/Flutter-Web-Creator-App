@@ -257,7 +257,7 @@ showDialog(
           shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
           title: Text('Error'),
           
-          content: Expanded(child: Text("Los campos Email y Password deben estar rellenos")),
+          content:  Text("Los campos Email y Password deben estar rellenos"),
           actions: <Widget>[
            
             TextButton(
@@ -280,14 +280,9 @@ showDialog(
 
 
 
-}
+}else{
 
 
-
-
-
-
- 
 try {
   UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
     email: _email,
@@ -405,34 +400,21 @@ showDialog(
     );
 
   }
-}on Exception catch (e){
+}
 
-showDialog(
-      context: context,
-      barrierDismissible: true,
-      builder: (context) {
 
-         return AlertDialog(
-          shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
-          title: Text('Error'),
-          
-          content: Expanded(child: Text("Error inesperado")),
-          actions: <Widget>[
-           
-            TextButton(
-              child: Text('Ok'),
-              onPressed: (){
-                Navigator.of(context).pop();
-        },
-            ),
-          ],
-        );
 
-      }
 
-    );
 
 }
+
+
+
+
+
+
+ 
+
 
 
 

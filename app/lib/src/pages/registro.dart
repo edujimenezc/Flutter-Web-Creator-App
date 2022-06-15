@@ -153,7 +153,7 @@ showDialog(
           shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
           title: Text('Error'),
           
-          content: Expanded(child: Text("Los campos Email y Password deben estar rellenos")),
+          content: Text("Los campos Email y Password deben estar rellenos"),
           actions: <Widget>[
            
             TextButton(
@@ -176,7 +176,7 @@ showDialog(
 
 
 
-}
+}else{
 
 try {
   UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -209,7 +209,7 @@ showDialog(
           shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
           title: Text('Error'),
           
-          content: Expanded(child: Text("La contraseña es demasiado débil")),
+          content: Text("La contraseña es demasiado débil"),
           actions: <Widget>[
            
             TextButton(
@@ -248,7 +248,7 @@ showDialog(
           shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
           title: Text('Error'),
           
-          content: Expanded(child: Text("Ya hay una cuenta registrada con ese correo")),
+          content: Text("Ya hay una cuenta registrada con ese correo"),
           actions: <Widget>[
            
             TextButton(
@@ -292,7 +292,7 @@ showDialog(
           shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
           title: Text('Error'),
           
-          content: Expanded(child: Text("Introduce un email válido")),
+          content:  Text("Introduce un email válido"),
           actions: <Widget>[
            
             TextButton(
@@ -351,9 +351,11 @@ showDialog(
     );
 
   }
-} catch (e) {
-  print(e);
 }
+
+}
+
+
 
 
 

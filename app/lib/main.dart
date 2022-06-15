@@ -319,7 +319,7 @@ showDialog(
           shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
           title: Text('Error'),
           
-          content: Expanded(child: Text("Email incorrecto")),
+          content:  Text("Usuario no encontrado"),
           actions: <Widget>[
            
             TextButton(
@@ -354,7 +354,7 @@ showDialog(
           shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
           title: Text('Error'),
           
-          content: Expanded(child: Text("Contraseña Incorrecta")),
+          content: Text("Contraseña Incorrecta"),
           actions: <Widget>[
            
             TextButton(
@@ -377,7 +377,61 @@ showDialog(
 
 
 
+  }else{
+
+showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+
+         return AlertDialog(
+          shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
+          title: Text('Error'),
+          
+          content: Text("Introduce un email y contraseña válidos"),
+          actions: <Widget>[
+           
+            TextButton(
+              child: Text('Ok'),
+              onPressed: (){
+                Navigator.of(context).pop();
+        },
+            ),
+          ],
+        );
+
+      }
+
+    );
+
   }
+}on Exception catch (e){
+
+showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+
+         return AlertDialog(
+          shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
+          title: Text('Error'),
+          
+          content: Expanded(child: Text("Error inesperado")),
+          actions: <Widget>[
+           
+            TextButton(
+              child: Text('Ok'),
+              onPressed: (){
+                Navigator.of(context).pop();
+        },
+            ),
+          ],
+        );
+
+      }
+
+    );
+
 }
 
 

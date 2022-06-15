@@ -178,24 +178,6 @@ showDialog(
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 try {
   UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
     email: _email,
@@ -340,6 +322,33 @@ showDialog(
 
 
 
+
+  }else{
+
+showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+
+         return AlertDialog(
+          shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
+          title: Text('Error'),
+          
+          content: Text("Introduce un email y contraseña válidos"),
+          actions: <Widget>[
+           
+            TextButton(
+              child: Text('Ok'),
+              onPressed: (){
+                Navigator.of(context).pop();
+        },
+            ),
+          ],
+        );
+
+      }
+
+    );
 
   }
 } catch (e) {

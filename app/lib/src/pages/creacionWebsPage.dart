@@ -13378,7 +13378,30 @@ _write(value1).then((value2)  {
 subirWebFirebase(value2,this.paginaActual).then((value) => null);
 
 
+showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
 
+         return AlertDialog(
+          shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
+          title: Text('Completado!'),
+          
+          content: Text("¡Tu web se ha publicado correctamente!"),
+          actions: <Widget>[
+           
+            TextButton(
+              child: Text('Ok'),
+              onPressed: (){
+                Navigator.of(context).pop();
+        },
+            ),
+          ],
+        );
+
+      }
+
+    );
 
 });
 

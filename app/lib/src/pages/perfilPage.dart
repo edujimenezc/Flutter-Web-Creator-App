@@ -83,16 +83,16 @@ _crearAlertCambiarCorreo(context);
                 textAlign: TextAlign.end, //aligment
               ),
             ),
-TextButton(
+/*TextButton(
               onPressed: () {
-                _crearAlertCambiarContrasenia(context);
+                //_crearAlertCambiarContrasenia(context);
               },
               child: Text(
                 '¿Cambiar Contraseña?', //title
                 textAlign: TextAlign.end, //aligment
               ),
-            ),
-TextButton(
+            ),*/
+/*TextButton(
               onPressed: () async {
 
 _crearAlertEliminarCuenta(context);
@@ -102,7 +102,7 @@ _crearAlertEliminarCuenta(context);
                 'Eliminar mi cuenta', //title
                 textAlign: TextAlign.end, //aligment
               ),
-            ),
+            ),*/
 
 
 SizedBox(height: 140),
@@ -432,8 +432,8 @@ showDialog(
 
 
 void _crearAlertCambiarContrasenia(BuildContext context){
-var passAntigua=null;
-var passNueva=null;
+var passAntigua="";
+var passNueva="";
  showDialog(
       context: context,
       barrierDismissible: true,
@@ -495,27 +495,25 @@ return LoginPage();
 
     }
   );
-//TODO trycatch
-                AuthCredential credential = EmailAuthProvider.credential(email: currentUser!.email.toString(), password: passAntigua);
+
+               
+
+
+
+
+
+
+try{
+
+if(passNueva.toString().isNotEmpty && passAntigua.toString().isNotEmpty){
+
+ AuthCredential credential = EmailAuthProvider.credential(email: currentUser!.email.toString(), password: passAntigua);
 
 currentUser!.reauthenticateWithCredential(credential).then((value) => currentUser!.updatePassword(passNueva).then((value) => Navigator.push(context, route)));
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-       /*        
-if(passNueva!=null){
-//falta las excepciones
   
  
   
@@ -537,7 +535,7 @@ showDialog(
           shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
           title: Text('Error'),
           
-          content: Text("El correo introducido no es válido"),
+          content: Text("Debes rellenar todos los campos "),
           actions: <Widget>[
            
             TextButton(
@@ -554,7 +552,89 @@ showDialog(
     );
 
 }
-*/
+
+
+
+
+
+
+
+} on FirebaseAuthException catch (e) {
+
+
+
+showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+
+         return AlertDialog(
+          shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
+          title: Text('Error'),
+          
+          content: Text("Introduce una contraseña válida en los dos campos "),
+          actions: <Widget>[
+           
+            TextButton(
+              child: Text('Ok'),
+              onPressed: (){
+                Navigator.of(context).pop();
+        },
+            ),
+          ],
+        );
+
+      }
+
+    );
+
+
+
+
+// ignore: nullable_type_in_catch_clause
+} on FirebaseException  catch (e){
+
+
+
+
+showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+
+         return AlertDialog(
+          shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20.0) ),
+          title: Text('Error'),
+          
+          content: Text("Introduce una contraseña válida en los dos campos "),
+          actions: <Widget>[
+           
+            TextButton(
+              child: Text('Ok'),
+              onPressed: (){
+                Navigator.of(context).pop();
+        },
+            ),
+          ],
+        );
+
+      }
+
+    );
+
+
+
+
+}
+
+
+
+
+
+
+            
+
+
 
 
               },
